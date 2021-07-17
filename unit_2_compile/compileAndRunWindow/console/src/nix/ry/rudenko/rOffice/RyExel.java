@@ -22,8 +22,6 @@ public class RyExel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         System.out.println(" Exel created");
     }
 }

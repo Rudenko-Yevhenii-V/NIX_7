@@ -23,7 +23,5 @@ public class Main {
         GeneratorRandom generatorRandom = new GeneratorRandom();
         generatorRandom.myMethod();
         System.out.println("_________________________");
-
-
     }
 }
