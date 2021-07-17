@@ -1,7 +1,7 @@
 #!/bin/sh
 rm -r build/classes
 rm -r build/jar
- ..\ant\setantenv.bat
+sh setantenv.sh
 
 ant clean
 ant compile

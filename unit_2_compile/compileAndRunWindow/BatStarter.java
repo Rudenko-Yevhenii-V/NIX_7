@@ -26,6 +26,7 @@ public class BatStarter {
                        System.out.println(output);
                    }else {
                        System.out.println("Something wrong");
+                       jTextArea.setText("Something wrong maybe you don't have ANT");
                    }
 
                } catch (IOException | InterruptedException e) {
