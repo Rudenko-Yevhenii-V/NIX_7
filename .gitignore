@@ -3,6 +3,7 @@
 target
 unit_1_git/target
 unit_2_compile/target
+unit_2_compile/compileAndRunWindow/maven/target
 
 .*
 ~*
