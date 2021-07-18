@@ -16,7 +16,6 @@ public class WindowApp extends JFrame {
         JButton jButton3 = new JButton("maven");
         buttonsPanel.add(sp);
         buttonsPanel.add(label, BorderLayout.WEST);
-
         buttonsPanel.add(jButton1);
         buttonsPanel.add(jButton2);
         buttonsPanel.add(jButton3);

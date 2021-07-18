@@ -11,7 +11,6 @@ public class RyExel {
     public void CreateExel(){
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("NIX7");
-
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream("files/NIX7ExeleFile.xls");

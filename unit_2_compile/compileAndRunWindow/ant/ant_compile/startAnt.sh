@@ -8,4 +8,4 @@ ant compile
 ant jar
 ant run
 
-rem call ant clean compile jar run
+ant clean compile jar run

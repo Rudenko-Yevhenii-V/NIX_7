@@ -14,7 +14,6 @@ public class RyExel {
 
         FileOutputStream fileOutputStream = null;
         try {
-
             fileOutputStream = new FileOutputStream("src/main/resources/NIX7ExeleFile.xls");
             workbook.write(fileOutputStream);
             fileOutputStream.close();
@@ -23,8 +22,6 @@ public class RyExel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         System.out.println(" Exel created");
     }
 }
