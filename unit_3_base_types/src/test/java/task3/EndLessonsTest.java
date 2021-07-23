@@ -1,12 +1,23 @@
 package task3;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
-public class EndLessonsTest extends TestCase {
+public class EndLessonsTest {
 
-    public void testMathematicalSolution() {
+    @org.junit.Test
+    public void mathematicalSolution() {
+        EndLessons endLessons = new EndLessons(3);
+        String actual = endLessons.MathematicalSolution(3);
+        String expected = "11:35";
+        assertEquals(actual, expected);
     }
 
-    public void testStupidDecision() {
+
+    @org.junit.Test
+    public void stupidDecision() {
+        EndLessons endLessons = new EndLessons(3);
+        String actual = endLessons.StupidDecision(3);
+        String expected = "11:35";
+        assertEquals(actual, expected);
     }
 }

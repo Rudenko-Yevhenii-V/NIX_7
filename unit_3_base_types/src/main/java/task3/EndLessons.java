@@ -25,11 +25,11 @@ import java.util.Date;
 public class EndLessons {
     MyColors myColors = new MyColors();
     private int lesson;
-    private int lessons = 10;
+    private final int LESSONS = 10;
     private int startLessons = 9 * 60;
-    private int shortPause = 5;
-    private int longPause = 15;
-    private int timeOneLesson = 45;
+    private final int SHORT_PAUSE = 5;
+    private final int LONG_PAUSE = 15;
+    private final int TIME_ONE_LESSON = 45;
     private int counter = 0;
 
     public EndLessons(int lesson) {
@@ -37,31 +37,35 @@ public class EndLessons {
         StupidDecision(lesson);
         MathematicalSolution(lesson);
     }
-    public  void  MathematicalSolution(int i){
+    public  String  MathematicalSolution(int i){
         Date date = new Date();
+        String result;
         long start = 21600000;
         long  oneMinutes = 60000;
-        long timeEndLesson = start + ((timeOneLesson * oneMinutes) * i) + ((shortPause * oneMinutes) * (i-1)) + (((longPause-shortPause) * oneMinutes) * ((i-1)/2));
+        long timeEndLesson = start + ((TIME_ONE_LESSON * oneMinutes) * i) + ((SHORT_PAUSE * oneMinutes) * (i-1)) + (((LONG_PAUSE - SHORT_PAUSE) * oneMinutes) * ((i-1)/2));
         System.out.println(myColors.ANSI_YELLOW_BACKGROUND + myColors.ANSI_BLACK +"MathematicalSolution:" + myColors.ANSI_RESET);
         date.setTime(timeEndLesson);
-        System.out.printf("%tR%n", date);
+        result = String.format("%tR", date);
+        System.out.println(result);
+        return result;
 
     }
-    public void StupidDecision(int i){
+    public String StupidDecision(int i){
 
         int[] timeTableArray= new int[11];
-        timeTableArray[0] = (startLessons + timeOneLesson);
-        timeTableArray[1] = (timeTableArray[0] + timeOneLesson + shortPause);
-        timeTableArray[2] = (timeTableArray[1] + timeOneLesson + longPause);
-        timeTableArray[3] = (timeTableArray[2] + timeOneLesson + shortPause);
-        timeTableArray[4] = (timeTableArray[3] + timeOneLesson + longPause);
-        timeTableArray[5] = (timeTableArray[4] + timeOneLesson + shortPause);
-        timeTableArray[6] = (timeTableArray[5] + timeOneLesson + longPause);
-        timeTableArray[7] = (timeTableArray[6] + timeOneLesson + shortPause);
-        timeTableArray[8] = (timeTableArray[7] + timeOneLesson + longPause);
-        timeTableArray[9] = (timeTableArray[8] + timeOneLesson + shortPause);
+        timeTableArray[0] = (startLessons + TIME_ONE_LESSON);
+        timeTableArray[1] = (timeTableArray[0] + TIME_ONE_LESSON + SHORT_PAUSE);
+        timeTableArray[2] = (timeTableArray[1] + TIME_ONE_LESSON + LONG_PAUSE);
+        timeTableArray[3] = (timeTableArray[2] + TIME_ONE_LESSON + SHORT_PAUSE);
+        timeTableArray[4] = (timeTableArray[3] + TIME_ONE_LESSON + LONG_PAUSE);
+        timeTableArray[5] = (timeTableArray[4] + TIME_ONE_LESSON + SHORT_PAUSE);
+        timeTableArray[6] = (timeTableArray[5] + TIME_ONE_LESSON + LONG_PAUSE);
+        timeTableArray[7] = (timeTableArray[6] + TIME_ONE_LESSON + SHORT_PAUSE);
+        timeTableArray[8] = (timeTableArray[7] + TIME_ONE_LESSON + LONG_PAUSE);
+        timeTableArray[9] = (timeTableArray[8] + TIME_ONE_LESSON + SHORT_PAUSE);
         System.out.println(myColors.ANSI_YELLOW_BACKGROUND + myColors.ANSI_BLACK +"StupidDecision:" + myColors.ANSI_RESET);
         System.out.printf("%02d:%02d%n",timeTableArray[i-1]/60, timeTableArray[i-1]%60 );
+        return String.format("%02d:%02d",timeTableArray[i-1]/60, timeTableArray[i-1]%60);
     }
 }
 
