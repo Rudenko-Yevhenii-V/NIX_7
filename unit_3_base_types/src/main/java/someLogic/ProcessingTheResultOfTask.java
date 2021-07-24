@@ -34,7 +34,7 @@ public class ProcessingTheResultOfTask {
             }
             break;
             case "3": {
-                System.out.println(Enter Nnumber of lesson:);
+                System.out.println("Enter Nnumber of lesson:");
                 ScannerConsole scannerConsole = new ScannerConsole();
                 String scaner = scannerConsole.getOutConsoleScanner();
                 String exp = "\\d+";
