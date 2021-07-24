@@ -6,6 +6,7 @@ then
 	echo "one  - $n!!!"
 cd compileAndRunWindow
 sh STARTERgui.sh
+echo "PAUSE 10 sec"
 sleep 10
 elif [ $n -eq '2' ]
 then
