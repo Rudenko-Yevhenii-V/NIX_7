@@ -3,7 +3,6 @@ package task3;
 import myColors.MyColors;
 import task3.Recursion.EndLessonsRec;
 
-import java.util.Date;
 
 /**
  * EndLessons
@@ -31,7 +30,6 @@ public class EndLessons {
     private final int SHORT_PAUSE = 5;
     private final int LONG_PAUSE = 15;
     private final int TIME_ONE_LESSON = 45;
-    private int counter = 0;
 
     public EndLessons(int lesson) {
         this.lesson = lesson;
@@ -39,22 +37,20 @@ public class EndLessons {
         MathematicalSolution(lesson);
         new EndLessonsRec(lesson);
     }
-    public  String  MathematicalSolution(int i){
-        Date date = new Date();
+
+    public String MathematicalSolution(int i) {
         String result;
-        long start = 21600000;
-        long  oneMinutes = 60000;
-        long timeEndLesson = start + ((TIME_ONE_LESSON * oneMinutes) * i) + ((SHORT_PAUSE * oneMinutes) * (i-1)) + (((LONG_PAUSE - SHORT_PAUSE) * oneMinutes) * ((i-1)/2));
-        System.out.println(myColors.ANSI_WHITE_BACKGROUND + myColors.ANSI_BLACK +"MathematicalSolution:" + myColors.ANSI_RESET);
-        date.setTime(timeEndLesson);
-        result = String.format("%tR", date);
+        long timeEndLesson = startLessons + ((TIME_ONE_LESSON) * i) + ((SHORT_PAUSE) * (i - 1)) + (((LONG_PAUSE - SHORT_PAUSE)) * ((i - 1) / 2));
+        System.out.println(myColors.ANSI_WHITE_BACKGROUND + myColors.ANSI_BLACK + "MathematicalSolution:" + myColors.ANSI_RESET);
+        result = (timeEndLesson / 60 + ":" + timeEndLesson % 60);
         System.out.println(result);
         return result;
 
     }
-    public String StupidDecision(int i){
 
-        int[] timeTableArray= new int[11];
+    public String StupidDecision(int i) {
+
+        int[] timeTableArray = new int[11];
         timeTableArray[0] = (startLessons + TIME_ONE_LESSON);
         timeTableArray[1] = (timeTableArray[0] + TIME_ONE_LESSON + SHORT_PAUSE);
         timeTableArray[2] = (timeTableArray[1] + TIME_ONE_LESSON + LONG_PAUSE);
@@ -65,9 +61,9 @@ public class EndLessons {
         timeTableArray[7] = (timeTableArray[6] + TIME_ONE_LESSON + SHORT_PAUSE);
         timeTableArray[8] = (timeTableArray[7] + TIME_ONE_LESSON + LONG_PAUSE);
         timeTableArray[9] = (timeTableArray[8] + TIME_ONE_LESSON + SHORT_PAUSE);
-        System.out.println(myColors.ANSI_WHITE_BACKGROUND + myColors.ANSI_BLACK +"StupidDecision:" + myColors.ANSI_RESET);
-        System.out.printf("%02d:%02d%n",timeTableArray[i-1]/60, timeTableArray[i-1]%60 );
-        return String.format("%02d:%02d",timeTableArray[i-1]/60, timeTableArray[i-1]%60);
+        System.out.println(myColors.ANSI_WHITE_BACKGROUND + myColors.ANSI_BLACK + "StupidDecision:" + myColors.ANSI_RESET);
+        System.out.printf("%02d:%02d%n", timeTableArray[i - 1] / 60, timeTableArray[i - 1] % 60);
+        return String.format("%02d:%02d", timeTableArray[i - 1] / 60, timeTableArray[i - 1] % 60);
     }
 }
 
