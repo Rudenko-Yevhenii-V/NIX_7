@@ -1,8 +1,7 @@
 package task3;
 
-import myColors.MyColors;
-import task3.Recursion.EndLessonsRec;
-
+import customcolors.MyColors;
+import task3.recursion.EndLessonsRec;
 
 /**
  * EndLessons
@@ -23,6 +22,7 @@ import task3.Recursion.EndLessonsRec;
  * Выходные данные: 10 35
  */
 public class EndLessons {
+
     MyColors myColors = new MyColors();
     private int lesson;
     private final int LESSONS = 10;
@@ -33,23 +33,21 @@ public class EndLessons {
 
     public EndLessons(int lesson) {
         this.lesson = lesson;
-        StupidDecision(lesson);
-        MathematicalSolution(lesson);
+        stupidDecision(lesson);
+        mathematicalSolution(lesson);
         new EndLessonsRec(lesson);
     }
 
-    public String MathematicalSolution(int i) {
+    public String mathematicalSolution(int i) {
         String result;
         long timeEndLesson = startLessons + ((TIME_ONE_LESSON) * i) + ((SHORT_PAUSE) * (i - 1)) + (((LONG_PAUSE - SHORT_PAUSE)) * ((i - 1) / 2));
         System.out.println(myColors.ANSI_WHITE_BACKGROUND + myColors.ANSI_BLACK + "MathematicalSolution:" + myColors.ANSI_RESET);
         result = (timeEndLesson / 60 + ":" + timeEndLesson % 60);
         System.out.println(result);
         return result;
-
     }
 
-    public String StupidDecision(int i) {
-
+    public String stupidDecision(int i) {
         int[] timeTableArray = new int[11];
         timeTableArray[0] = (startLessons + TIME_ONE_LESSON);
         timeTableArray[1] = (timeTableArray[0] + TIME_ONE_LESSON + SHORT_PAUSE);

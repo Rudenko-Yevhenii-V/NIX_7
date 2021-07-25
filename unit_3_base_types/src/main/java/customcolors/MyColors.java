@@ -1,10 +1,11 @@
-package myColors;
+package customcolors;
 
 /**
  * MyColors
  * цвета текста в консоли
  */
 public class MyColors {
+
     private static String shell = "";
     public static String ANSI_RESET;
     public static String ANSI_BLACK;
@@ -29,7 +30,6 @@ public class MyColors {
     }
 
     public MyColors() {
-
         if (!(shell.equals("shell"))) {
             ANSI_RESET = "";
             ANSI_BLACK = "";
@@ -68,6 +68,4 @@ public class MyColors {
             ANSI_WHITE_BACKGROUND = "\u001B[47m";
         }
     }
-
-
 }

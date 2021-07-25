@@ -1,6 +1,6 @@
 package task2;
 
-import myColors.MyColors;
+import customcolors.MyColors;
 
 import java.util.Arrays;
 
@@ -16,14 +16,13 @@ import java.util.Arrays;
  */
 
 public class FindAndCountSimbolInAString {
+
     private  String example = "";
     int countLetter = 0;
 
     public FindAndCountSimbolInAString(String example) {
         MyColors myColors = new MyColors();
         this.example = example;
-
-
         String result = "";
         for (int i = 0; i < example.length(); i++) {
             if (Character .isLetterOrDigit(example.charAt(i)))
@@ -43,7 +42,7 @@ public class FindAndCountSimbolInAString {
         }
         ArrayOfSymbol = bufer.toCharArray();
         Arrays.sort(ArrayOfSymbol);
-        if (ArrayOfSymbol.length == 0){
+        if (ArrayOfSymbol.length == 0) {
             System.out.println("text have only numbers");
             return;
         }
@@ -53,16 +52,12 @@ public class FindAndCountSimbolInAString {
         for (int i = 0; i < ArrayOfSymbol.length; i++) {
             if ((ArrayOfSymbol[i] == buferC)){
                 count++;
-            }else {
+            } else {
                 System.out.print( buferC + " - " + count + " | ");
                 buferC = ArrayOfSymbol[i];
                 count = 1;
             }
-
         }
         System.out.print( buferC + " - " + count + " | "  + myColors.ANSI_RESET);
     }
-    public FindAndCountSimbolInAString() {
-    }
-
 }

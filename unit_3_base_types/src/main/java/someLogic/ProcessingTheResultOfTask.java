@@ -1,8 +1,8 @@
 package someLogic;
 
 import announcement.AnnouncNextStep;
-import inData.ScannerConsole;
-import myColors.MyColors;
+import indata.ScannerConsole;
+import customcolors.MyColors;
 import task1.FindNumbersInAString;
 import task2.FindAndCountSimbolInAString;
 import task3.EndLessons;
@@ -12,6 +12,7 @@ import task3.EndLessons;
  * выбор задачи и вывод решения
  */
 public class ProcessingTheResultOfTask {
+
     String inChoise;
 
     public ProcessingTheResultOfTask(String inChoise) {

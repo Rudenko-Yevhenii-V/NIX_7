@@ -1,0 +1,18 @@
+public class Main {
+    public static void main(String[] args) {
+
+    где отступ???)
+    эта проблема во всех классах
+
+    лишние отступы между } и }
+
+    например в AnnouncEnter
+
+            System.out.printf("%-58s | %10s%n",customcolors.ANSI_PURPLE + "-EXIT?   " , customcolors.ANSI_RED + "Enter any" + customcolors.ANSI_RESET);
+
+
+        }
+
+    имена пакетов не должны начинаться с заглавной, не должны содержать цифры
+
+    но рука не поднимается поставить меньше 10)))

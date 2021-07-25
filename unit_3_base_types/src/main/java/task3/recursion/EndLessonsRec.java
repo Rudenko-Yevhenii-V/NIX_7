@@ -1,8 +1,9 @@
-package task3.Recursion;
+package task3.recursion;
 
-import myColors.MyColors;
+import customcolors.MyColors;
 
 public class EndLessonsRec {
+
     private int lesson;
     private int startLessons = 9 * 60;
     private final int SHORT_PAUSE = 5;
@@ -11,18 +12,18 @@ public class EndLessonsRec {
     private  static int endOfLessons=0;
     MyColors myColors = new MyColors();
 
-
     public EndLessonsRec(int lesson) {
         this.lesson = lesson;
         endOfLessons = startLessons + TIME_ONE_LESSON;
-        CalculateTimeOfLastLesson(lesson);
+        calculateTimeOfLastLesson(lesson);
     }
-    public  void CalculateTimeOfLastLesson(int lesson){
+
+    public void calculateTimeOfLastLesson(int lesson) {
         try {
             lesson--;
             int error = 5/lesson;
             endOfLessons =endOfLessons + TIME_ONE_LESSON + SHORT_PAUSE + (LONG_PAUSE-SHORT_PAUSE) - ((lesson%2)*(LONG_PAUSE - SHORT_PAUSE));
-            CalculateTimeOfLastLesson(lesson);
+            calculateTimeOfLastLesson(lesson);
         } catch (Exception e) {
             System.out.println("*********************************************************");
             System.out.println("");
@@ -30,9 +31,5 @@ public class EndLessonsRec {
 
             System.out.println(endOfLessons/60 + ":" + endOfLessons%60);
         }
-
-
     }
-
-
 }
