@@ -10,8 +10,10 @@ package task1;
  */
 
 public class FindNumbersInAString {
+
     private  String example = "";
     private int result = 0;
+
     public FindNumbersInAString(String exemple) {
         this.example = exemple;
         char[] ArrayExemple = exemple.toCharArray();
@@ -22,8 +24,8 @@ public class FindNumbersInAString {
             }
         }
     }
+
     public int getResult() {
         return result;
     }
-
 }

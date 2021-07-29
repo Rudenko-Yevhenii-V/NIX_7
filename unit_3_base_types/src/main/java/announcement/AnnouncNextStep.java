@@ -1,11 +1,12 @@
 package announcement;
 
-import inData.ScannerConsole;
-import myColors.MyColors;
+import indata.ScannerConsole;
+import customcolors.MyColors;
 import someLogic.ProcessingTheResultOfTask;
 
 public class AnnouncNextStep {
-    public void sayAboutNextStep(){
+
+    public void sayAboutNextStep() {
         MyColors myColors = new MyColors();
         System.out.printf("%30s", "what task do solve?");
         System.out.println("");
