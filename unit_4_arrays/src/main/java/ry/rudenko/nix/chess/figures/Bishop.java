@@ -31,7 +31,7 @@ public class Bishop extends Figure {
   }
 
   @Override
-  public boolean isMoveValid(int srcRow, int srcCol, int destRow, int destCol) {
+  public boolean isMoveValid(int srcRow, int srcCol, int destRow, int destCol, Figure[][] figures) {
     return diagonalPath(srcRow, srcCol, destRow, destCol);
   }
 

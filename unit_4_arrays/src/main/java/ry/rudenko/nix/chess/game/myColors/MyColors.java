@@ -28,7 +28,7 @@ public class MyColors {
         this.shell = shell;
     }
 
-    public static String getShell() {
+    public  String getShell() {
         return shell;
     }
 

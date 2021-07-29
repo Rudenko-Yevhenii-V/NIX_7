@@ -33,7 +33,7 @@ public class Queen extends Figure {
   }
 
   @Override
-  public boolean isMoveValid(int nowRow, int nowCol, int needRow, int needCol) {
+  public boolean isMoveValid(int nowRow, int nowCol, int needRow, int needCol, Figure[][] figures) {
     return (diagonalPath(nowRow, nowCol, needRow, needCol))
         || straightPath(nowRow, nowCol, needRow, needCol);
   }

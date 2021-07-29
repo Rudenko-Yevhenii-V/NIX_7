@@ -16,7 +16,7 @@ public class Chessboard {
   DrowBoard drowBoard = new DrowBoard();
   private static Boolean whitesNowToMove;
   private static Boolean invalidMove = false;
-  String move;
+  String enterMoveStep;
 
   public Figure[][] getChessboard() {
     return chessboard;
@@ -46,23 +46,20 @@ public class Chessboard {
           .println("___________________________________________________\n"
               + "Black's move EXAMPLE ENTER: A7 to A6\n");
     }
-
-    move = user_input.nextLine();
-
-    if (move.equalsIgnoreCase("EXIT")) {
+    enterMoveStep = user_input.nextLine();
+    if (enterMoveStep.equalsIgnoreCase("EXIT")) {
       gameRunning = false;
       System.out.println("Thanks you. Bye!");
       return;
     }
-
-    String lowerCase = move.toLowerCase();
+    String lowerCase = enterMoveStep.toLowerCase();
     String[] components = lowerCase.split(" ");
     nowRow = 7 - (components[0].charAt(1) - '1');
     nowCol = components[0].charAt(0) - 'a';
     needRow = 7 - (components[2].charAt(1) - '1');
     needCol = components[2].charAt(0) - 'a';
     if (new ValidCheker(whitesNowToMove, nowRow, nowCol, needRow, needCol,
-        chessboard[nowRow][nowCol], chessboard[needRow][needCol]).moveValid()) {
+        chessboard[nowRow][nowCol], chessboard[needRow][needCol], chessboard).moveValid()) {
       chessboard[needRow][needCol] = chessboard[nowRow][nowCol];
       chessboard[nowRow][nowCol] = null;
       whitesNowToMove = !whitesNowToMove;

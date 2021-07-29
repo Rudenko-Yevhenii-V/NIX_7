@@ -27,7 +27,7 @@ public class Rook extends Figure {
   }
 
   @Override
-  public boolean isMoveValid(int nowRow, int nowCol, int needRow, int needCol) {
+  public boolean isMoveValid(int nowRow, int nowCol, int needRow, int needCol, Figure[][] figures) {
     return straightPath(nowRow, nowCol, needRow, needCol);
   }
 }

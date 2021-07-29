@@ -38,7 +38,7 @@ public class Greetings {
       Thread.sleep(300);
       new Helper().clearConsole();
       Thread.sleep(300);
-      System.out.print(myColors.ansiPurple + chess  + myColors.ansiReset);
+      System.out.print(myColors.ansiPurple + chess + myColors.ansiReset);
       Thread.sleep(700);
       new Helper().clearConsole();
       Thread.sleep(700);
@@ -75,7 +75,8 @@ public class Greetings {
         return myColors.ansiCyan + strigToColor;
       case (9):
         return myColors.ansiWhite + strigToColor;
-      default: return strigToColor;
+      default:
+        return strigToColor;
     }
   }
 }

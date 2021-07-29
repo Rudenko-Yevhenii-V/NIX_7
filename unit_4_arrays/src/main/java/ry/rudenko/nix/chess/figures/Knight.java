@@ -1,6 +1,7 @@
 package ry.rudenko.nix.chess.figures;
 
 
+import java.util.Arrays;
 import ry.rudenko.nix.chess.game.DrowBoard;
 
 public class Knight extends Figure {
@@ -32,7 +33,12 @@ public class Knight extends Figure {
   }
 
   @Override
-  public boolean isMoveValid(int nowRow, int nowCol, int needRow, int needCol) {
+  public boolean isMoveValid(int nowRow, int nowCol, int needRow, int needCol, Figure[][] figures) {
     return lShapedPath(nowRow, nowCol, needRow, needCol);
+  }
+
+  @Override
+  public String toString() {
+    return "Knight" ;
   }
 }
