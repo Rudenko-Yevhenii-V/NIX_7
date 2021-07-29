@@ -8,7 +8,7 @@ public class EmptyFigure extends Figure {
 
   @Override
   public String toString() {
-    return "empty";
+    return empty;
   }
 
   public EmptyFigure(boolean isWhite) {

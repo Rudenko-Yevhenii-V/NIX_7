@@ -11,7 +11,7 @@ public class Main {
     for (String arg : args) {
       new MyColors().setShell(arg);
     }
-   // new Greetings().sayHelloStartGame();
+    new Greetings().sayHelloStartGame();
     Chessboard myChessboard = new Chessboard();
     DrowBoard drowBoard = new DrowBoard();
     while (myChessboard.getGameRunning()) {

@@ -24,7 +24,6 @@ public class Pawn extends Figure {
   @Override
   public boolean isMoveValid(int nowRow, int nowCol, int needRow, int needCol, Figure[][] figures) {
     if (this.isWhite) {
-
       try {
         return (
             ((nowCol == needCol) && nowRow == (needRow + 1)) ||

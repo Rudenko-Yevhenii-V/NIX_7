@@ -6,7 +6,6 @@ public class Bishop extends Figure {
 
   public Bishop(boolean isWhite) {
     super(isWhite);
-
   }
 
   @Override
@@ -22,7 +21,6 @@ public class Bishop extends Figure {
       }
     }
   }
-
 
   private static Boolean diagonalPath(int srcRow, int srcCol,
       int destRow, int destCol) {

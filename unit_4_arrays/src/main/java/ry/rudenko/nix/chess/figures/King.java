@@ -21,7 +21,6 @@ public class King extends Figure {
     }
   }
 
-
   @Override
   public boolean isMoveValid(int srcRow, int srcCol, int destRow, int destCol, Figure[][] figures) {
     return Math.abs(destRow - srcRow) <= 1 || Math.abs(destCol - srcCol) <= 1;

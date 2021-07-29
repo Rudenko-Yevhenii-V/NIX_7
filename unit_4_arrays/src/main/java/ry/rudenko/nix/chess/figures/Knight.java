@@ -1,7 +1,5 @@
 package ry.rudenko.nix.chess.figures;
 
-
-import java.util.Arrays;
 import ry.rudenko.nix.chess.game.DrowBoard;
 
 public class Knight extends Figure {
