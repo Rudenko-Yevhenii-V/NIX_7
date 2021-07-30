@@ -21,28 +21,31 @@ public class Helper {
 
     int count = 0;
     Process process;
-    try {
+
       if (!(shell.equals("shell"))) {
-        process = Runtime.getRuntime().exec("cls");
+        for (int i = 0; i < 30; i++) {
+          System.out.println();
+        }
       } else {
+        try {
         process = Runtime.getRuntime().exec("clear");
-      }
-      StringBuilder output = new StringBuilder();
-      BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-      String line;
-      while ((line = reader.readLine()) != null) {
-        if (count == 3) {
+        StringBuilder output = new StringBuilder();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+          if (count == 3) {
+            output.append(line + "\n");
+          }
           output.append(line + "\n");
         }
-        output.append(line + "\n");
+        int exitVal = process.waitFor();
+        if (exitVal == 0) {
+          System.out.println(output);
+        } else {
+        }
+      } catch (IOException | InterruptedException e) {
+        e.printStackTrace();
       }
-      int exitVal = process.waitFor();
-      if (exitVal == 0) {
-        System.out.println(output);
-      } else {
       }
-    } catch (IOException | InterruptedException e) {
-      e.printStackTrace();
-    }
   }
 }
