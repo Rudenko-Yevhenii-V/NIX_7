@@ -3,6 +3,7 @@ package ry.rudenko.nix.chess;
 import ry.rudenko.nix.chess.game.Chessboard;
 import ry.rudenko.nix.chess.game.DrowBoard;
 import ry.rudenko.nix.chess.game.Greetings;
+import ry.rudenko.nix.chess.game.Helper;
 import ry.rudenko.nix.chess.game.myColors.MyColors;
 
 public class Main {
@@ -10,6 +11,7 @@ public class Main {
   public static void main(String[] args) {
     for (String arg : args) {
       new MyColors().setShell(arg);
+      new Helper().setShell(arg);
     }
     new Greetings().sayHelloStartGame();
     Chessboard myChessboard = new Chessboard();

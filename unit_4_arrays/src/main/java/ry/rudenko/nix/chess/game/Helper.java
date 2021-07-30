@@ -5,17 +5,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Helper {
+  private static String shell = "";
+  public void setShell(String shell) {
+    this.shell = shell;
+  }
+  public  String getShell() {
+    return shell;
+  }
 
   public Helper() {
 
   }
 
   public final void clearConsole() {
+
     int count = 0;
     Process process;
     try {
-      final String os = System.getProperty("os.name");
-      if (os.contains("Windows")) {
+      if (!(shell.equals("shell"))) {
         process = Runtime.getRuntime().exec("cls");
       } else {
         process = Runtime.getRuntime().exec("clear");

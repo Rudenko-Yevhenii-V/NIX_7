@@ -1,0 +1,90 @@
+package ry.rudenko.nix.strings.reverse;
+
+public class ReverseString implements IReverse {
+
+  @Override
+  public String reverse(String src) {
+    return reverse(src, true);
+  }
+
+  @Override
+  public String reverse(String src, boolean eachWord) {
+    StringBuilder buffer = new StringBuilder();
+    if (eachWord) {
+      String[] subStr;
+      String delimeter = " ";
+      subStr = src.split(delimeter);
+      for (String elementSubStr : subStr
+      ) {
+        buffer.append(reverse(elementSubStr, false));
+        buffer.append(" ");
+      }
+      return String.valueOf(buffer).trim();
+    } else {
+      char[] charsSrc = src.toCharArray();
+      for (int i = charsSrc.length - 1; i >= 0; i--) {
+        buffer.append(charsSrc[i]);
+      }
+      return String.valueOf(buffer);
+    }
+  }
+
+  @Override
+  public String reverse(String src, String dest) {
+    return reverse(src, dest, false);
+  }
+
+  @Override
+  public String reverse(String src, String dest, boolean eachWord) {
+    StringBuilder buffer = new StringBuilder();
+    if (!src.contains(dest)) {
+      System.out.println("not substring");
+    }
+    if (eachWord) {
+      reverse(dest);
+      buffer.append(src.substring(0, src.indexOf(dest)));
+      buffer.append(reverse(dest));
+      buffer.append(src.substring(src.indexOf(dest) + dest.length(), src.length()));
+      return String.valueOf(reverse(String.valueOf(buffer), true));
+    } else {
+      reverse(dest);
+      buffer.append(src.substring(0, src.indexOf(dest)));
+      buffer.append(reverse(dest, false));
+      buffer.append(src.substring(src.indexOf(dest) + dest.length(), src.length()));
+      return String.valueOf(buffer);
+    }
+  }
+
+  @Override
+  public String reverse(String src, int firstIndex, int lastIndex) {
+    int lastIndexInclusive = lastIndex + 1;
+    StringBuilder buffer = new StringBuilder();
+    String[] subStr;
+    String delimeter = " ";
+    subStr = src.substring(firstIndex, lastIndexInclusive).split(delimeter);
+    buffer.append(src.substring(firstIndex, lastIndexInclusive));
+    return src.substring(0, firstIndex) + (reverse(String.valueOf(buffer), true))
+        + src.substring(lastIndex + 1, src.length());
+  }
+
+  @Override
+  public String reverse(String src, int firstIndex, int lastIndex, boolean eachWord) {
+    if (eachWord) {
+
+      return reverse(reverse(src, firstIndex, lastIndex), true);
+    } else {
+      return reverse(src, firstIndex, lastIndex);
+    }
+  }
+
+  @Override
+  public String reverse(String src, char firstIndex, char lastIndex, boolean eachWord) {
+    return reverse(src, src.substring(src.indexOf(firstIndex), src.indexOf(lastIndex)), eachWord);
+  }
+
+  @Override
+  public String reverse(String src, char firstIndex, char lastIndex) {
+    return null;
+  }
+
+}

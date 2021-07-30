@@ -1,0 +1,21 @@
+package ry.rudenko.nix.strings.reverse;
+
+public interface IReverse {
+
+  String reverse(String src);
+
+  String reverse(String src, boolean eachWord);
+
+  String reverse(String src, String dest);
+
+  String reverse(String src, String dest, boolean eachWord);
+
+  String reverse(String src, int firstIndex, int lastIndex);
+
+  String reverse(String src, int firstIndex, int lastIndex, boolean eachWord);
+
+  String reverse(String src, char firstIndex, char lastIndex);
+
+  String reverse(String src, char firstIndex, char lastIndex, boolean eachWord);
+
+}
