@@ -2,6 +2,8 @@ package ry.rudenko.nix.chess.game;
 
 import java.util.Random;
 import java.util.Scanner;
+
+import ry.rudenko.nix.chess.figures.EmptyFigure;
 import ry.rudenko.nix.chess.figures.Figure;
 import ry.rudenko.nix.chess.logic.ValidCheker;
 
@@ -40,7 +42,7 @@ public class Chessboard {
     } else if (whitesNowToMove) {
       System.out
           .println("___________________________________________________\n"
-              + "White's move EXAMPLE ENTER: A2 to A4\n");
+              + "Red's move EXAMPLE ENTER: A2 to A4\n");
     } else {
       System.out
           .println("___________________________________________________\n"
@@ -61,7 +63,7 @@ public class Chessboard {
     if (new ValidCheker(whitesNowToMove, nowRow, nowCol, needRow, needCol,
         chessboard[nowRow][nowCol], chessboard[needRow][needCol], chessboard).moveValid()) {
       chessboard[needRow][needCol] = chessboard[nowRow][nowCol];
-      chessboard[nowRow][nowCol] = null;
+      chessboard[nowRow][nowCol] = new EmptyFigure(true);
       whitesNowToMove = !whitesNowToMove;
     } else {
       invalidMove = true;

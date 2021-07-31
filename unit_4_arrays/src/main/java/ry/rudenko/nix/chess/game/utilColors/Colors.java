@@ -33,7 +33,6 @@ public class Colors {
     }
 
     public Colors() {
-
         if (!(shell.equals("shell"))) {
             ansiReset = "";
             ansiBlack = "";
@@ -72,6 +71,4 @@ public class Colors {
             ansiWhiteBackground = "\u001B[47m";
         }
     }
-
-
 }
