@@ -10,11 +10,11 @@ import ry.rudenko.nix.chess.figures.Knight;
 import ry.rudenko.nix.chess.figures.Pawn;
 import ry.rudenko.nix.chess.figures.Queen;
 import ry.rudenko.nix.chess.figures.Rook;
-import ry.rudenko.nix.chess.game.myColors.MyColors;
+import ry.rudenko.nix.chess.game.utilColors.Colors;
 
 public class DrowBoard {
 
-  MyColors myColors = new MyColors();
+  Colors myColors = new Colors();
   private int countDrawColorSells = 0;
 
   public DrowBoard() {
@@ -86,22 +86,40 @@ public class DrowBoard {
 
   public void drawBoard(Figure[][] chessboard) {
     new Helper().clearConsole();
-    System.out.println(" ****** BLACK ****** ");
-    System.out.printf("_| %2s %2s %2s %2s %2s %2s %2s %2s", "\u0041", "B", "C", "D",
-        "E", "F", "G", "H");
-    for (int row = 0; row < chessboard.length; row++) {
-      System.out.println(drawColorSells(""));
-      System.out.printf("%2d", 8 - row);
-      for (int col = 0; col < chessboard[row].length; col++) {
-        if (chessboard[row][col] != null) {
-          System.out.printf("%2s", drawColorSells(chessboard[row][col].draw()));
-        } else {
-          System.out.printf("%2s", drawColorSells("\u2662"));
+    System.out.println(myColors.getShell());
+    if(myColors.getShell().equals("shell")){
+      System.out.printf("_| %10s %10s %10s %10s %10s %10s %10s %10s%n", "\u0041", "B", "C", "D",
+              "E", "F", "G", "H");
+      for (int row = 0; row < 8; row++) {
+        for (int line = 0; line < 6; line++) {
+          for (int cell = 0; cell < 8; cell++) {
+              System.out.print(drawColorSells((chessboard[row][cell].drawASCII())[line]));
+          }
+          System.out.println();
+        }
+        System.out.println(drawColorSells(""));
+      }
+      System.out.println();
+      System.out.println(" ****** WHITE ****** ");
+      System.out.println("if teams tied enter EXIT");
+    }else {
+      System.out.println(" ****** BLACK ****** ");
+      System.out.printf("_| %2s %2s %2s %2s %2s %2s %2s %2s", "\u0041", "B", "C", "D",
+              "E", "F", "G", "H");
+      for (int row = 0; row < chessboard.length; row++) {
+        System.out.println(drawColorSells(""));
+        System.out.printf("%2d", 8 - row);
+        for (int col = 0; col < chessboard[row].length; col++) {
+          if (chessboard[row][col] != null) {
+            System.out.printf("%2s", drawColorSells(chessboard[row][col].draw()));
+          } else {
+            System.out.printf("%2s", drawColorSells("\u2662"));
+          }
         }
       }
+      System.out.println();
+      System.out.println(" ****** WHITE ****** ");
+      System.out.println("if teams tied enter EXIT");
     }
-    System.out.println();
-    System.out.println(" ****** WHITE ****** ");
-    System.out.println("if teams tied enter EXIT");
   }
 }

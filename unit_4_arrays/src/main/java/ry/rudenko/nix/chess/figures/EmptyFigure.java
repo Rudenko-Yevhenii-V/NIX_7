@@ -30,6 +30,13 @@ public class EmptyFigure extends Figure {
   }
 
   @Override
+  public String[] drawASCII() {
+    String paw1 = "        ";
+    String [] emptyFigure = {paw1,paw1,paw1,paw1,paw1,paw1};
+    return  emptyFigure ;
+  }
+
+  @Override
   public boolean isMoveValid(int srcRow, int srcCol, int destRow, int destCol, Figure[][] figures) {
     return false;
   }

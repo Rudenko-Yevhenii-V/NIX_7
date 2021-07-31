@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Helper {
-  private static String shell = "";
+  private static String shell = "defHelper";
   public void setShell(String shell) {
     this.shell = shell;
   }

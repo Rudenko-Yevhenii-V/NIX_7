@@ -1,11 +1,11 @@
-package ry.rudenko.nix.chess.game.myColors;
+package ry.rudenko.nix.chess.game.utilColors;
 
 /**
  * MyColors
  * цвета текста в консоли
  */
-public class MyColors {
-    private static String shell = "";
+public class Colors {
+    private static String shell = "DefColo";
     public static String ansiReset;
     public static String ansiBlack;
     public static String ansiRed;
@@ -32,7 +32,7 @@ public class MyColors {
         return shell;
     }
 
-    public MyColors() {
+    public Colors() {
 
         if (!(shell.equals("shell"))) {
             ansiReset = "";

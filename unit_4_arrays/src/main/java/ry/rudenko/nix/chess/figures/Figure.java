@@ -1,9 +1,9 @@
 package ry.rudenko.nix.chess.figures;
 
-import ry.rudenko.nix.chess.game.myColors.MyColors;
+import ry.rudenko.nix.chess.game.utilColors.Colors;
 
 public abstract class Figure {
-  MyColors myColors = new MyColors();
+  Colors myColors = new Colors();
   public boolean isWhite;
   Figure[][] figures;
 
@@ -16,6 +16,7 @@ public abstract class Figure {
   }
 
   public abstract String draw();
+  public  abstract String[] drawASCII();
 
   public abstract boolean isMoveValid(int srcRow, int srcCol, int destRow, int destCol, Figure[][] figures);
 

@@ -1,11 +1,11 @@
 package ry.rudenko.nix.chess.game;
 
 import java.util.Random;
-import ry.rudenko.nix.chess.game.myColors.MyColors;
+import ry.rudenko.nix.chess.game.utilColors.Colors;
 
 public class Greetings {
 
-  MyColors myColors = new MyColors();
+  Colors myColors = new Colors();
   Random random = new Random();
 
   public void sayHelloStartGame() {
@@ -17,8 +17,33 @@ public class Greetings {
         "*            *     *    *                 *          *\n" +
         "*            *     *    *                 *          *\n" +
         "********     *     *    *******    ********   ********\n";
+    String KOHb = "  |\\_\n" +
+            "  /  .\\_\n" +
+            " |   ___)\n" +
+            " |    \\\n" +
+            " |  =  |\n" +
+            " /_____\\\n" +
+            "[_______]";
+    String fugures = "                                            _:_\n" +
+            "                                                    '-.-'\n" +
+            "                                           ()      __.'.__\n" +
+            "                                        .-:--:-.  |_______|\n" +
+            "                                 ()      \\____/    \\=====/\n" +
+            "                                 /\\      {====}     )___(\n" +
+            "                      (\\=,      //\\\\      )__(     /_____\\\n" +
+            "      __    |'-'-'|  //  .\\    (    )    /____\\     |   |\n" +
+            "     /  \\   |_____| (( \\_  \\    )__(      |  |      |   |\n" +
+            "     \\__/    |===|   ))  `\\_)  /____\\     |  |      |   |\n" +
+            "    /____\\   |   |  (/     \\    |  |      |  |      |   |\n" +
+            "     |  |    |   |   | _.-'|    |  |      |  |      |   |\n" +
+            "     |__|    )___(    )___(    /____\\    /____\\    /_____\\\n" +
+            "    (====)  (=====)  (=====)  (======)  (======)  (=======)\n" +
+            "    }===={  }====={  }====={  }======{  }======{  }======={\n" +
+            "   (______)(_______)(_______)(________)(________)(_________)";
     System.out.flush();
     char[] charsOfChess = chess.toCharArray();
+    char[] charsOfKOHb = KOHb.toCharArray();
+    char[] charsOfFigures = fugures.toCharArray();
     for (char elOfCharsOfChess : charsOfChess) {
       try {
         Thread.sleep(10);
@@ -27,22 +52,38 @@ public class Greetings {
       }
       System.out.print(giveMixColors(String.valueOf(elOfCharsOfChess)));
     }
+    for (char elOfCharsOfKOHb : charsOfKOHb) {
+      try {
+        Thread.sleep(10);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      System.out.print(giveMixColors(String.valueOf(elOfCharsOfKOHb)));
+    }
+    for (char elOfCharsOfKOHb : charsOfFigures) {
+      try {
+        Thread.sleep(10);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      System.out.print(giveMixColors(String.valueOf(elOfCharsOfKOHb)));
+    }
     try {
       Thread.sleep(1000);
       new Helper().clearConsole();
-      System.out.print(myColors.ansiGreen + chess + myColors.ansiReset);
+      System.out.print(myColors.ansiGreen + chess + KOHb + fugures + myColors.ansiReset);
       Thread.sleep(500);
       new Helper().clearConsole();
       Thread.sleep(500);
-      System.out.print(myColors.ansiRed + chess + myColors.ansiReset);
+      System.out.print(myColors.ansiRed + chess + KOHb + fugures + myColors.ansiReset);
       Thread.sleep(300);
       new Helper().clearConsole();
       Thread.sleep(300);
-      System.out.print(myColors.ansiPurple + chess + myColors.ansiReset);
+      System.out.print(myColors.ansiPurple + chess + KOHb + fugures + myColors.ansiReset);
       Thread.sleep(700);
       new Helper().clearConsole();
       Thread.sleep(700);
-      System.out.print(myColors.ansiYellow + chess + myColors.ansiReset);
+      System.out.print(myColors.ansiYellow + chess + KOHb + fugures + myColors.ansiReset);
       Thread.sleep(1000);
       new Helper().clearConsole();
     } catch (InterruptedException e) {
