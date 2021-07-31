@@ -40,7 +40,7 @@ public class Pawn extends Figure {
     public boolean isMoveValid(int nowRow, int nowCol, int needRow, int needCol, Figure[][] figures) {
         if (this.isWhite) {
             try {
-                return (!((needCol - nowCol) < 3)) &&
+                return (((needRow - nowRow) < 3)) &&
                         ((nowCol == needCol) && nowRow == (needRow + 1)) ||
                         ((nowRow == 6) && (nowCol == needCol) && (nowRow == (needRow + 2))) ||
                         ((nowRow == (needRow + 1)) && (Math.abs(nowCol - needCol) == 1));
@@ -50,7 +50,7 @@ public class Pawn extends Figure {
             }
         } else {
             try {
-                return (!((nowCol - needCol) < 3)) &&
+                return (((nowRow - needRow) < 3)) &&
                         (((nowCol == needCol) && nowRow == (needRow - 1))
                                 || ((nowRow == 1) && (nowCol == needCol) && (nowRow == (needRow - 2)))
                                 || ((nowRow == (needRow - 1)))
