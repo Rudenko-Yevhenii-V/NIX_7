@@ -40,28 +40,38 @@ public class LevelOne extends JFrame {
     JLabel task3Label = new JLabel();
     task3Label.setIcon(icon3);
 
-    JButton jButtonTask1 = new JButton("select");
-    JButton jButtonTask2 = new JButton("select");
-    JButton jButtonTask3 = new JButton("select");
+    JButton jButtonTask1 = new JButton("enter");
+    JButton jButtonTask2 = new JButton("enter");
+    JButton jButtonTask3 = new JButton("enter");
     JButton jButtonGoToMain = new JButton("Go To Main");
 
     JPanel buttonsPanel = new JPanel(new GridLayout(5, 1));
     JPanel jPanel1 = new JPanel(new FlowLayout());
     jPanel1.add(titleLabel);
+
     JPanel jPanel2 = new JPanel(new GridLayout(2, 1));
     jPanel2.add(task1Label);
     JTextField jTextFieldTask1 = new JTextField();
     JLabel jLabelEnterNumbers = new JLabel("Enter numbers");
     jTextFieldTask1.setToolTipText("Enter numbers");
-    JPanel jPanetask1 = new JPanel(new GridLayout(1, 3));
+    JPanel jPanetask1 = new JPanel(new BorderLayout());
     jPanel2.add(jPanetask1);
-    jPanetask1.add(jLabelEnterNumbers);
-    jPanetask1.add(jTextFieldTask1);
-    jPanetask1.add(jButtonTask1);
-    JPanel jPanel3 = new JPanel(new FlowLayout());
-    jPanel3.add(task2Label);
-    JPanel jPanel4 = new JPanel(new FlowLayout());
-    jPanel4.add(task3Label);
+    jPanetask1.add(jLabelEnterNumbers, BorderLayout.NORTH);
+    JPanel bufer1 = new JPanel(new GridLayout(1, 2));
+    jPanetask1.add(bufer1);
+    bufer1.add(jTextFieldTask1);
+    bufer1.add(jButtonTask1);
+
+    JPanel jPanel3 = new JPanel(new BorderLayout());
+    jPanel3.add(task2Label, BorderLayout.NORTH);
+    JButton jButtonHorseMove = new JButton("press on to show horse moves");
+    jPanel3.add(jButtonHorseMove, BorderLayout.SOUTH);
+
+    JPanel jPanel4 = new JPanel(new BorderLayout());
+    jPanel4.add(task3Label, BorderLayout.NORTH);
+    JButton jButtonTrianhle = new JButton("press on to show area of a triangle");
+    jPanel4.add(jButtonTrianhle, BorderLayout.CENTER);
+
     JPanel jPanel5 = new JPanel(new FlowLayout());
     jPanel5.add(jButtonGoToMain);
 
@@ -107,6 +117,17 @@ public class LevelOne extends JFrame {
           new ShowModule().setVisible(true);
         }
     );
+    jButtonHorseMove.addActionListener(e -> {
+          setVisible(false);
+          new HorseMove().setVisible(true);
+        }
+    );
+    jButtonTrianhle.addActionListener(e -> {
+          setVisible(false);
+          new HorseMove().setVisible(true);
+        }
+    );
+
 
   }
 }
