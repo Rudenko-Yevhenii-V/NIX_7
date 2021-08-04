@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import ry.rudenko.taskLevel1.task1.UniqueCharactersFromArray;
+import ry.rudenko.windows.triangle.TriangleTest;
 
 public class LevelOne extends JFrame {
 
@@ -112,7 +113,7 @@ public class LevelOne extends JFrame {
     );
     jButtonTrianhle.addActionListener(e -> {
           setVisible(false);
-          new HorseMove().setVisible(true);
+          new AreaOfTriangleWindow().setVisible(true);
         }
     );
 
