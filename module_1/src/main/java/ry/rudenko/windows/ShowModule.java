@@ -12,7 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class ShowModule extends JFrame {
-private String jLabelLVL1SetText;
+
+  private String jLabelLVL1SetText;
 
   public void setjLabelLVL1SetText(String jLabelLVL1SetText) {
     this.jLabelLVL1SetText = jLabelLVL1SetText;
@@ -22,7 +23,8 @@ private String jLabelLVL1SetText;
     super("MODULE1 for NIX 7!!!");
     setBounds(0, 0, 1200, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("images"+File.separator+"title.jpg"));
+    ImageIcon icon = new ImageIcon(
+        getClass().getClassLoader().getResource("images" + File.separator + "title.jpg"));
     icon.getImage().flush();
     JLabel labelTitle = new JLabel();
     JLabel jLabelTest = new JLabel("<html>JUnit TEST</html>", SwingConstants.CENTER);
@@ -70,18 +72,18 @@ private String jLabelLVL1SetText;
     );
     jButton1.addActionListener(e -> {
           setVisible(false);
-          new  LevelOne().setVisible(true);
+          new LevelOne().setVisible(true);
         }
     );
 
     jButton2.addActionListener(e -> {
           setVisible(false);
-          //new WindowApp().setVisible(true);
+          new LevelTwo().setVisible(true);
         }
     );
     jButton3.addActionListener(e -> {
           setVisible(false);
-          //new WindowApp().setVisible(true);
+          new LevelThree().setVisible(true);
         }
     );
 

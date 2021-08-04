@@ -6,7 +6,6 @@ public class MaximumDepthOfBinaryTree {
     if (root == null) {
       return 0;
     }
-
     return 1 + Math.max(MaximumDepthOfBinaryTree(root.left), MaximumDepthOfBinaryTree(root.right));
   }
 
