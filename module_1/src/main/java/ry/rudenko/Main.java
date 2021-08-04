@@ -1,46 +1,16 @@
 package ry.rudenko;
 
-import static ry.rudenko.taskLevel2.task2.MaximumDepthOfBinaryTree.MaximumDepthOfBinaryTree;
-
-import ry.rudenko.taskLevel1.task1.UniqueCharactersFromArray;
-import ry.rudenko.taskLevel1.task2.KnightsMoveValidator;
-import ry.rudenko.taskLevel1.task3.AreaOfTriangle;
-import ry.rudenko.taskLevel2.task1.StringValidatorForTheTask1Lvl2;
-import ry.rudenko.taskLevel2.task2.TreeNode;
-import ry.rudenko.taskLevel3.task1.GameOfLife;
-import ry.rudenko.windows.ShowModule;
+import ry.rudenko.windows.HorseMove;
 
 public class Main {
 
   public static void main(String[] args) {
 
-    ShowModule showModule = new ShowModule();
-    showModule.setVisible(true);
-//    showModule.setSize(500, 600);
-//    //lvl1 task1
-//    int[] numbers = {1, 4, 5, 1, 1, 3};
-//    System.out.println("expected  4 - result " + new UniqueCharactersFromArray()
-//        .ReturnTheNumberOfUniqueCharactersFromArray(numbers));
-//    //lvl1 task1
-//    //lvl1 task2
-//    System.out.println("expected true: ");
-//    System.out.println("KONb = " + new KnightsMoveValidator(1, 1, 3, 2).isPossiblePath());
-//    System.out.println("KONb = " + new KnightsMoveValidator(1, 1, 2, 3).isPossiblePath());
-//    System.out.println("KONb = " + new KnightsMoveValidator(1, 1, 3, 0).isPossiblePath());
-//    System.out.println("KONb = " + new KnightsMoveValidator(1, 1, 2, -1).isPossiblePath());
-//    System.out.println("KONb = " + new KnightsMoveValidator(1, 1, 0, -1).isPossiblePath());
-//    System.out.println("KONb = " + new KnightsMoveValidator(1, 1, -1, 0).isPossiblePath());
-//    System.out.println("KONb = " + new KnightsMoveValidator(1, 1, -1, 2).isPossiblePath());
-//    System.out.println("KONb = " + new KnightsMoveValidator(1, 1, 0, 3).isPossiblePath());
-//    System.out.println("test for loop row from -4 to 4 col from -4 to 4: ");
-//    for (int i = -4; i < 5; i++) {
-//      for (int j = -4; j < 5; j++) {
-//        System.out.println(
-//            "KONbto ( " + i + ", " + j + ") = " + new KnightsMoveValidator(1, 1, i, j)
-//                .isPossiblePath());
-//      }
-//    }
-//    //lvl1 task2
+//    ShowModule showModule = new ShowModule();
+//    showModule.setVisible(true);
+    HorseMove horseMove = new HorseMove();
+    horseMove.setVisible(true);
+
 //    //lvl1 task3
 //    System.out.println("S A(1.5) B(6.-4) C(-2.1) = " +
 //        new AreaOfTriangle().CalculateAreaOfTriangleFromVertices(1, 5, 6, -4, -2, 1));

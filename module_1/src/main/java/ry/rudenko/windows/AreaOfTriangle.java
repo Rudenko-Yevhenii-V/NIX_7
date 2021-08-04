@@ -2,29 +2,10 @@ package ry.rudenko.windows;
 
 
 import java.awt.BorderLayout;
-    import java.awt.FlowLayout;
-    import java.awt.GridLayout;
-    import java.io.File;
-    import javax.swing.ImageIcon;
-    import javax.swing.JButton;
-    import javax.swing.JFrame;
-    import javax.swing.JLabel;
-    import javax.swing.JPanel;
-    import javax.swing.JTextField;
-    import ry.rudenko.taskLevel1.task1.UniqueCharactersFromArray;
-
-    import java.awt.BorderLayout;
-    import java.awt.FlowLayout;
-    import java.awt.GridLayout;
-    import java.io.File;
-    import javax.swing.ImageIcon;
-    import javax.swing.JButton;
-    import javax.swing.JFrame;
-    import javax.swing.JLabel;
-    import javax.swing.JPanel;
-    import javax.swing.JTextField;
-    import javax.swing.SwingConstants;
-    import ry.rudenko.taskLevel1.task1.UniqueCharactersFromArray;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class AreaOfTriangle extends JFrame {
   public AreaOfTriangle() {

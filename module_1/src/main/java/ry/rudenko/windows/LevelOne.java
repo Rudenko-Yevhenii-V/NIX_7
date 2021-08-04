@@ -11,10 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import ry.rudenko.taskLevel1.task1.UniqueCharactersFromArray;
 
 public class LevelOne extends JFrame {
+
   public LevelOne() {
     super("MODULE1 for NIX 7!!!");
     setBounds(0, 0, 1200, 1000);
@@ -41,8 +41,6 @@ public class LevelOne extends JFrame {
     task3Label.setIcon(icon3);
 
     JButton jButtonTask1 = new JButton("enter");
-    JButton jButtonTask2 = new JButton("enter");
-    JButton jButtonTask3 = new JButton("enter");
     JButton jButtonGoToMain = new JButton("Go To Main");
 
     JPanel buttonsPanel = new JPanel(new GridLayout(5, 1));
@@ -100,16 +98,6 @@ public class LevelOne extends JFrame {
           }
           jTextFieldTask1.setText(String.valueOf(
               new UniqueCharactersFromArray().ReturnTheNumberOfUniqueCharactersFromArray(numbers)));
-        }
-    );
-    jButtonTask2.addActionListener(e -> {
-          setVisible(false);
-          //new WindowApp().setVisible(true);
-        }
-    );
-    jButtonTask3.addActionListener(e -> {
-          setVisible(false);
-          //new WindowApp().setVisible(true);
         }
     );
     jButtonGoToMain.addActionListener(e -> {
