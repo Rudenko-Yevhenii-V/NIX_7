@@ -24,13 +24,11 @@ public class Queen extends Figure {
   @Override
   public String[] drawASCII() {
 
-      String paw1 = new DrowBoard().drawColorFigures("    .   ", isWhite);
+      String paw1 = new DrowBoard().drawColorFigures("    -   ", isWhite);
       String paw2 = new DrowBoard().drawColorFigures("   ww   ", isWhite);
       String paw3 = new DrowBoard().drawColorFigures("   ()   ", isWhite);
-      String paw4 = new DrowBoard().drawColorFigures("   )(   ", isWhite);
-      String paw5 = new DrowBoard().drawColorFigures("   )(   ", isWhite);
-      String paw6 = new DrowBoard().drawColorFigures("  /__\\  ", isWhite);
-      String[] pawn = {paw1, paw2, paw3, paw4, paw5, paw6};
+      String paw4 = new DrowBoard().drawColorFigures("  /__\\  ", isWhite);
+      String[] pawn = {paw1, paw2, paw3, paw4};
       return pawn;
   }
 

@@ -31,7 +31,7 @@ public class EmptyFigure extends Figure {
     @Override
     public String[] drawASCII() {
         String paw1 = "        ";
-        String[] emptyFigure = {paw1, paw1, paw1, paw1, paw1, paw1};
+        String[] emptyFigure = {paw1, paw1, paw1, paw1};
         return emptyFigure;
     }
 

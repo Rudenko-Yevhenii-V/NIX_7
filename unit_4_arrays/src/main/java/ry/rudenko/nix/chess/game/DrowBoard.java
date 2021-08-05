@@ -92,7 +92,7 @@ public class DrowBoard {
                     "E", "F", "G", "H");
             for (int row = 0; row < 8; row++) {
                 System.out.println((8 - row) + drawColorSells(""));
-                for (int line = 0; line < 6; line++) {
+                for (int line = 0; line < 4; line++) {
                     for (int cell = 0; cell < 8; cell++) {
                         System.out.print("   " + drawColorSells((chessboard[row][cell].drawASCII())[line]));
                     }
