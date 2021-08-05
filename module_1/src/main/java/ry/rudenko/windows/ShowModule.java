@@ -28,9 +28,9 @@ public class ShowModule extends JFrame {
     icon.getImage().flush();
     JLabel labelTitle = new JLabel();
     JLabel jLabelTest = new JLabel("<html>JUnit TEST</html>", SwingConstants.CENTER);
-    JLabel jLabelLVL1 = new JLabel("<html>TASK 1</html>", SwingConstants.CENTER);
-    JLabel jLabelLVL2 = new JLabel("<html>TASK 2</html>", SwingConstants.CENTER);
-    JLabel jLabelLVL3 = new JLabel("<html>TASK 3</html>", SwingConstants.CENTER);
+    JLabel jLabelLVL1 = new JLabel("<html>LEVEL 1</html>", SwingConstants.CENTER);
+    JLabel jLabelLVL2 = new JLabel("<html>LEVEL 2</html>", SwingConstants.CENTER);
+    JLabel jLabelLVL3 = new JLabel("<html>LEVEL 3</html>", SwingConstants.CENTER);
     labelTitle.setIcon(icon);
     JButton jButton1 = new JButton("select");
     JButton jButton2 = new JButton("select");

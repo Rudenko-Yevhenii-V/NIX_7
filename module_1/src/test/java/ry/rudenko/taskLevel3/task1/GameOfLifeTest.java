@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class GameOfLifeTest {
-  GameOfLife gameOfLife = new GameOfLife(3, 3);
+  GameOfLife gameOfLife = new GameOfLife(3, 3, false);
   boolean[][] testArray = new boolean[3][3];
 
   @Test

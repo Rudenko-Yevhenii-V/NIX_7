@@ -3,22 +3,24 @@ package ry.rudenko.taskLevel3.task1;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class GameOfLife {
 
   private int rows;
   private int colums;
+  private int countIteration = 0;
   private boolean runOn = true;
   private boolean[][] boardOfLife;
   boolean[][] bufferOfBoardOfLife;
   private boolean isAlive = true;
   private boolean isEmpty = false;
 
-  public GameOfLife(int rows, int colums) {
+  public GameOfLife(int rows, int colums, Boolean randomIsAlive) {
     this.rows = rows;
     this.colums = colums;
     boardOfLife = new boolean[rows][colums];
-    initBoardOfLife();
+    initBoardOfLife(randomIsAlive);
   }
 
   public boolean isRunOn() {
@@ -28,8 +30,20 @@ public class GameOfLife {
   private void initBoardOfLife() {
     for (int i = 0; i < boardOfLife.length; i++) {
       for (int j = 0; j < boardOfLife[i].length; j++) {
+
         boardOfLife[i][j] = isEmpty;
       }
+    }
+  }
+  private void initBoardOfLife(Boolean randomAlive) {
+    if(randomAlive){
+      for (int i = 0; i < boardOfLife.length; i++) {
+        for (int j = 0; j < boardOfLife[i].length; j++) {
+          boardOfLife[i][j] = new Random().nextBoolean();
+        }
+      }
+    }else {
+      initBoardOfLife();
     }
   }
 
@@ -37,8 +51,8 @@ public class GameOfLife {
     boardOfLife[row][colum] = isAlive;
   }
 
-  public void oneIteration() {
-
+  public boolean[][] oneIteration() {
+    countIteration++;
     if (Arrays.deepEquals(bufferOfBoardOfLife, boardOfLife)) {
       runOn = false;
     }
@@ -60,7 +74,8 @@ public class GameOfLife {
         }
       }
     }
-    System.out.println(printArray(bufferOfBoardOfLife));
+    System.out.print(printArray(bufferOfBoardOfLife));
+    return bufferOfBoardOfLife;
   }
 
   private int analyzingNearCellWithAlive(boolean[][] boardOfLife, int i, int j) {
@@ -100,7 +115,7 @@ public class GameOfLife {
     for (int i = 0; i < bufferOfBoardOfLife.length; i++) {
       printArrayText.append(i);
       for (int j = 0; j < bufferOfBoardOfLife[i].length; j++) {
-        if (boardOfLife[i][j]) {
+        if (bufferOfBoardOfLife[i][j]) {
           printArrayText.append(" * ");
         } else {
           printArrayText.append(" - ");

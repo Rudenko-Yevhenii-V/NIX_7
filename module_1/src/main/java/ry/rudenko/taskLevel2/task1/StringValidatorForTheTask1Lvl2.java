@@ -2,6 +2,7 @@ package ry.rudenko.taskLevel2.task1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class StringValidatorForTheTask1Lvl2 {
 
@@ -13,16 +14,15 @@ public class StringValidatorForTheTask1Lvl2 {
   }
 
   public boolean isValid() {
-    List<Character> findElementsOfInputText = new ArrayList();
+    Stack stack = new Stack();
     char[] elementsOfInputText = inputText.toCharArray();
     for (char element : elementsOfInputText
     ) {
       if ((element == '(') || (element == ')') || (element == '{')
           || (element == '}') || (element == '[') || (element == ']')) {
         if ((element == '(') || (element == '{') || (element == '[')) {
-          findElementsOfInputText.add(element);
+          stack.push(element);
         } else {
-
           switch (element) {
             case ')':
               element = '(';
@@ -36,19 +36,28 @@ public class StringValidatorForTheTask1Lvl2 {
             default:
               element = ' ';
           }
-          if (findElementsOfInputText.contains(element)) {
-            findElementsOfInputText.remove(findElementsOfInputText.indexOf(element));
-          } else {
-            System.out.println(" First need open " + element + " than close!");
+          if(stack.empty()){
+           System.out.println(" First need open " + element + " than close!");
             return false;
           }
+          if (stack.lastElement().equals(element)){
+            stack.pop();
+          }else {
+            return false;
+          }
+
+//          if (findElementsOfInputText.contains(element)) {
+//            findElementsOfInputText.remove(findElementsOfInputText.indexOf(element));
+//          } else {
+//                        System.out.println(" you need to close - " + stack.get(0));
+//            return false;
+//          }
         }
       }
     }
-    if (!findElementsOfInputText.isEmpty()){
-      System.out.println(" you need to close - " + findElementsOfInputText.get(0));
-      valid = false;
-    }
+  if (!stack.empty()){
+    return false;
+  }
     return valid;
   }
 }
