@@ -20,16 +20,23 @@ public class GameOfLifeWindow extends JFrame {
   private boolean[][] oneIteration;
   private JButton buttonGoToMain;
   private JButton buttonIterations;
+  private JButton buttonStart;
+  private JButton buttonStop;
+  private JPanel mainPanel;
   private JPanel buttonsPanel;
   private JPanel botbuttonsPanel;
+  private JPanel botbuttonsPanelStartStop;
+  boolean start = true;
 
   public GameOfLifeWindow(String rows, String colums, GameOfLife gameOfLife) {
 
     super("Game of Life");
-    device.setFullScreenWindow(this);
     this.rows = Integer.parseInt(rows);
     this.colums = Integer.parseInt(colums);
     this.gameOfLife = gameOfLife;
+    if (this.rows > 30 || this.colums > 30) {
+      device.setFullScreenWindow(this);
+    }
     setBounds(100, 100, 800, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     oneIteration = gameOfLife.oneIteration();
@@ -38,6 +45,10 @@ public class GameOfLifeWindow extends JFrame {
           this.setVisible(false);
           this.removeAll();
           new GameOfLifeWindow(rows, colums, gameOfLife).setVisible(true);
+        }
+    );
+    buttonStop.addActionListener(e -> {
+          start = false;
         }
     );
     buttonGoToMain.addActionListener(e -> {
@@ -50,8 +61,14 @@ public class GameOfLifeWindow extends JFrame {
   private void drawFrame(boolean[][] oneIterationBuff) {
     buttonGoToMain = new JButton("go to main");
     buttonIterations = new JButton("Press to next ITERATION");
-    buttonsPanel = new JPanel(new GridLayout(this.rows + 1, this.colums));
+    buttonStart = new JButton("Press to autoRUN");
+    buttonStop = new JButton("Press to Stop");
+    buttonIterations.setActionCommand("Press to next ITERATION");
+    mainPanel = new JPanel(new BorderLayout());
+    buttonsPanel = new JPanel(new GridLayout(this.rows, this.colums));
     botbuttonsPanel = new JPanel(new BorderLayout());
+    botbuttonsPanelStartStop = new JPanel(new BorderLayout());
+    botbuttonsPanel.setBackground(Color.GRAY);
     System.out.println(gameOfLife.printArray(oneIterationBuff));
     for (int i = 0; i < oneIterationBuff.length; i++) {
       for (int j = 0; j < oneIterationBuff[i].length; j++) {
@@ -65,10 +82,12 @@ public class GameOfLifeWindow extends JFrame {
         b.setVisible(true);
       }
     }
-    buttonsPanel.add(botbuttonsPanel, BorderLayout.CENTER);
-    add(buttonsPanel);
-    buttonsPanel.add(buttonGoToMain, BorderLayout.CENTER);
-    buttonsPanel.add(buttonIterations, BorderLayout.WEST);
+    botbuttonsPanel.add(buttonIterations, BorderLayout.EAST);
+    botbuttonsPanel.add(botbuttonsPanelStartStop, BorderLayout.CENTER);
+    botbuttonsPanel.add(buttonGoToMain, BorderLayout.WEST);
+    mainPanel.add(buttonsPanel, BorderLayout.NORTH);
+    mainPanel.add(botbuttonsPanel, BorderLayout.SOUTH);
+    add(mainPanel);
     pack();
   }
 }

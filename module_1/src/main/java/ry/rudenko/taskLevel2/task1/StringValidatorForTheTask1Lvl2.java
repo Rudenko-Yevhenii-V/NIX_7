@@ -1,7 +1,5 @@
 package ry.rudenko.taskLevel2.task1;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class StringValidatorForTheTask1Lvl2 {
@@ -36,28 +34,21 @@ public class StringValidatorForTheTask1Lvl2 {
             default:
               element = ' ';
           }
-          if(stack.empty()){
-           System.out.println(" First need open " + element + " than close!");
+          if (stack.empty()) {
+            System.out.println(" First need open " + element + " than close!");
             return false;
           }
-          if (stack.lastElement().equals(element)){
+          if (stack.lastElement().equals(element)) {
             stack.pop();
-          }else {
+          } else {
             return false;
           }
-
-//          if (findElementsOfInputText.contains(element)) {
-//            findElementsOfInputText.remove(findElementsOfInputText.indexOf(element));
-//          } else {
-//                        System.out.println(" you need to close - " + stack.get(0));
-//            return false;
-//          }
         }
       }
     }
-  if (!stack.empty()){
-    return false;
-  }
+    if (!stack.empty()) {
+      return false;
+    }
     return valid;
   }
 }

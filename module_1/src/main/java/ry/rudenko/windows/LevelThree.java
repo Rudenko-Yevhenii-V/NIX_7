@@ -25,10 +25,10 @@ public class LevelThree extends JFrame {
     titleLabel.setIcon(iconTitle);
 
     JPanel jPanel1 = new JPanel(new FlowLayout());
-    JTextField jTextFieldRows = new JTextField(3);
+    JTextField jTextFieldRows = new JTextField("70");
     JLabel rows = new JLabel("ROWS");
     JLabel colums = new JLabel("COLUMS");
-    JTextField jTextFieldColums = new JTextField(3);
+    JTextField jTextFieldColums = new JTextField("70");
     JPanel jPanel2 = new JPanel(new FlowLayout());
     JButton jButtonValidate = new JButton("GAME OF LIFE START");
     JPanel jPanel4 = new JPanel(new FlowLayout());
