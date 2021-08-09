@@ -35,9 +35,9 @@ public class GameOfLifeWindow extends JFrame {
     this.colums = Integer.parseInt(colums);
     this.gameOfLife = gameOfLife;
     if (this.rows > 30 || this.colums > 30) {
-      device.setFullScreenWindow(this);
+      this.device.setFullScreenWindow(this);
     }
-    setBounds(100, 100, 800, 1000);
+    setBounds(1, 1, 800, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     oneIteration = gameOfLife.oneIteration();
     drawFrame(oneIteration);
