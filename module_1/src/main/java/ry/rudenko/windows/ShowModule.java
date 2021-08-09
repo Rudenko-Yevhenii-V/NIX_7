@@ -61,8 +61,6 @@ public class ShowModule extends JFrame {
         buttonsPanel.add(jPanel2);
         jPanel1.add(labelTitle);
 
-        jPanel2.add(jLabelTest);
-        jPanel2.add(jPanelForButtonTest);
         jPanelForButtonTest.add(jButtonTest);
         jPanel2.add(jLabelLVL1);
         jPanel2.add(jPanelForButton1);
