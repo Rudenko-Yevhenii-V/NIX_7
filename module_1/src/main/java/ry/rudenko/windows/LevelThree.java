@@ -13,16 +13,26 @@ import javax.swing.JTextField;
 import ry.rudenko.taskLevel3.task1.GameOfLife;
 
 public class LevelThree extends JFrame {
-
+private ImageIcon iconTitle;
+private JLabel titleLabel;
   public LevelThree() {
     super("GAME OF LIFE");
     setBounds(0, 0, 1200, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    ImageIcon iconTitle = new ImageIcon(
-        getClass().getClassLoader().getResource("images" + File.separator + "gl.jpg"));
-    iconTitle.getImage().flush();
-    JLabel titleLabel = new JLabel();
-    titleLabel.setIcon(iconTitle);
+    if (System.getProperty("os.name").contains("W")) {
+      iconTitle = new ImageIcon(
+              getClass().getClassLoader().getResource("images/gl.jpg"));
+      iconTitle.getImage().flush();
+      titleLabel = new JLabel();
+      titleLabel.setIcon(iconTitle);
+    } else {
+      iconTitle = new ImageIcon(
+              getClass().getClassLoader().getResource("images" + File.separator + "gl.jpg"));
+      iconTitle.getImage().flush();
+      titleLabel = new JLabel();
+      titleLabel.setIcon(iconTitle);
+    }
+
 
     JPanel jPanel1 = new JPanel(new FlowLayout());
     JTextField jTextFieldRows = new JTextField("70");

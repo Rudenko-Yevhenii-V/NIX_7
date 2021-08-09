@@ -19,7 +19,7 @@ public class StartTests extends JFrame {
     buttonsPanel.add(jButton2);
     add(buttonsPanel, BorderLayout.SOUTH);
     pack();
-    jButton1.addActionListener(e -> new BatStarter().start("mvn test", jTextArea));
+    jButton1.addActionListener(e -> new BatStarter().start("mvn clean test", jTextArea));
     jButton2.addActionListener(e -> {
           setVisible(false);
           new ShowModule().setVisible(true);

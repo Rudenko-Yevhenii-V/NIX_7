@@ -12,15 +12,22 @@ import javax.swing.JPanel;
 import ry.rudenko.taskLevel1.task2.KnightsMoveValidator;
 
 public class HorseMove extends JFrame {
-
+    private ImageIcon iconKoHb;
   public HorseMove() {
     super("HorseMove");
     setBounds(100, 100, 800, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    ImageIcon iconKoHb = new ImageIcon(
-        getClass().getClassLoader().getResource("images" + File.separator + "kohb.jpg"));
-    iconKoHb.getImage().flush();
+      if (System.getProperty("os.name").contains("W")) {
+          iconKoHb = new ImageIcon(
+                  getClass().getClassLoader().getResource("images/kohb.jpg"));
+          iconKoHb.getImage().flush();
+      }else {
+          iconKoHb = new ImageIcon(
+                  getClass().getClassLoader().getResource("images" + File.separator + "kohb.jpg"));
+          iconKoHb.getImage().flush();
+      }
+
 
     JButton button1 = new JButton();
     button1.setBackground(Color.WHITE);
