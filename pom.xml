@@ -12,8 +12,8 @@
         <module>unit_1_git</module>
         <module>unit_3_base_types</module>
       <module>unit_4_arrays</module>
-      <module>unit_5_strings</module>
-        <module>module_ 1_ Rudenko_Yevhenii</module>
+        <module>unit_6_test_and_logs</module>
+
     </modules>
 
     <build>
