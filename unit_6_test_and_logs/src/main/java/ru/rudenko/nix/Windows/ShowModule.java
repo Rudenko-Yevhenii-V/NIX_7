@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
+import ru.rudenko.nix.dao.InMemoryAuthorDao;
 import ru.rudenko.nix.entity.Author;
 import ru.rudenko.nix.entity.AuthorBook;
 import ru.rudenko.nix.entity.Book;
@@ -58,9 +59,21 @@ public class ShowModule extends JFrame {
     seachPanel.add(panelSeachBookByNameOfBook);
     seachPanel.add(panelSeachBookByAuhtorName);
     JPanel autoGeneratePanel = new JPanel(new GridLayout(0, 6));
+    //Draw All
     AuthorBook[] authorBooks = createOneBookWithAuthors.findAllAuthorsBooks();
     if ((authorBooks.length > 1)) {
+      //del
+      for (int i = 0; i < authorBooks.length; i++) {
+        System.out.println("TEST " + InMemoryAuthorDao.getInstance().findAuthorById(authorBooks[i].getIdAuthor()).getName());
+      }
+      System.out.println(authorBooks.length);
+      //del
       authorBooksIteration = new String[authorBooks.length / 3][4];
+      //del
+
+      System.out.println(authorBooksIteration.length);
+      //del
+
       int countForOutPutAuthorBooks = 0;
       int countForOutPutAuthorBooks3 = 0;
       for (int i = 0; i < authorBooks.length; i++) {
@@ -86,6 +99,7 @@ public class ShowModule extends JFrame {
           countForOutPutAuthorBooks = 0;
         }
       }
+      System.out.println(authorBooksIteration.length);
       for (int i = 0; i < authorBooksIteration.length; i++) {
         JTextField jTextFieldBook = new JTextField(i);
         JTextField jTextFieldAuthor1 = new JTextField(i);

@@ -2,6 +2,7 @@ package ru.rudenko.nix.dao;
 
 import java.util.Arrays;
 import java.util.UUID;
+import ru.rudenko.nix.bd.Arraysbd;
 import ru.rudenko.nix.entity.Author;
 import ru.rudenko.nix.entity.Book;
 import ru.rudenko.nix.service.CRUDService;
@@ -9,7 +10,9 @@ import ru.rudenko.nix.service.CRUDService;
 public class InMemoryBookDao {
 
   private int count = 0;
-  private Book[] books = new Book[count + 1];
+  Arraysbd arraysbd = Arraysbd.getInstance();
+  private Book[] books = arraysbd.getBooks();
+
   private static final InMemoryBookDao instance = new InMemoryBookDao();
 
   private InMemoryBookDao() {
@@ -20,7 +23,7 @@ public class InMemoryBookDao {
   }
 
   public String create(Book book) {
-    if(books.length> 1) {
+    if (books.length > 1) {
       for (Book a : books
       ) {
         if (a.equals(book)) {

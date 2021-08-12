@@ -23,11 +23,13 @@ public class InMemoryAuthorBookDao {
          AuthorBook authorBook = new AuthorBook();
          authorBook.setIdBook(book);
           authorBook.setIdAuthor(authors[i]);
-         System.out.println("Table authorBook IdBook getIdAuthor: " + authorBook.getIdBook() + " " + authorBook.getIdAuthor());
           authorsbooks = Arrays.copyOf(authorsbooks, count + 1);
          authorsbooks[count] = authorBook;
          count++;
-        }
+         System.out.println("+++++++++++++++++" + authorsbooks.length);
+         System.out.println("Table authorBook IdBook getIdAuthor: " + authorBook.getIdBook() + " " + authorBook.getIdAuthor());
+
+       }
 
 //    //delete
 //    for (AuthorBook b: authorsbooks
@@ -65,6 +67,7 @@ public class InMemoryAuthorBookDao {
   }
 
   public AuthorBook[] findAllAuthorsBooks() {
+    System.out.println(" ---------------- " + authorsbooks.length);
     return authorsbooks;
   }
 

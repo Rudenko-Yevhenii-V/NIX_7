@@ -120,7 +120,7 @@
     <maven.shade.plugin.version>3.2.0</maven.shade.plugin.version>
     <lombok.version>1.18.20</lombok.version>
     <maven.compiler.target>11</maven.compiler.target>
-    <logs.folder>logs</logs.folder>
+    <logs.folder>logsUnit6</logs.folder>
     <slf4j.version>1.7.30</slf4j.version>
     <junit.version>4.13.1</junit.version>
     <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
