@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.Windows.ShowModule;
 
-public class Main {
+public class Unit6Main {
 
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");

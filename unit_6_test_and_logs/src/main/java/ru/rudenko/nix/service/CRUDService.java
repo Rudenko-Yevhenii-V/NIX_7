@@ -20,12 +20,16 @@ public class CRUDService {
   private static final CRUDService instance = new CRUDService();
 
   private CRUDService(){}
-  int count = 0;
-  String[] authorsId = new String[count];
   public static CRUDService getInstance(){
     return instance;
   }
   public void createBookAuthors(Book book, Author[] authors) {
+    int count = 0;
+    String[] authorsId = new String[count];
+
+//    for (int i = 0; i < authors.length; i++) {
+//      System.out.println(authors[i].getName());
+//    }
     for (Author author:authors
     ) {
       authorsId = Arrays.copyOf(authorsId, count + 1);

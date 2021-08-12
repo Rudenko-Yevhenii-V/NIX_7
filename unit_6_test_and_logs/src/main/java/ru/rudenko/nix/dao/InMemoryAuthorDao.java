@@ -9,8 +9,9 @@ import ru.rudenko.nix.entity.Author;
 public class InMemoryAuthorDao {
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
-  private static final Logger LOGGER_DEBAG = LoggerFactory.getLogger("debag");
+  private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
   private int count = 0;
+  private int counterForgenerateIdAuthors = 0;
   private Author[] authorsArray = new Author[count+1];
   private static final InMemoryAuthorDao instance = new InMemoryAuthorDao();
 
@@ -21,7 +22,6 @@ public class InMemoryAuthorDao {
   }
 
   public String create(Author author) {
-    LOGGER_INFO.info(" create author");
    if(authorsArray.length> 1){
      for (Author a: authorsArray
      ) {
@@ -34,7 +34,7 @@ public class InMemoryAuthorDao {
     author.setId(generateId());
     authorsArray[count] = author;
     count++;
-    System.out.println("table Author id name: " + author.getId() + " " + author.getName());
+    LOGGER_INFO.info(("table Author id name: " + author.getId() + " " + author.getName()));
     return author.getId();
   }
 
@@ -71,7 +71,10 @@ public class InMemoryAuthorDao {
   }
 
   private String generateId() {
-    String id = UUID.randomUUID().toString();
+    String id = (counterForgenerateIdAuthors+" AUTHOR "
+//        + UUID.randomUUID().toString()
+    );
+    counterForgenerateIdAuthors++;
     if ((authorsArray.length) < 0) {
       for (int i = 0; i < authorsArray.length; i++) {
         if ((authorsArray[i].getId()).equals(id)) {

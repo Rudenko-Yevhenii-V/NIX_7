@@ -33,7 +33,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>ru.rudenko.nix.Main</mainClass>
+                  <mainClass>ru.rudenko.nix.Unit6Main</mainClass>
                 </transformer>
               </transformers>
             </configuration>

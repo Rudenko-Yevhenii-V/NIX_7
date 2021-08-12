@@ -1,13 +1,16 @@
 package ru.rudenko.nix.dao;
 
 import java.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.entity.Author;
 import ru.rudenko.nix.entity.AuthorBook;
 import ru.rudenko.nix.entity.Book;
-import ru.rudenko.nix.service.CRUDService;
 
 public class InMemoryAuthorBookDao {
-
+  private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
+  private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
+  private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
   private int count = 0;
   private AuthorBook[] authorsbooks = new AuthorBook[count + 1];
   private static final InMemoryAuthorBookDao instance = new InMemoryAuthorBookDao();
@@ -18,6 +21,7 @@ public class InMemoryAuthorBookDao {
     return instance;
   }
   public void create(String book, String[] authors) {
+
     String[] idAuthors = new String[authors.length];
        for (int i = 0; i < idAuthors.length; i++) {
          AuthorBook authorBook = new AuthorBook();
@@ -26,9 +30,11 @@ public class InMemoryAuthorBookDao {
           authorsbooks = Arrays.copyOf(authorsbooks, count + 1);
          authorsbooks[count] = authorBook;
          count++;
-         System.out.println("+++++++++++++++++" + authorsbooks.length);
-         System.out.println("Table authorBook IdBook getIdAuthor: " + authorBook.getIdBook() + " " + authorBook.getIdAuthor());
-
+         LOGGER_INFO.info("Table authorBook IdBook getIdAuthor: " +
+             InMemoryBookDao.getInstance().findBookById(authorBook.getIdBook()).getNameOfBook()
+             + " " +
+             InMemoryAuthorDao.getInstance().findAuthorById(authorBook.getIdAuthor()).getName()
+             );
        }
 
 //    //delete
@@ -67,7 +73,6 @@ public class InMemoryAuthorBookDao {
   }
 
   public AuthorBook[] findAllAuthorsBooks() {
-    System.out.println(" ---------------- " + authorsbooks.length);
     return authorsbooks;
   }
 

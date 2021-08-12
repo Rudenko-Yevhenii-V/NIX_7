@@ -2,14 +2,17 @@ package ru.rudenko.nix.dao;
 
 import java.util.Arrays;
 import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.bd.Arraysbd;
-import ru.rudenko.nix.entity.Author;
 import ru.rudenko.nix.entity.Book;
-import ru.rudenko.nix.service.CRUDService;
 
 public class InMemoryBookDao {
-
+  private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
+  private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
+  private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
   private int count = 0;
+  private int counterForgenerateIdBooks = 0;
   Arraysbd arraysbd = Arraysbd.getInstance();
   private Book[] books = arraysbd.getBooks();
 
@@ -35,8 +38,7 @@ public class InMemoryBookDao {
     book.setId(generateId());
     books[count] = book;
     count++;
-    System.out.println("table book id nameBook: " + book.getId() + " " + book.getNameOfBook());
-
+    LOGGER_INFO.info(("table book id nameBook: " + book.getId() + " " + book.getNameOfBook()));
     return book.getId();
   }
 
@@ -77,12 +79,15 @@ public class InMemoryBookDao {
     return null;
   }
 
-  public Book[] findAllUsers() {
+  public Book[] findAllBooks() {
     return books;
   }
 
   private String generateId() {
-    String id = UUID.randomUUID().toString();
+    String id = (counterForgenerateIdBooks + " BOOK  "
+//        + UUID.randomUUID().toString()
+    );
+    counterForgenerateIdBooks++;
     if ((books.length) < 0) {
       for (int i = 0; i < books.length; i++) {
         if ((books[i].getId()).equals(id)) {

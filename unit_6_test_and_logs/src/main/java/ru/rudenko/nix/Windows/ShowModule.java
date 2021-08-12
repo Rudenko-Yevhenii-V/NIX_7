@@ -10,7 +10,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.rudenko.nix.dao.InMemoryAuthorBookDao;
 import ru.rudenko.nix.dao.InMemoryAuthorDao;
+import ru.rudenko.nix.dao.InMemoryBookDao;
 import ru.rudenko.nix.entity.Author;
 import ru.rudenko.nix.entity.AuthorBook;
 import ru.rudenko.nix.entity.Book;
@@ -18,6 +22,9 @@ import ru.rudenko.nix.service.CRUDService;
 
 public class ShowModule extends JFrame {
 
+  private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
+  private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
+  private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
   private CRUDService createOneBookWithAuthors = CRUDService.getInstance();
   private String[][] authorBooksIteration;
   JLabel book1 = new JLabel("name of book");
@@ -27,7 +34,6 @@ public class ShowModule extends JFrame {
     super("CRUD for NIX 7!!!");
     setBounds(0, 0, 1200, 1000);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    System.out.println("new ShowModule ShowModule ShowModule ShowModule ShowModule ShowModule");
     JPanel mainPanel = new JPanel(new BorderLayout());
     JPanel panel1 = new JPanel();
     panel1.setBackground(Color.GRAY);
@@ -61,19 +67,13 @@ public class ShowModule extends JFrame {
     JPanel autoGeneratePanel = new JPanel(new GridLayout(0, 6));
     //Draw All
     AuthorBook[] authorBooks = createOneBookWithAuthors.findAllAuthorsBooks();
+    LOGGER_INFO.info(" All data \n" +
+    InMemoryAuthorDao.getInstance().findAllAuthors().length + " aucthors " +
+    InMemoryBookDao.getInstance().findAllBooks().length + " books " +
+    InMemoryAuthorBookDao.getInstance().findAllAuthorsBooks().length + " aucthorsbooks "
+    );
     if ((authorBooks.length > 1)) {
-      //del
-      for (int i = 0; i < authorBooks.length; i++) {
-        System.out.println("TEST " + InMemoryAuthorDao.getInstance().findAuthorById(authorBooks[i].getIdAuthor()).getName());
-      }
-      System.out.println(authorBooks.length);
-      //del
       authorBooksIteration = new String[authorBooks.length / 3][4];
-      //del
-
-      System.out.println(authorBooksIteration.length);
-      //del
-
       int countForOutPutAuthorBooks = 0;
       int countForOutPutAuthorBooks3 = 0;
       for (int i = 0; i < authorBooks.length; i++) {
@@ -99,18 +99,17 @@ public class ShowModule extends JFrame {
           countForOutPutAuthorBooks = 0;
         }
       }
-      System.out.println(authorBooksIteration.length);
       for (int i = 0; i < authorBooksIteration.length; i++) {
         JTextField jTextFieldBook = new JTextField(i);
-        JTextField jTextFieldAuthor1 = new JTextField(i);
-        JTextField jTextFieldAuthor2 = new JTextField(i);
-        JTextField jTextFieldAuthor3 = new JTextField(i);
+        JTextField jTextFieldAuthor1Auto = new JTextField(i);
+        JTextField jTextFieldAuthor2Auto = new JTextField(i);
+        JTextField jTextFieldAuthor3Auto = new JTextField(i);
         JButton jButtonUpdate = new JButton("jButtonUpdate");
         JButton jButtonDelete = new JButton("jButtonDelete");
         autoGeneratePanel.add(jTextFieldBook);
-        autoGeneratePanel.add(jTextFieldAuthor1);
-        autoGeneratePanel.add(jTextFieldAuthor2);
-        autoGeneratePanel.add(jTextFieldAuthor3);
+        autoGeneratePanel.add(jTextFieldAuthor1Auto);
+        autoGeneratePanel.add(jTextFieldAuthor2Auto);
+        autoGeneratePanel.add(jTextFieldAuthor3Auto);
         autoGeneratePanel.add(jButtonUpdate);
         autoGeneratePanel.add(jButtonDelete);
         for (int j = 0; j < authorBooksIteration[i].length; j++) {
@@ -118,11 +117,11 @@ public class ShowModule extends JFrame {
             case 0:
               jTextFieldBook.setText(authorBooksIteration[i][j]);
             case 1:
-              jTextFieldAuthor1.setText(authorBooksIteration[i][j]);
+              jTextFieldAuthor1Auto.setText(authorBooksIteration[i][j]);
             case 2:
-              jTextFieldAuthor2.setText(authorBooksIteration[i][j]);
+              jTextFieldAuthor2Auto.setText(authorBooksIteration[i][j]);
             case 3:
-              jTextFieldAuthor3.setText(authorBooksIteration[i][j]);
+              jTextFieldAuthor3Auto.setText(authorBooksIteration[i][j]);
           }
         }
         int iter = i;
@@ -135,6 +134,7 @@ public class ShowModule extends JFrame {
     mainPanel.add(autoGeneratePanel, BorderLayout.SOUTH);
     add(mainPanel, BorderLayout.SOUTH);
     pack();
+    //jButtonAdd
     jButtonAdd.addActionListener(e -> {
           if (validatorFieldNotEmpty(jTextFieldBook11) &&
               validatorFieldNotEmpty(jTextFieldAuthor11)
@@ -178,6 +178,7 @@ public class ShowModule extends JFrame {
               authors = Arrays.copyOf(authors, authors.length + 1);
               authors[authors.length - 1] = author3;
             }
+
             createOneBookWithAuthors.createBookAuthors(book1, authors);
             this.setVisible(false);
             this.removeAll();

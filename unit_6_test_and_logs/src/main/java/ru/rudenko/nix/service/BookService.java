@@ -39,6 +39,6 @@ public class BookService {
   }
 
   public Book[] findAllBooks() {
-    return bookDao.findAllUsers();
+    return bookDao.findAllBooks();
   }
 }
