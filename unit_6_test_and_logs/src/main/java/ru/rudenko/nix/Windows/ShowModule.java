@@ -66,6 +66,22 @@ public class ShowModule extends JFrame {
     seachPanel.add(panelSeachBookByAuhtorName);
     JPanel autoGeneratePanel = new JPanel(new GridLayout(0, 6));
     //Draw All
+    //delete
+
+//    System.out.println(InMemoryAuthorDao.getInstance().findAllAuthors().length + " aucthors " +
+//        InMemoryBookDao.getInstance().findAllBooks().length + " books " +
+//        InMemoryAuthorBookDao.getInstance().findAllAuthorsBooks().length + " aucthorsbooks ");
+//
+//    Book[] allBooks = InMemoryBookDao.getInstance().findAllBooks();
+//    for (int i = 0; i < allBooks.length; i++) {
+//      System.out.println(" allBooks = " + allBooks[i].getNameOfBook() + " " + allBooks[i].getId());
+//    }
+    AuthorBook[] authorBookstest = createOneBookWithAuthors.findAllAuthorsBooks();
+    for (int i = 0; i < authorBookstest.length; i++) {
+      System.out.println(authorBookstest[i] + " authorBookstest[i]");
+    }
+    //delete
+
     AuthorBook[] authorBooks = createOneBookWithAuthors.findAllAuthorsBooks();
     LOGGER_INFO.info(" All data \n" +
     InMemoryAuthorDao.getInstance().findAllAuthors().length + " aucthors " +
@@ -78,8 +94,12 @@ public class ShowModule extends JFrame {
       int countForOutPutAuthorBooks3 = 0;
       for (int i = 0; i < authorBooks.length; i++) {
         if (countForOutPutAuthorBooks == 0) {
-          authorBooksIteration[countForOutPutAuthorBooks3][countForOutPutAuthorBooks] =
-              createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()).getNameOfBook();
+          System.out.println(authorBooks[i]);
+          System.out.println(createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()));
+          if (!(createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()) == null)){
+            authorBooksIteration[countForOutPutAuthorBooks3][countForOutPutAuthorBooks] =
+                createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()).getNameOfBook();
+          }
         }
         countForOutPutAuthorBooks++;
         if (countForOutPutAuthorBooks == 1) {
@@ -124,8 +144,10 @@ public class ShowModule extends JFrame {
           }
         }
         int iter = i;
+        //jButtonUpdate
         jButtonUpdate
             .addActionListener(actionEvent -> jTextFieldBook.setText("jButtonUpdate" + iter));
+        //jButtonDelete
         jButtonDelete
             .addActionListener(actionEvent ->{
               createOneBookWithAuthors.delete(InMemoryBookDao.getInstance().
@@ -162,6 +184,7 @@ public class ShowModule extends JFrame {
             }
             Book book1 = new Book();
             book1.setNameOfBook(jTextFieldBook11.getText());
+
             Author author1 = new Author();
             author1.setName(jTextFieldAuthor11.getText());
             Author[] authors = {author1};

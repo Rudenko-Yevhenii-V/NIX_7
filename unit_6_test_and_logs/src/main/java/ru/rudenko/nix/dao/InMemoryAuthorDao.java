@@ -12,18 +12,27 @@ public class InMemoryAuthorDao {
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
   private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
-  private int count = 1;
   private int counterForgenerateIdAuthors = 0;
-  private Author[] authorsArray = new Author[count];
+  private int count = 1;
+  private Author[] authorsArray = new Author[1];
   private static final InMemoryAuthorDao instance = new InMemoryAuthorDao();
 
   private InMemoryAuthorDao(){}
+
+  public int getCount() {
+    return count;
+  }
+
+  public void setCount(int count) {
+    this.count = count;
+  }
 
   public static InMemoryAuthorDao getInstance(){
     return instance;
   }
 
   public String create(Author author) {
+
     LOGGER_INFO.info("enter to create author");
     LOGGER_INFO.info(count + " Author create in author- " + author.getName());
     LOGGER_INFO.info("table authors has length : " + authorsArray.length);
@@ -32,13 +41,11 @@ public class InMemoryAuthorDao {
        if (!(authorsArray[i] == null)){
          if(authorsArray[i].getName().equals(author.getName())){
            author.setId(authorsArray[i].getId());
-           return "this author exist in bd";
+           return author.getId();
 
          }
        }
      }
-
-
     authorsArray = Arrays.copyOf(authorsArray, count);
     author.setId(generateId());
     LOGGER_INFO.info("Author generate id in Author- " + author.getName() + " - " + author.getId());
@@ -62,12 +69,13 @@ public class InMemoryAuthorDao {
     for (int i = 0; i < authorsArray.length; i++) {
       if (authorsArray[i].getId().equals(id)){
         authorsArray[i] = null;
+        setCount(getCount() - 1);
         countMuchDelId++;
       }
     }
     bufferArray = new Author[authorsArray.length-countMuchDelId];
     int count = 0;
-    for (int i = 0; i < bufferArray.length; i++) {
+    for (int i = 0; i < authorsArray.length; i++) {
       if (!(authorsArray[i]==null)){
         bufferArray[count] = authorsArray[i];
         count++;

@@ -13,7 +13,7 @@ public class InMemoryBookDao {
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
   private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
-  private int count = 1;
+private int count = 1;
   private int counterForgenerateIdBooks = 0;
   Arraysbd arraysbd = Arraysbd.getInstance();
   private Book[] books = arraysbd.getBooks();
@@ -27,7 +27,16 @@ public class InMemoryBookDao {
     return instance;
   }
 
+  public int getCount() {
+    return count;
+  }
+
+  public void setCount(int count) {
+    this.count = count;
+  }
+
   public String create(Book book) {
+
     LOGGER_INFO.info("enter to create book");
     LOGGER_INFO.info("Book create in book- " + book.getNameOfBook());
     LOGGER_INFO.info("table books has length : " + books.length);
@@ -35,18 +44,10 @@ public class InMemoryBookDao {
       if (!(books[i] == null)){
         if(books[i].getNameOfBook().equals(book.getNameOfBook())){
           book.setId(books[i].getId());
-          return "this book exist in bd";
+          return book.getId();
         }
       }
     }
-//    if (books.length > 1) {
-//      for (Book a : books
-//      ) {
-//        if (a.equals(book)) {
-//          return a.getId();
-//        }
-//      }
-//    }
     books = Arrays.copyOf(books, count );
     book.setId(generateId());
     LOGGER_INFO.info("Book generate id in book- " + book.getNameOfBook() + " - " + book.getId());
@@ -71,12 +72,13 @@ public class InMemoryBookDao {
     for (int i = 0; i < books.length; i++) {
       if (books[i].getId().equals(id)){
         books[i] = null;
+        setCount(getCount()- 1);
         countMuchDelId++;
       }
     }
     bufferArray = new Book[books.length-countMuchDelId];
     int count = 0;
-    for (int i = 0; i < bufferArray.length; i++) {
+    for (int i = 0; i < books.length; i++) {
       if (!(books[i]==null)){
         bufferArray[count] = books[i];
         count++;

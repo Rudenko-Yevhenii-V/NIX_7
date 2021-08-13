@@ -27,15 +27,19 @@ public class CRUDService {
   }
 
   public void createBookAuthors(Book book, Author[] authors) {
+
     int count = 0;
+    bookDao.create(book);
     String[] authorsId = new String[count];
-    for (Author author : authors
-    ) {
+    for (int i = 0; i < authors.length; i++) {
       authorsId = Arrays.copyOf(authorsId, count + 1);
       count++;
-      authorsId[count - 1] = authorDao.create(author);
+      authorDao.create(authors[i]);
+      authorsId[count - 1] = InMemoryAuthorDao.getInstance().findAuthorById(authors[i].getId()).getId();
     }
-    authorBookDao.create(bookDao.create(book), authorsId);
+    authorBookDao.create(InMemoryBookDao.getInstance().findBookById(book.getId()).getId()
+        , authorsId);
+
   }
 
   public void update(AuthorBook authorBook, Book book, Author[] authors) {
