@@ -77,7 +77,6 @@ public class ShowModule extends JFrame {
       int countForOutPutAuthorBooks = 0;
       int countForOutPutAuthorBooks3 = 0;
       for (int i = 0; i < authorBooks.length; i++) {
-
         if (countForOutPutAuthorBooks == 0) {
           authorBooksIteration[countForOutPutAuthorBooks3][countForOutPutAuthorBooks] =
               createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()).getNameOfBook();
@@ -128,7 +127,16 @@ public class ShowModule extends JFrame {
         jButtonUpdate
             .addActionListener(actionEvent -> jTextFieldBook.setText("jButtonUpdate" + iter));
         jButtonDelete
-            .addActionListener(actionEvent -> jTextFieldBook.setText("jButtonDelete" + iter));
+            .addActionListener(actionEvent ->{
+              createOneBookWithAuthors.delete(InMemoryBookDao.getInstance().
+                  findBookByName(jTextFieldBook.getText())
+                  .getId());
+              this.setVisible(false);
+              this.removeAll();
+              new ShowModule().setVisible(true);
+                }
+            );
+
       }
     }
     mainPanel.add(autoGeneratePanel, BorderLayout.SOUTH);
@@ -149,6 +157,7 @@ public class ShowModule extends JFrame {
                   return;
                 }
               } catch (NullPointerException er) {
+                LOGGER_ERROR.error("NullPointerException for LOGGER" + er);
               }
             }
             Book book1 = new Book();

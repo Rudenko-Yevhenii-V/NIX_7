@@ -14,27 +14,26 @@ public class CRUDService {
 
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
-  private  InMemoryAuthorDao authorDao = InMemoryAuthorDao.getInstance();
-  private  InMemoryBookDao bookDao = InMemoryBookDao.getInstance();
-  private  InMemoryAuthorBookDao authorBookDao = InMemoryAuthorBookDao.getInstance();
+  private InMemoryAuthorDao authorDao = InMemoryAuthorDao.getInstance();
+  private InMemoryBookDao bookDao = InMemoryBookDao.getInstance();
+  private InMemoryAuthorBookDao authorBookDao = InMemoryAuthorBookDao.getInstance();
   private static final CRUDService instance = new CRUDService();
 
-  private CRUDService(){}
-  public static CRUDService getInstance(){
+  private CRUDService() {
+  }
+
+  public static CRUDService getInstance() {
     return instance;
   }
+
   public void createBookAuthors(Book book, Author[] authors) {
     int count = 0;
     String[] authorsId = new String[count];
-
-//    for (int i = 0; i < authors.length; i++) {
-//      System.out.println(authors[i].getName());
-//    }
-    for (Author author:authors
+    for (Author author : authors
     ) {
       authorsId = Arrays.copyOf(authorsId, count + 1);
       count++;
-      authorsId[count-1] = authorDao.create(author);
+      authorsId[count - 1] = authorDao.create(author);
     }
     authorBookDao.create(bookDao.create(book), authorsId);
   }
@@ -42,6 +41,16 @@ public class CRUDService {
   public void update(AuthorBook authorBook, Book book, Author[] authors) {
     authorBookDao.update(authorBook, book, authors);
   }
+
+  public void delete(String id) {
+    LOGGER_WARN.warn(
+        " CRUDService remove book by id: " + InMemoryBookDao.getInstance().findBookById(id)
+            .getNameOfBook());
+    authorBookDao.delete(id);
+    bookDao.delete(id);
+//    authorDao.delete(id);
+  }
+
   public AuthorBook findBookByIdBook(String idBook) {
     return authorBookDao.findAuthorByIdBook(idBook);
   }
@@ -49,9 +58,11 @@ public class CRUDService {
   public Author findAuthorById(String id) {
     return authorDao.findAuthorById(id);
   }
+
   public Book findBookById(String id) {
     return bookDao.findBookById(id);
   }
+
   public Book findBookByName(String nameOfBook) {
     return bookDao.findBookByName(nameOfBook);
   }

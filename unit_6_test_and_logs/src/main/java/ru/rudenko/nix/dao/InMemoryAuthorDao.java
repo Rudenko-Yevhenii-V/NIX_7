@@ -5,14 +5,16 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.entity.Author;
+import ru.rudenko.nix.entity.AuthorBook;
+import ru.rudenko.nix.entity.Book;
 
 public class InMemoryAuthorDao {
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
   private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
-  private int count = 0;
+  private int count = 1;
   private int counterForgenerateIdAuthors = 0;
-  private Author[] authorsArray = new Author[count+1];
+  private Author[] authorsArray = new Author[count];
   private static final InMemoryAuthorDao instance = new InMemoryAuthorDao();
 
   private InMemoryAuthorDao(){}
@@ -22,45 +24,68 @@ public class InMemoryAuthorDao {
   }
 
   public String create(Author author) {
-   if(authorsArray.length> 1){
-     for (Author a: authorsArray
-     ) {
-       if(a.equals(author)){
-          return a.getId();
+    LOGGER_INFO.info("enter to create author");
+    LOGGER_INFO.info(count + " Author create in author- " + author.getName());
+    LOGGER_INFO.info("table authors has length : " + authorsArray.length);
+
+     for (int i = 0; i < authorsArray.length; i++) {
+       if (!(authorsArray[i] == null)){
+         if(authorsArray[i].getName().equals(author.getName())){
+           author.setId(authorsArray[i].getId());
+           return "this author exist in bd";
+
+         }
        }
      }
-   }
-    authorsArray = Arrays.copyOf(authorsArray, count+1);
+
+
+    authorsArray = Arrays.copyOf(authorsArray, count);
     author.setId(generateId());
-    authorsArray[count] = author;
+    LOGGER_INFO.info("Author generate id in Author- " + author.getName() + " - " + author.getId());
+    authorsArray[count-1] = author;
     count++;
+    LOGGER_INFO.info("table Authors has length : " + authorsArray.length);
+    LOGGER_INFO.info(("table Authors has last element : " + authorsArray[authorsArray.length-1].getId() + " " + authorsArray[authorsArray.length-1].getName()));
     LOGGER_INFO.info(("table Author id name: " + author.getId() + " " + author.getName()));
+    LOGGER_INFO.info("Exit from create author");
     return author.getId();
   }
-
   public void update(Author author) {
     Author inDbAuthor = findAuthorById(author.getId());
     inDbAuthor.setName(author.getName());
   }
 
   public void delete(String id) {
-    if ((authorsArray.length) < 0) {
-      for (int i = 0; i < authorsArray.length; i++) {
-        if ((authorsArray[i].getId()).equals(id)) {
-          authorsArray[i] = null;
-          for (int j = 2; j < authorsArray.length - i; j++) {
-            authorsArray[j - i] = authorsArray[j];
-            authorsArray[j] = null;
-          }
-        }
+    LOGGER_WARN.warn("try delete database record author - " + findAuthorById(id).getName());
+    int countMuchDelId = 0;
+    Author[] bufferArray;
+    for (int i = 0; i < authorsArray.length; i++) {
+      if (authorsArray[i].getId().equals(id)){
+        authorsArray[i] = null;
+        countMuchDelId++;
       }
     }
-  }
+    bufferArray = new Author[authorsArray.length-countMuchDelId];
+    int count = 0;
+    for (int i = 0; i < bufferArray.length; i++) {
+      if (!(authorsArray[i]==null)){
+        bufferArray[count] = authorsArray[i];
+        count++;
+      }
+    }
+    authorsArray = bufferArray;
+    LOGGER_WARN.warn("isExist database record author - " + findAuthorById(id));
+    }
 
   public Author findAuthorById(String id) {
-    for (int i = 0; i < authorsArray.length; i++) {
-      if ((authorsArray[i].getId()).equals(id)) {
-        return authorsArray[i];
+    if (authorsArray.length > 0) {
+      for (int i = 0; i < authorsArray.length; i++) {
+        if (authorsArray[i] == null){
+          break;
+        }
+        if ((authorsArray[i].getId()).equals(id)) {
+          return authorsArray[i];
+        }
       }
     }
     return null;
