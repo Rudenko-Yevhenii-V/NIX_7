@@ -1,12 +1,9 @@
 package ru.rudenko.nix.dao;
 
 import java.util.Arrays;
-import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.entity.Author;
-import ru.rudenko.nix.entity.AuthorBook;
-import ru.rudenko.nix.entity.Book;
 
 public class InMemoryAuthorDao {
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
@@ -58,8 +55,17 @@ public class InMemoryAuthorDao {
     return author.getId();
   }
   public void update(Author author) {
+    for (int i = 0; i < authorsArray.length; i++) {
+      if (!(authorsArray[i] == null)){
+        if(authorsArray[i].getName().equals(author.getName())){
+          author.setId(authorsArray[i].getId());
+          return ;
+        }
+      }
+    }
     Author inDbAuthor = findAuthorById(author.getId());
     inDbAuthor.setName(author.getName());
+
   }
 
   public void delete(String id) {
@@ -94,6 +100,14 @@ public class InMemoryAuthorDao {
         if ((authorsArray[i].getId()).equals(id)) {
           return authorsArray[i];
         }
+      }
+    }
+    return null;
+  }
+  public Author findAuthorByName(String authorName) {
+    for (int i = 0; i < authorsArray.length; i++) {
+      if ((authorsArray[i].getName()).equals(authorName)) {
+        return authorsArray[i];
       }
     }
     return null;

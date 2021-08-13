@@ -66,27 +66,11 @@ public class ShowModule extends JFrame {
     seachPanel.add(panelSeachBookByAuhtorName);
     JPanel autoGeneratePanel = new JPanel(new GridLayout(0, 6));
     //Draw All
-    //delete
-
-//    System.out.println(InMemoryAuthorDao.getInstance().findAllAuthors().length + " aucthors " +
-//        InMemoryBookDao.getInstance().findAllBooks().length + " books " +
-//        InMemoryAuthorBookDao.getInstance().findAllAuthorsBooks().length + " aucthorsbooks ");
-//
-//    Book[] allBooks = InMemoryBookDao.getInstance().findAllBooks();
-//    for (int i = 0; i < allBooks.length; i++) {
-//      System.out.println(" allBooks = " + allBooks[i].getNameOfBook() + " " + allBooks[i].getId());
-//    }
-    AuthorBook[] authorBookstest = createOneBookWithAuthors.findAllAuthorsBooks();
-    for (int i = 0; i < authorBookstest.length; i++) {
-      System.out.println(authorBookstest[i] + " authorBookstest[i]");
-    }
-    //delete
-
     AuthorBook[] authorBooks = createOneBookWithAuthors.findAllAuthorsBooks();
     LOGGER_INFO.info(" All data \n" +
-    InMemoryAuthorDao.getInstance().findAllAuthors().length + " aucthors " +
-    InMemoryBookDao.getInstance().findAllBooks().length + " books " +
-    InMemoryAuthorBookDao.getInstance().findAllAuthorsBooks().length + " aucthorsbooks "
+        InMemoryAuthorDao.getInstance().findAllAuthors().length + " aucthors " +
+        InMemoryBookDao.getInstance().findAllBooks().length + " books " +
+        InMemoryAuthorBookDao.getInstance().findAllAuthorsBooks().length + " aucthorsbooks "
     );
     if ((authorBooks.length > 1)) {
       authorBooksIteration = new String[authorBooks.length / 3][4];
@@ -94,9 +78,7 @@ public class ShowModule extends JFrame {
       int countForOutPutAuthorBooks3 = 0;
       for (int i = 0; i < authorBooks.length; i++) {
         if (countForOutPutAuthorBooks == 0) {
-          System.out.println(authorBooks[i]);
-          System.out.println(createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()));
-          if (!(createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()) == null)){
+          if (!(createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()) == null)) {
             authorBooksIteration[countForOutPutAuthorBooks3][countForOutPutAuthorBooks] =
                 createOneBookWithAuthors.findBookById(authorBooks[i].getIdBook()).getNameOfBook();
           }
@@ -120,11 +102,16 @@ public class ShowModule extends JFrame {
       }
       for (int i = 0; i < authorBooksIteration.length; i++) {
         JTextField jTextFieldBook = new JTextField(i);
+        JTextField jTextFieldBookSave = new JTextField(i);
+        jTextFieldBookSave.setVisible(false);
         JTextField jTextFieldAuthor1Auto = new JTextField(i);
+        JTextField jTextFieldAuthor1AutoSave = new JTextField(i);
         JTextField jTextFieldAuthor2Auto = new JTextField(i);
+        JTextField jTextFieldAuthor2AutoSave = new JTextField(i);
         JTextField jTextFieldAuthor3Auto = new JTextField(i);
-        JButton jButtonUpdate = new JButton("jButtonUpdate");
-        JButton jButtonDelete = new JButton("jButtonDelete");
+        JTextField jTextFieldAuthor3AutoSave = new JTextField(i);
+        JButton jButtonUpdate = new JButton("Update");
+        JButton jButtonDelete = new JButton("Delete");
         autoGeneratePanel.add(jTextFieldBook);
         autoGeneratePanel.add(jTextFieldAuthor1Auto);
         autoGeneratePanel.add(jTextFieldAuthor2Auto);
@@ -135,27 +122,40 @@ public class ShowModule extends JFrame {
           switch (j) {
             case 0:
               jTextFieldBook.setText(authorBooksIteration[i][j]);
+              jTextFieldBookSave.setText(authorBooksIteration[i][j]);
             case 1:
               jTextFieldAuthor1Auto.setText(authorBooksIteration[i][j]);
+              jTextFieldAuthor1AutoSave.setText(authorBooksIteration[i][j]);
             case 2:
               jTextFieldAuthor2Auto.setText(authorBooksIteration[i][j]);
+              jTextFieldAuthor2AutoSave.setText(authorBooksIteration[i][j]);
             case 3:
               jTextFieldAuthor3Auto.setText(authorBooksIteration[i][j]);
+              jTextFieldAuthor3AutoSave.setText(authorBooksIteration[i][j]);
           }
         }
         int iter = i;
-        //jButtonUpdate
         jButtonUpdate
-            .addActionListener(actionEvent -> jTextFieldBook.setText("jButtonUpdate" + iter));
-        //jButtonDelete
-        jButtonDelete
-            .addActionListener(actionEvent ->{
-              createOneBookWithAuthors.delete(InMemoryBookDao.getInstance().
-                  findBookByName(jTextFieldBook.getText())
-                  .getId());
+            .addActionListener(actionEvent -> {
+
+              CRUDService.getInstance().updateAllData(jTextFieldBook.getText(), jTextFieldBookSave.getText()
+              , jTextFieldAuthor1Auto.getText(), jTextFieldAuthor1AutoSave.getText()
+                  ,jTextFieldAuthor2Auto.getText(), jTextFieldAuthor2AutoSave.getText()
+              ,jTextFieldAuthor3Auto.getText(),jTextFieldAuthor3AutoSave.getText());
               this.setVisible(false);
               this.removeAll();
               new ShowModule().setVisible(true);
+                }
+            );
+        //jButtonDelete
+        jButtonDelete
+            .addActionListener(actionEvent -> {
+                  createOneBookWithAuthors.delete(InMemoryBookDao.getInstance().
+                      findBookByName(jTextFieldBook.getText())
+                      .getId());
+                  this.setVisible(false);
+                  this.removeAll();
+                  new ShowModule().setVisible(true);
                 }
             );
 
