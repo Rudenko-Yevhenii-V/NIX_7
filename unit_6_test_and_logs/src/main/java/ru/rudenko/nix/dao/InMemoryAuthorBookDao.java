@@ -3,15 +3,12 @@ package ru.rudenko.nix.dao;
 import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.rudenko.nix.entity.Author;
 import ru.rudenko.nix.entity.AuthorBook;
-import ru.rudenko.nix.entity.Book;
 
 public class InMemoryAuthorBookDao {
 
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
-  private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
   private AuthorBook[] authorsbooks = new AuthorBook[1];
   private int count = 1;
   private static final InMemoryAuthorBookDao instance = new InMemoryAuthorBookDao();
@@ -31,16 +28,16 @@ public class InMemoryAuthorBookDao {
     return instance;
   }
 
-  public String create(String bookId, String[] authorsId) {
+  public void create(String bookId, String[] authorsId) {
 
     LOGGER_INFO.info("enter to create AuthorBook");
     LOGGER_INFO.info(
         "AuthorBook create in AuthorBook- " + bookId + " have number authors " + authorsId.length);
     LOGGER_INFO.info("table AuthorBook has length : " + authorsbooks.length);
-    for (int i = 0; i < authorsbooks.length; i++) {
-      if (!(authorsbooks[i] == null)) {
-        if (authorsbooks[i].getIdBook().equals(bookId)) {
-          return "this book exist in bd";
+    for (AuthorBook authorsbook : authorsbooks) {
+      if (!(authorsbook == null)) {
+        if (authorsbook.getIdBook().equals(bookId)) {
+          return;
         }
       }
     }
@@ -69,10 +66,9 @@ public class InMemoryAuthorBookDao {
         ("table AuthorBook has last  3 elements : " + authorsbooks[authorsbooks.length - 3]
             .getIdBook() + " " + authorsbooks[authorsbooks.length - 3].getIdAuthor()));
     LOGGER_INFO.info("Exit from create book");
-    return authorsbooks[authorsbooks.length - 1].getIdBook();
   }
 
-  public void update(AuthorBook authorBook, Book book, Author[] authors) {
+  public void update(AuthorBook authorBook) {
 
     AuthorBook inDbAuthorBook = findAuthorByIdBook(authorBook.getIdBook());
     inDbAuthorBook.setIdAuthor(authorBook.getIdAuthor());
@@ -96,9 +92,9 @@ public class InMemoryAuthorBookDao {
 
     bufferArray = new AuthorBook[authorsbooks.length - countMuchDelId];
     int countbufferArray = 0;
-    for (int i = 0; i < authorsbooks.length; i++) {
-      if (!(authorsbooks[i] == null)) {
-        bufferArray[countbufferArray] = authorsbooks[i];
+    for (AuthorBook authorsbook : authorsbooks) {
+      if (!(authorsbook == null)) {
+        bufferArray[countbufferArray] = authorsbook;
         countbufferArray++;
       }
     }
@@ -110,24 +106,24 @@ public class InMemoryAuthorBookDao {
   }
 
   public AuthorBook findAuthorByIdBook(String idBook) {
-    for (int i = 0; i < authorsbooks.length; i++) {
-      if (authorsbooks[i] == null) {
+    for (AuthorBook authorsbook : authorsbooks) {
+      if (authorsbook == null) {
         continue;
       }
-      if ((authorsbooks[i].getIdBook()).equals(idBook)) {
-        return authorsbooks[i];
+      if ((authorsbook.getIdBook()).equals(idBook)) {
+        return authorsbook;
       }
     }
     return null;
   }
 
   public AuthorBook findBookByidAuthor(String idAuthor) {
-    for (int i = 0; i < authorsbooks.length; i++) {
-      if (authorsbooks[i] == null) {
+    for (AuthorBook authorsbook : authorsbooks) {
+      if (authorsbook == null) {
         continue;
       }
-      if ((authorsbooks[i].getIdAuthor()).equals(idAuthor)) {
-        return authorsbooks[i];
+      if ((authorsbook.getIdAuthor()).equals(idAuthor)) {
+        return authorsbook;
       }
     }
     return null;

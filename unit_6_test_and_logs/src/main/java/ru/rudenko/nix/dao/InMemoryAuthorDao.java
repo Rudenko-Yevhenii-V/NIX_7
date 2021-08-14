@@ -1,6 +1,7 @@
 package ru.rudenko.nix.dao;
 
 import java.util.Arrays;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.entity.Author;
@@ -8,7 +9,6 @@ import ru.rudenko.nix.entity.Author;
 public class InMemoryAuthorDao {
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
-  private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
   private int counterForgenerateIdAuthors = 0;
   private int count = 1;
   private Author[] authorsArray = new Author[1];
@@ -34,17 +34,17 @@ public class InMemoryAuthorDao {
     LOGGER_INFO.info(count + " Author create in author- " + author.getName());
     LOGGER_INFO.info("table authors has length : " + authorsArray.length);
 
-     for (int i = 0; i < authorsArray.length; i++) {
-       if (!(authorsArray[i] == null)){
-         if(authorsArray[i].getName().equals(author.getName())){
-           author.setId(authorsArray[i].getId());
-           return author.getId();
+    for (Author value : authorsArray) {
+      if (!(value == null)) {
+        if (value.getName().equals(author.getName())) {
+          author.setId(value.getId());
+          return author.getId();
 
-         }
-       }
-     }
-    authorsArray = Arrays.copyOf(authorsArray, count);
+        }
+      }
+    }
     author.setId(generateId());
+    authorsArray = Arrays.copyOf(authorsArray, count);
     LOGGER_INFO.info("Author generate id in Author- " + author.getName() + " - " + author.getId());
     authorsArray[count-1] = author;
     count++;
@@ -55,11 +55,11 @@ public class InMemoryAuthorDao {
     return author.getId();
   }
   public void update(Author author) {
-    for (int i = 0; i < authorsArray.length; i++) {
-      if (!(authorsArray[i] == null)){
-        if(authorsArray[i].getName().equals(author.getName())){
-          author.setId(authorsArray[i].getId());
-          return ;
+    for (Author value : authorsArray) {
+      if (!(value == null)) {
+        if (value.getName().equals(author.getName())) {
+          author.setId(value.getId());
+          return;
         }
       }
     }
@@ -81,9 +81,9 @@ public class InMemoryAuthorDao {
     }
     bufferArray = new Author[authorsArray.length-countMuchDelId];
     int count = 0;
-    for (int i = 0; i < authorsArray.length; i++) {
-      if (!(authorsArray[i]==null)){
-        bufferArray[count] = authorsArray[i];
+    for (Author author : authorsArray) {
+      if (!(author == null)) {
+        bufferArray[count] = author;
         count++;
       }
     }
@@ -93,21 +93,21 @@ public class InMemoryAuthorDao {
 
   public Author findAuthorById(String id) {
     if (authorsArray.length > 0) {
-      for (int i = 0; i < authorsArray.length; i++) {
-        if (authorsArray[i] == null){
+      for (Author author : authorsArray) {
+        if (author == null) {
           break;
         }
-        if ((authorsArray[i].getId()).equals(id)) {
-          return authorsArray[i];
+        if ((author.getId()).equals(id)) {
+          return author;
         }
       }
     }
     return null;
   }
   public Author findAuthorByName(String authorName) {
-    for (int i = 0; i < authorsArray.length; i++) {
-      if ((authorsArray[i].getName()).equals(authorName)) {
-        return authorsArray[i];
+    for (Author author : authorsArray) {
+      if ((author.getName()).equals(authorName)) {
+        return author;
       }
     }
     return null;
@@ -119,12 +119,12 @@ public class InMemoryAuthorDao {
 
   private String generateId() {
     String id = (counterForgenerateIdAuthors+" AUTHOR "
-//        + UUID.randomUUID().toString()
+        + UUID.randomUUID().toString()
     );
     counterForgenerateIdAuthors++;
-    if ((authorsArray.length) < 0) {
-      for (int i = 0; i < authorsArray.length; i++) {
-        if ((authorsArray[i].getId()).equals(id)) {
+    if ((authorsArray.length) > 2) {
+      for (Author author : authorsArray) {
+        if ((author.getId()).equals(id)) {
           return generateId();
         }
       }

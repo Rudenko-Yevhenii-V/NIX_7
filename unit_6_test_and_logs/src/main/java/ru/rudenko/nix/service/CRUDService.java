@@ -28,6 +28,13 @@ public class CRUDService {
 
   public void createBookAuthors(Book book, Author[] authors) {
 
+    if (book.getNameOfBook() == "") {
+      return;
+    }
+    if (authors[0].getName() == "") {
+      return;
+    }
+    LOGGER_INFO.info(" createBookAuthors in " + book.getNameOfBook() + " " + authors.length);
     int count = 0;
     bookDao.create(book);
     String[] authorsId = new String[count];
@@ -43,20 +50,21 @@ public class CRUDService {
 
   }
 
-  public void update(AuthorBook authorBook, Book book, Author[] authors) {
-    authorBookDao.update(authorBook, book, authors);
+  public void update(AuthorBook authorBook) {
+    LOGGER_INFO.info(" update in " + authorBook.getIdBook() + " " + authorBook.getIdAuthor());
+    authorBookDao.update(authorBook);
   }
 
-  public void delete(String id) {
+  public void delete(String idBook) {
     LOGGER_WARN.warn(
-        " CRUDService remove book by id: " + InMemoryBookDao.getInstance().findBookById(id)
+        " CRUDService remove book by id: " + InMemoryBookDao.getInstance().findBookById(idBook)
             .getNameOfBook());
-    authorBookDao.delete(id);
-    bookDao.delete(id);
-//    authorDao.delete(id);
+    authorBookDao.delete(idBook);
+    bookDao.delete(idBook);
   }
 
-  public AuthorBook findBookByIdBook(String idBook) {
+  public AuthorBook findBookAuthorByIdBook(String idBook) {
+    LOGGER_INFO.info(" findBookAuthorByIdBook in " + idBook);
     return authorBookDao.findAuthorByIdBook(idBook);
   }
 
@@ -82,6 +90,11 @@ public class CRUDService {
       String authorName2, String authorNameSave2,
       String authorName3, String authorNameSave3
   ) {
+    LOGGER_INFO.info(" updateAllData in " +  bookName + bookNameSave
+        + authorName1 + authorNameSave1
+        + authorName2 + authorNameSave2
+        + authorName3 + authorNameSave3);
+
     if (!(bookNameSave.equals(bookName))) {
       Book bookUpdate = new Book();
       bookUpdate.setId(InMemoryBookDao.getInstance()

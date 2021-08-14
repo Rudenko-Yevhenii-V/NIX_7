@@ -1,6 +1,7 @@
 package ru.rudenko.nix.dao;
 
 import java.util.Arrays;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.bd.Arraysbd;
@@ -10,7 +11,6 @@ public class InMemoryBookDao {
 
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
-  private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
   private int count = 1;
   private int counterForgenerateIdBooks = 0;
   Arraysbd arraysbd = Arraysbd.getInstance();
@@ -33,21 +33,21 @@ public class InMemoryBookDao {
     this.count = count;
   }
 
-  public String create(Book book) {
+  public void create(Book book) {
 
     LOGGER_INFO.info("enter to create book");
     LOGGER_INFO.info("Book create in book- " + book.getNameOfBook());
     LOGGER_INFO.info("table books has length : " + books.length);
-    for (int i = 0; i < books.length; i++) {
-      if (!(books[i] == null)) {
-        if (books[i].getNameOfBook().equals(book.getNameOfBook())) {
-          book.setId(books[i].getId());
-          return book.getId();
+    for (Book value : books) {
+      if (!(value == null)) {
+        if (value.getNameOfBook().equals(book.getNameOfBook())) {
+          book.setId(value.getId());
+          return ;
         }
       }
     }
-    books = Arrays.copyOf(books, count);
     book.setId(generateId());
+    books = Arrays.copyOf(books, count);
     LOGGER_INFO.info("Book generate id in book- " + book.getNameOfBook() + " - " + book.getId());
     books[count - 1] = book;
     count++;
@@ -56,14 +56,13 @@ public class InMemoryBookDao {
         ("table books has last element : " + books[books.length - 1].getId() + " " + books[
             books.length - 1].getNameOfBook()));
     LOGGER_INFO.info("Exit from create book");
-    return book.getId();
   }
 
   public void update(Book book) {
-    for (int i = 0; i < books.length; i++) {
-      if (!(books[i] == null)) {
-        if (books[i].getNameOfBook().equals(book.getNameOfBook())) {
-          book.setId(books[i].getId());
+    for (Book value : books) {
+      if (!(value == null)) {
+        if (value.getNameOfBook().equals(book.getNameOfBook())) {
+          book.setId(value.getId());
           return;
         }
       }
@@ -87,9 +86,9 @@ public class InMemoryBookDao {
     }
     bufferArray = new Book[books.length - countMuchDelId];
     int count = 0;
-    for (int i = 0; i < books.length; i++) {
-      if (!(books[i] == null)) {
-        bufferArray[count] = books[i];
+    for (Book book : books) {
+      if (!(book == null)) {
+        bufferArray[count] = book;
         count++;
       }
     }
@@ -101,12 +100,12 @@ public class InMemoryBookDao {
 
   public Book findBookById(String id) {
     if (books.length > 0) {
-      for (int i = 0; i < books.length; i++) {
-        if (books[i] == null) {
+      for (Book book : books) {
+        if (book == null) {
           break;
         }
-        if ((books[i].getId()).equals(id)) {
-          return books[i];
+        if ((book.getId()).equals(id)) {
+          return book;
         }
       }
     }
@@ -114,9 +113,9 @@ public class InMemoryBookDao {
   }
 
   public Book findBookByName(String name) {
-    for (int i = 0; i < books.length; i++) {
-      if ((books[i].getNameOfBook()).equals(name)) {
-        return books[i];
+    for (Book book : books) {
+      if ((book.getNameOfBook()).equals(name)) {
+        return book;
       }
     }
     return null;
@@ -128,12 +127,12 @@ public class InMemoryBookDao {
 
   private String generateId() {
     String id = (counterForgenerateIdBooks + " BOOK  "
-//        + UUID.randomUUID().toString()
+        + UUID.randomUUID().toString()
     );
     counterForgenerateIdBooks++;
-    if ((books.length) < 0) {
-      for (int i = 0; i < books.length; i++) {
-        if ((books[i].getId()).equals(id)) {
+    if ((books.length) > 2) {
+      for (Book book : books) {
+        if ((book.getId()).equals(id)) {
           return generateId();
         }
       }
