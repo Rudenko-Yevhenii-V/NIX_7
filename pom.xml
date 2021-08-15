@@ -11,8 +11,9 @@
     <modules>
         <module>unit_1_git</module>
         <module>unit_3_base_types</module>
-      <module>unit_4_arrays</module>
+        <module>unit_4_arrays</module>
         <module>unit_6_test_and_logs</module>
+        <module>unit_8_crud_lookup</module>
 
     </modules>
 
