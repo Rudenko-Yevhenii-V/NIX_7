@@ -28,6 +28,7 @@ public class CRUDService {
 
   public void createBookAuthors(Book book, Author[] authors) {
 
+    // используй equals
     if (book.getNameOfBook() == "") {
       return;
     }
