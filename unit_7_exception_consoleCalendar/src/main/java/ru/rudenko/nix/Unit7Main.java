@@ -9,23 +9,22 @@ import ru.rudenko.nix.data.Calendar;
  */
 public class Unit7Main {
 
-  public static void main(String[] args) {
-    System.out.println("main ");
-    Calendar calendar = new Calendar();
-    System.out.println(calendar.daysInMounth(2, 2019));
-    System.out.println(calendar.isLeapYear(2000) + " y");//1
-    System.out.println(calendar.isLeapYear(2004)+ " y");//1
-    System.out.println(calendar.isLeapYear(2008)+ " y");//1
-    System.out.println(calendar.isLeapYear(2012)+ " y");//1
-    System.out.println(calendar.isLeapYear(2020)+ " y");//1
-    System.out.println(calendar.isLeapYear(2024)+ " y");//1
-    System.out.println(calendar.isLeapYear(1764)+ " y");//1
-    System.out.println(calendar.isLeapYear(1763)+ " n");//0
-    System.out.println(calendar.isLeapYear(2001)+ " n");//0
-    System.out.println(calendar.isLeapYear(2002)+ " n");//0
-    System.out.println(calendar.isLeapYear(2003)+ " n");//0
-    System.out.println(calendar.isLeapYear(2005)+ " n");//0
-    System.out.println(calendar.isLeapYear(2006)+ " n");//0
-  }
+  private static long year = 2024;
 
+  public static void main(String[] args) throws InterruptedException {
+    //86400000 day
+    //3600000 hour
+    //60000 min
+    //1000 sec
+    long milisek = (long) 2021 * 365 * 86_400_000;
+    Calendar calendar = new Calendar(864000001);
+    calendar.print(calendar);
+    calendar.addMilliseconds(100000000000L);
+    calendar.print(calendar);
+    while (true) {
+      calendar.addMilliseconds(1000);
+      Thread.sleep(1000);
+      calendar.print(calendar);
+    }
+  }
 }
