@@ -18,6 +18,7 @@ public abstract class Time {
   public abstract boolean isLeapYear(long years);
 
   public abstract long daysInYear(long years);
+  public abstract long getTime();
   public abstract long getMounths(long milliseconds);
   public abstract long getYears(long milliseconds);
   public abstract long getDays(long milliseconds);

@@ -1,13 +1,14 @@
 package ru.rudenko.nix.data;
 
 
+import java.io.Serializable;
 
 /**
  * @author Rudenko Yevhenii
  * @created 19/08/2021 - 2:18 PM
  * @project NIX_7
  */
-public class Calendar extends Time {
+public class Calendar extends Time implements Serializable {
 
   static long numberOfMounth;
   static long numberOfYears;
@@ -32,6 +33,9 @@ public class Calendar extends Time {
   }
 
   public Calendar(long milliseconds) {
+    if (milliseconds<0){
+      throw new RuntimeException("Exception: milliseconds cant be < 0");
+    }
     super.time = milliseconds;
     super.milliseconds = getMilliseconds(milliseconds);
     super.seconds = getSeconds(milliseconds);
@@ -53,6 +57,11 @@ public class Calendar extends Time {
       return 366;
     }
     return 365;
+  }
+
+  @Override
+  public long getTime() {
+    return super.time;
   }
 
   @Override
