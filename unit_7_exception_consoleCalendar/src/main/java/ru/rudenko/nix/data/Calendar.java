@@ -30,10 +30,29 @@ public class Calendar extends Time implements Serializable {
     super.days = day;
     super.mounths = mounth;
     super.years = year;
+    super.time = (millisecond) + (second * 1000) + (minute * 1000 * 60) + (hour * 1000 * 60 * 60)
+        + (day * 1000 * 60 * 60 * 24) + (getMillisecondsInMounths(mounth, year))
+        + (getMillisecondsInYear(year));
+  }
+
+  private long getMillisecondsInYear(long year) {
+    long time = 0;
+    for (int i = 0; i < year; i++) {
+      time = time + (daysInYear(i) * 24 * 60 * 60 * 1000);
+    }
+    return time;
+  }
+
+  private long getMillisecondsInMounths(long mounth, long year) {
+    long time = 0;
+    for (int i = 1; i <= mounth; i++) {
+      time = time + (daysInMounth(i, year) * 24 * 60 * 60 * 1000);
+    }
+    return time;
   }
 
   public Calendar(long milliseconds) {
-    if (milliseconds<0){
+    if (milliseconds < 0) {
       throw new RuntimeException("Exception: milliseconds cant be < 0");
     }
     super.time = milliseconds;
@@ -78,7 +97,6 @@ public class Calendar extends Time implements Serializable {
         break;
       }
     }
-    // super.days = daysInThisYear;
     return numberOfMounth;
   }
 
@@ -132,22 +150,22 @@ public class Calendar extends Time implements Serializable {
 
   @Override
   public long getHours(long milliseconds) {
-    return (milliseconds % (86400000))/1000/60/60;
+    return (milliseconds % (86400000)) / 1000 / 60 / 60;
   }
 
   @Override
   public long getMinutes(long milliseconds) {
-    return (milliseconds % (3600000))/1000/60;
+    return (milliseconds % (3600000)) / 1000 / 60;
   }
 
   @Override
   public long getSeconds(long milliseconds) {
-    return (milliseconds % (60000))/1000;
+    return (milliseconds % (60000)) / 1000;
   }
 
   @Override
-  public long getMilliseconds(long milliseconds) {
-    return (milliseconds % (1000));
+  public long getMilliseconds(long millisecondsAll) {
+    return (millisecondsAll % (1000));
 
   }
 
@@ -189,7 +207,8 @@ public class Calendar extends Time implements Serializable {
     super.mounths = getMounths(super.time);
     super.years = getYears(super.time);
   }
-  public void print(Calendar calendar){
+
+  public void print(Calendar calendar) {
     System.out.print(calendar.years + " = years; ");
     System.out.print(calendar.mounths + " = mounths; ");
     System.out.print(calendar.days + " = days; ");

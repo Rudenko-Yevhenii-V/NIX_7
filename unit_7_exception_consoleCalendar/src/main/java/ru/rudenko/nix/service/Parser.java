@@ -18,7 +18,7 @@ public class Parser {
   private long minutes;
   private long hours;
   private long days;
-  private long mounths;
+  private long mounths = 1;
   private long years;
   boolean isHaveDate = false;
   boolean isHaveTime = false;

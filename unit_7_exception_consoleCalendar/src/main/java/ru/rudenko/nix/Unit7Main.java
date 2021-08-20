@@ -1,5 +1,7 @@
 package ru.rudenko.nix;
 
+import ru.rudenko.nix.controllers.Controller;
+import ru.rudenko.nix.data.Calendar;
 import ru.rudenko.nix.service.Parser;
 
 /**
@@ -10,6 +12,21 @@ import ru.rudenko.nix.service.Parser;
 public class Unit7Main {
 
   public static void main(String[] args) throws InterruptedException {
+//    new Controller().start();
+    long test = 1000*60*60*24*300002L;
+    Calendar calendar1 = new Calendar(test);
+    System.out.println(calendar1.years + " years");
+    System.out.println(calendar1.mounths + " mounths");
+    System.out.println(calendar1.days + " days");
+    System.out.println(calendar1.hours + " hours");
+    System.out.println(calendar1.minutes + " minutes");
+    System.out.println(calendar1.seconds + " seconds");
+    System.out.println(calendar1.milliseconds + " milliseconds");
+    Calendar calendar2 = new Calendar(
+        0, 0, 0, 0, 12, 4, 821 );
+    System.out.println();
+    System.out.println(calendar1.time + " ===" + calendar2.time);
+
     //done
 //  dd/mm/yy
 //  dd-mm-yy
@@ -17,7 +34,7 @@ public class Unit7Main {
 //  dd mm yy
     //dd ./-mm ./-yyyy hh:mm:ss:msmsms + any text
     //done
-    //      • dd/mm/yy - 31/12/99  23:59:59:999
+
 //      • m/d/yyyy - 3/4/2021
 //      • mmm-d-yy - Март 4 21
 //      • dd-mmm-yyyy 00:00 - 09 Апрель 789 45:23
@@ -35,7 +52,7 @@ public class Unit7Main {
 //    parser.ParseStringToCalendarDateFormat("23:59::999");
 //    parser.ParseStringToCalendarDateFormat("23::59:999");
 //    parser.ParseStringToCalendarDateFormat(":59:59:999");
-    parser.ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat("sdfasd 31 12 2005 23:59:59:999");
+//    parser.ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat("sdfasd 31 12 2005 23:59:59:999");
 //    parser.ParseStringToCalendarDateFormat("00:00:00:000");
 //    parser.ParseStringToCalendarDateFormat("24:59:59:999");
 //    parser.ParseStringToCalendarDateFormat("00:60:59:999");

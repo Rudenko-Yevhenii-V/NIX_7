@@ -11,7 +11,7 @@ public abstract class Time {
   public long seconds;
   public long minutes;
   public long hours;
-  public long days;
+  public long days = 1;
   public long mounths = 1;
   public long years;
 
