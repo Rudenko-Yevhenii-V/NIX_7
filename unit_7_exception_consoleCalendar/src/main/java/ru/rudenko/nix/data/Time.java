@@ -12,11 +12,10 @@ public abstract class Time {
   public long minutes;
   public long hours;
   public long days;
-  public long mounths;
+  public long mounths = 1;
   public long years;
 
   public abstract boolean isLeapYear(long years);
-
   public abstract long daysInYear(long years);
   public abstract long getTime();
   public abstract long getMounths(long milliseconds);
