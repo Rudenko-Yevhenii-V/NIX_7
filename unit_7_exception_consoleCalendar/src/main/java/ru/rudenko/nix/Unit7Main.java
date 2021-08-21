@@ -11,21 +11,26 @@ import ru.rudenko.nix.service.Parser;
  */
 public class Unit7Main {
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) {
 //    new Controller().start();
-    long test = 1000*60*60*24*300002L;
-    Calendar calendar1 = new Calendar(test);
-    System.out.println(calendar1.years + " years");
-    System.out.println(calendar1.mounths + " mounths");
-    System.out.println(calendar1.days + " days");
-    System.out.println(calendar1.hours + " hours");
-    System.out.println(calendar1.minutes + " minutes");
-    System.out.println(calendar1.seconds + " seconds");
-    System.out.println(calendar1.milliseconds + " milliseconds");
-    Calendar calendar2 = new Calendar(
-        0, 0, 0, 0, 12, 4, 821 );
-    System.out.println();
-    System.out.println(calendar1.time + " ===" + calendar2.time);
+    System.out.println(new Parser().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat
+        ("coming from the --4 to the 30.11.2009"));
+//        ("sdfasd 11-12-2005"));
+//        ("sdfasd 02:9:5:99"));
+
+//    long test = 1000*60*60*24*300002L;
+//    Calendar calendar1 = new Calendar(test);
+//    System.out.println(calendar1.years + " years");
+//    System.out.println(calendar1.mounths + " mounths");
+//    System.out.println(calendar1.days + " days");
+//    System.out.println(calendar1.hours + " hours");
+//    System.out.println(calendar1.minutes + " minutes");
+//    System.out.println(calendar1.seconds + " seconds");
+//    System.out.println(calendar1.milliseconds + " milliseconds");
+//    Calendar calendar2 = new Calendar(
+//        0, 0, 0, 0, 12, 4, 821 );
+//    System.out.println();
+//    System.out.println(calendar1.time + " ===" + calendar2.time);
 
     //done
 //  dd/mm/yy

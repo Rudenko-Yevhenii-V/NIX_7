@@ -3,6 +3,9 @@ package ru.rudenko.nix.controllers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import ru.rudenko.nix.data.Calendar;
+import ru.rudenko.nix.data.Time;
+import ru.rudenko.nix.service.Parser;
 import ru.rudenko.nix.utill.NixDate;
 
 
@@ -70,20 +73,26 @@ public class Controller {
 
   private void differenceDates() {
     System.out.println("enter first date");
-    String firstDate;
+    String firstDate = "";
     try {
       firstDate = reader.readLine();
     } catch (IOException e) {
       e.printStackTrace();
     }
     System.out.println("enter second date");
-    String secondDate;
+    String secondDate = "";
     try {
       secondDate = reader.readLine();
     } catch (IOException e) {
       e.printStackTrace();
     }
-//    new NixDate().findDifferenceBetweenDates(firstDate, secondDate);
+    Time timeStart = new Parser().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(firstDate);
+    Time timeStop = new Parser().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(secondDate);
+    Time differenceBetweenDates = new NixDate().findDifferenceBetweenDates(timeStart, timeStop);
+    System.out.println(" PRINT PRINT PRINT PRINT");
+    new Calendar().print((Calendar) differenceBetweenDates);
+    System.out.println(" PRINT PRINT PRINT PRINT");
+
   }
 
   private void setFormat() {
