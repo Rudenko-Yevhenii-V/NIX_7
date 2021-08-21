@@ -56,13 +56,13 @@ public class Calendar extends Time implements Serializable {
       throw new RuntimeException("Exception: milliseconds cant be < 0");
     }
     super.time = milliseconds;
-    super.milliseconds = getMilliseconds(milliseconds);
-    super.seconds = getSeconds(milliseconds);
-    super.minutes = getMinutes(milliseconds);
-    super.hours = getHours(milliseconds);
-    super.days = getDays(milliseconds);
-    super.mounths = getMounths(milliseconds);
-    super.years = getYears(milliseconds);
+    super.milliseconds = getMillisecondsFromMiliseconds(milliseconds);
+    super.seconds = getSecondsFromMiliseconds(milliseconds);
+    super.minutes = getMinutesFromMiliseconds(milliseconds);
+    super.hours = getHoursFromMiliseconds(milliseconds);
+    super.days = getDaysFromMiliseconds(milliseconds);
+    super.mounths = getMounthsFromMiliseconds(milliseconds);
+    super.years = getYearsFromMiliseconds(milliseconds);
   }
 
   @Override
@@ -83,12 +83,12 @@ public class Calendar extends Time implements Serializable {
     return super.time;
   }
 
-  @Override
-  public long getMounths(long milliseconds) {
+  public long getMounthsFromMiliseconds(long milliseconds) {
+    long daus = milliseconds/1000/60/60/24;
     numberOfMounth = 0;
     int fourYears = (365 * 3 + 366);
-    long daysInThisYear = ((milliseconds / 1000 / 60 / 60 / 24) % fourYears) % 365;
-    long nowYear = getYears(milliseconds);
+    long daysInThisYear = ((daus) % fourYears) % 365;
+    long nowYear = getYearsFromMiliseconds(milliseconds);
     for (int i = 0; i < 12; i++) {
       if (daysInThisYear > daysInMounth(i + 1, nowYear)) {
         numberOfMounth++;
@@ -101,8 +101,8 @@ public class Calendar extends Time implements Serializable {
   }
 
   @Override
-  public long getYears(long milliseconds) {
-    numberOfYears = 0;
+  public long getYearsFromMiliseconds(long milliseconds) {
+    numberOfYears = 1;
     int count = 0;
     long days = milliseconds / 24 / 60 / 60 / 1000;
     while (true) {
@@ -131,14 +131,13 @@ public class Calendar extends Time implements Serializable {
   }
 
   @Override
-  public long getDays(long milliseconds) {
-    numberOfMounth = 0;
+  public long getDaysFromMiliseconds(long milliseconds) {
+
     int fourYears = (365 * 3 + 366);
     long daysInThisYear = ((milliseconds / 1000 / 60 / 60 / 24) % fourYears) % 365;
-    long nowYear = getYears(milliseconds);
+    long nowYear = getYearsFromMiliseconds(milliseconds);
     for (int i = 0; i < 12; i++) {
       if (daysInThisYear > daysInMounth(i + 1, nowYear)) {
-        numberOfMounth++;
         daysInThisYear = daysInThisYear - daysInMounth(i + 1, nowYear);
       } else {
         break;
@@ -149,22 +148,22 @@ public class Calendar extends Time implements Serializable {
 
 
   @Override
-  public long getHours(long milliseconds) {
+  public long getHoursFromMiliseconds(long milliseconds) {
     return (milliseconds % (86400000)) / 1000 / 60 / 60;
   }
 
   @Override
-  public long getMinutes(long milliseconds) {
+  public long getMinutesFromMiliseconds(long milliseconds) {
     return (milliseconds % (3600000)) / 1000 / 60;
   }
 
   @Override
-  public long getSeconds(long milliseconds) {
+  public long getSecondsFromMiliseconds(long milliseconds) {
     return (milliseconds % (60000)) / 1000;
   }
 
   @Override
-  public long getMilliseconds(long millisecondsAll) {
+  public long getMillisecondsFromMiliseconds(long millisecondsAll) {
     return (millisecondsAll % (1000));
 
   }
@@ -186,36 +185,85 @@ public class Calendar extends Time implements Serializable {
   @Override
   public void addMilliseconds(long milliseconds) {
     super.time = time + milliseconds;
-    super.milliseconds = getMilliseconds(super.time);
-    super.seconds = getSeconds(super.time);
-    super.minutes = getMinutes(super.time);
-    super.hours = getHours(super.time);
-    super.days = getDays(super.time);
-    super.mounths = getMounths(super.time);
-    super.years = getYears(super.time);
+    super.milliseconds = getMillisecondsFromMiliseconds(super.time);
+    super.seconds = getSecondsFromMiliseconds(super.time);
+    super.minutes = getMinutesFromMiliseconds(super.time);
+    super.hours = getHoursFromMiliseconds(super.time);
+    super.days = getDaysFromMiliseconds(super.time);
+    super.mounths = getMounthsFromMiliseconds(super.time);
+    super.years = getYearsFromMiliseconds(super.time);
 
   }
 
   @Override
   public void subtractMilliseconds(long milliseconds) {
     super.time = time - milliseconds;
-    super.milliseconds = getMilliseconds(super.time);
-    super.seconds = getSeconds(super.time);
-    super.minutes = getMinutes(super.time);
-    super.hours = getHours(super.time);
-    super.days = getDays(super.time);
-    super.mounths = getMounths(super.time);
-    super.years = getYears(super.time);
+    super.milliseconds = getMillisecondsFromMiliseconds(super.time);
+    super.seconds = getSecondsFromMiliseconds(super.time);
+    super.minutes = getMinutesFromMiliseconds(super.time);
+    super.hours = getHoursFromMiliseconds(super.time);
+    super.days = getDaysFromMiliseconds(super.time);
+    super.mounths = getMounthsFromMiliseconds(super.time);
+    super.years = getYearsFromMiliseconds(super.time);
   }
 
   public void print(Calendar calendar) {
-    System.out.print(calendar.years + " = years; ");
-    System.out.print(calendar.mounths + " = mounths; ");
-    System.out.print(calendar.days + " = days; ");
-    System.out.print(calendar.hours + " = hours; ");
-    System.out.print(calendar.minutes + " = minutes; ");
-    System.out.print(calendar.seconds + " = seconds; ");
-    System.out.print(calendar.milliseconds + " = milliseconds; ");
+    System.out.print(calendar.days + " - days; ");
+    switch ((int) calendar.mounths) {
+      case 1 : {
+        System.out.print(" 01 Январь/January  - mounths; ");
+      }
+      break;
+      case 2 : {
+        System.out.print(" 02 Февраль/February  - mounths; ");
+      }
+      break;
+      case 3 : {
+        System.out.print(" 03 Март/March  - mounths; ");
+      }
+      break;
+      case 4 : {
+        System.out.print(" 04 Апрель/April  - mounths; ");
+      }
+      break;
+      case 5 : {
+        System.out.print(" 05 Май/May  - mounths; ");
+      }
+      break;
+      case 6 : {
+        System.out.print(" 06 Июнь/June  - mounths; ");
+      }
+      break;
+      case 7 : {
+        System.out.print(" 07 Июль/July  - mounths; ");
+      }
+      break;
+      case 8 : {
+        System.out.print(" 08 Август/August  - mounths; ");
+      }
+      break;
+      case 9 : {
+        System.out.print(" 09 Сентябрь/September  - mounths; ");
+      }
+      break;
+      case 10 : {
+        System.out.print(" 10  Октябрь/October  - mounths; ");
+      }
+      break;
+      case 11 : {
+        System.out.print(" 11  Ноябрь/November  - mounths; ");
+      }
+      break;
+      case 12 : {
+        System.out.print(" 12 Декабрь/December  - mounths; ");
+      }
+      break;
+    }
+    System.out.print(calendar.years + " - years; ");
+    System.out.print(calendar.hours + " - hours; ");
+    System.out.print(calendar.minutes + " - minutes; ");
+    System.out.print(calendar.seconds + " - seconds; ");
+    System.out.print(calendar.milliseconds + " - milliseconds; ");
     System.out.println();
   }
 }
