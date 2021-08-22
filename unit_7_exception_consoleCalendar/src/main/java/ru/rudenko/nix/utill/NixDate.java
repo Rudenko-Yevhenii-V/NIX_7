@@ -42,8 +42,15 @@ public class NixDate {
 
   }
 
-  public Time timeSubtractTime(Time timeStart, Time timeEnd) {
-    Time time = new Calendar(Math.abs(timeStart.time - timeEnd.time));
+  public Time timeSubtractTime(Time timeEnd, Time  timeStart) {
+    long year = timeEnd.years - timeStart.years;
+    long mounth = timeEnd.mounths - timeStart.mounths ;
+    long day = timeEnd.days - timeStart.days;
+    long hour = timeEnd.hours - timeStart.hours;
+    long minute = timeEnd.minutes - timeStart.minutes;
+    long second = timeEnd.seconds - timeStart.seconds;
+    long millisecond = timeEnd.milliseconds - timeStart.milliseconds;
+    Time time = new Calendar(millisecond, second, minute, hour, day, mounth, year);
     return time;
   }
 

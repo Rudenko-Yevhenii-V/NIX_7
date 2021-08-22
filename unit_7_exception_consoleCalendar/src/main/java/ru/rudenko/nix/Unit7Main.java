@@ -34,9 +34,11 @@ public class Unit7Main {
         + "- Смена форматта ввода setFormat \n"
         + "- Результат разници двух дат differenceDates \n"
         + "- прибавить к времени еще время addToTimeDate \n"
-        + "- Результат разници двух дат addToTimeDate \n"
+        + "- Результат вычетания с даты timeSubtractTime \n"
+        + "- Результат вычетания с даты subtract \n"
         + "Для продолжения нажми ENTER\n");
-
+  Scanner scaner = new Scanner(System.in);
+  String in = scaner.nextLine();
     new Controller().start();
 //
 ////  try {

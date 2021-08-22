@@ -35,10 +35,10 @@ public class Controller {
   private void runNavigation() {
     System.out.println();
     System.out.println(
-        "default format(" + format + "), if you want change format, please enter 1");
+        "default format(" + format + "),\nif you want change format, please enter 1");
     System.out.println("if you want to find the difference between dates, please enter 2");
     System.out.println("if you want add To Date Time , please enter 3");
-    System.out.println("if you want format dd/mm/yy hh:mm:ss:msmsms, please enter 4");
+    System.out.println("if you want subtract Time from Date , please enter 4");
     System.out.println("if you want findById user, please enter 5");
     System.out.println("if you want findAll user, please enter 6");
     System.out.println("if you want exit, please enter 0");
@@ -54,10 +54,10 @@ public class Controller {
         differenceDates();
         break;
       case "3":
-       addToTimeDate();
+        addToTimeDate();
         break;
       case "4":
-        //  delete(reader);
+        subtract();
         break;
       case "5":
         //  findById(reader);
@@ -72,10 +72,49 @@ public class Controller {
     runNavigation();
   }
 
+  private void subtract() {
+    System.out
+        .println("enter date exempl: Some text 04-07-2008 Some text 03:05:55:777 Some text");
+    System.out
+        .println("(default format only) if you want date from exempl, enter 1 or 2 if custom date");
+    String firstDate = "Some text 04-07-2008 Some text 03:05:55:777 Some text";
+    try {
+      String choise = reader.readLine();
+      if (!(choise.equals("1"))) {
+        System.out.println("Enter date:");
+        firstDate = reader.readLine();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    System.out
+        .println(
+            "enter  date for subtract  exempl: Some text 01-02-0008 Some text 01:01:01:111 Some text");
+    System.out.println(
+        "(default format only) if you want date from exempl, enter 1 or else if custom date");
+    String secondDate = "Some text 01-01-0008 Some text 01:02:01:111 Some text";
+    try {
+      String choise = reader.readLine();
+      if (!(choise.equals("1"))) {
+        System.out.println("Enter add date:");
+        secondDate = reader.readLine();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    Time timeStart = Parser.getInstance()
+        .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(firstDate, format);
+    Time timeStop = Parser.getInstance()
+        .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(secondDate, format);
+
+    new Calendar().print((Calendar) new NixDate().timeSubtractTime(timeStart, timeStop));
+  }
+
   private void addToTimeDate() {
     System.out
-        .println("enter date ex: Some text 01-03-2001 Some text 00:00:55:777 Some text");
-    System.out.println("(default format only) if you want date from ex, enter 1 or 2 if custom date");
+        .println("enter date exempl: Some text 01-03-2001 Some text 00:00:55:777 Some text");
+    System.out
+        .println("(default format only) if you want date from exempl, enter 1 or 2 if custom date");
     String firstDate = "Some text 01-03-2001 Some text 00:00:55:777 Some text";
     try {
       String choise = reader.readLine();
@@ -87,8 +126,9 @@ public class Controller {
       e.printStackTrace();
     }
     System.out
-        .println("enter add date ex: Some text 04-02-2008 Some text 00:00:00:000 Some text");
-    System.out.println("(default format only) if you want date from ex, enter 1 or else if custom date");
+        .println("enter add date exempl: Some text 04-02-2008 Some text 00:00:00:000 Some text");
+    System.out.println(
+        "(default format only) if you want date from exempl, enter 1 or else if custom date");
     String secondDate = "Some text 04-02-2008 Some text 00:00:00:000 Some text";
     try {
       String choise = reader.readLine();
@@ -109,8 +149,9 @@ public class Controller {
 
   private void differenceDates() {
     System.out
-        .println("enter first date ex: Some text 01-03-2001 Some text 00:00:55:777 Some text");
-    System.out.println("(default format only) if you want date from ex, enter 1 or 2 if custom date");
+        .println("enter first date exempl: Some text 01-03-2001 Some text 00:00:55:777 Some text");
+    System.out
+        .println("(default format only) if you want date from exempl, enter 1 or 2 if custom date");
     String firstDate = "Some text 01-03-2001 Some text 00:00:55:777 Some text";
     try {
       String choise = reader.readLine();
@@ -122,8 +163,9 @@ public class Controller {
       e.printStackTrace();
     }
     System.out
-        .println("enter second date ex: Some text 05-07-2004 Some text 01:10:55:777 Some text");
-    System.out.println("(default format only) if you want date from ex, enter 1 or else if custom date");
+        .println("enter second date exempl: Some text 05-07-2004 Some text 01:10:55:777 Some text");
+    System.out.println(
+        "(default format only) if you want date from exempl, enter 1 or else if custom date");
     String secondDate = "Some text 05-07-2004 Some text 01:10:55:777 Some text";
     try {
       String choise = reader.readLine();
@@ -143,6 +185,7 @@ public class Controller {
     new Calendar().print((Calendar) timeStop);
     new Calendar().print((Calendar) differenceBetweenDates);
   }
+
   private void setFormat() {
     String choice = "1";
     System.out.println("if you want format dd/mm/yy hh:mm:ss:msmsms, please enter 1");
