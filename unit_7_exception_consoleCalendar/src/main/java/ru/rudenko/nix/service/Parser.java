@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 import ru.rudenko.nix.data.Calendar;
 import ru.rudenko.nix.data.Time;
 
-
 public class Parser {
 
   private long time;
@@ -35,13 +34,38 @@ public class Parser {
     String check = ddMmYyyyHhMmSsMSms.toLowerCase();
     ddMmYyyyHhMmSsMSms = check.replaceAll("( )+", " ");
     parseTimeFromDdMmYyyyHhMmSsMSms(ddMmYyyyHhMmSsMSms);
-
     ddMmYyyyHhMmSsMSms = formatStrindCastToDateFormat(ddMmYyyyHhMmSsMSms);
     parseDateFromDdMmYyyyHhMmSsMSms(ddMmYyyyHhMmSsMSms);
     return new Calendar(milliseconds, seconds, minutes, hours, days, mounths, years);
   }
 
   private String formatStrindCastToDateFormat(String ddMmYyyyHhMmSsMSms) {
+    if (format.equals("dd/mm/yy hh:mm:ss:msmsms")) {
+      Matcher takeDate = Pattern.compile("(\\d\\d|\\d| )"
+          + "[- /.]"
+          + "(\\d\\d)"
+          + "[- /.]"
+          + "(\\d\\d\\d\\d|\\d\\d\\d|\\d\\d|\\d| )"
+          + "").matcher(ddMmYyyyHhMmSsMSms);
+      char spliter = '/';
+      if (takeDate.find()) {
+        String castDate = takeDate.group();
+        if (!String.valueOf(castDate.charAt(0)).matches("\\d")) {
+          spliter = castDate.charAt(0);
+        }
+        if (!String.valueOf(castDate.charAt(1)).matches("\\d")) {
+          spliter = castDate.charAt(1);
+        }
+        if (!String.valueOf(castDate.charAt(2)).matches("\\d")) {
+          spliter = castDate.charAt(2);
+        }
+        System.out.println(castDate + " eto data mm/dd/yyyy-" + spliter + "-spliter");
+        String[] splitArray = castDate.split(String.valueOf(spliter));
+        String outPut = splitArray[0] + "/" + splitArray[1] + "/" + splitArray[2];
+        System.out.println("outPut = " + outPut);
+        return outPut;
+      }
+    }
 
     if (format.equals("mm/dd/yy hh:mm:ss:msmsms")) {
       Matcher takeDate = Pattern.compile("(\\d\\d|\\d| )"
@@ -224,12 +248,14 @@ public class Parser {
 
     Matcher matcherTimeNumbers = Pattern
         .compile(
-            "([0-9]|0[0-9]|1[0-9]|2[0-3]|)[:]([0-9]|[0-5][0-9]|)[:]([0-9]|[0-5][0-9]|)[:]([0-9]|[0-9][0-9]|([0-9][0-9][0-9])|)")
+            "([0-9]|0[0-9]|1[0-9]|2[0-3]|)[:]([0-9]|[0-5][0-9]|)[:]([0-9]|[0-5][0-9]|)[:](\\d\\d\\d|\\d\\d|\\d| )")
         .matcher(ddMmYyyyHhMmSsMSms);
 
     if (matcherTimeNumbers.find()) {
       isHaveDate = true;
       String buf = matcherTimeNumbers.group();
+      System.out.println("buf time = " + buf);
+
       if (!buf.matches("\\d\\d:\\d\\d:\\d\\d:\\d\\d\\d")) {
         String[] split = buf.split("\\:");
         buf = "";
@@ -241,7 +267,14 @@ public class Parser {
             split[i] = "0" + split[i];
           }
           if (i == split.length - 1) {
-            if (split[i].matches("\\d\\d")) {
+            if (split[i].matches(" ")) {
+              split[i] = "000";
+            }
+            if (split[i].matches("\\d")) {
+              split[i] = "00" + split[i];
+            }
+
+              if (split[i].matches("\\d\\d")) {
               split[i] = "0" + split[i];
             }
           }
@@ -270,7 +303,6 @@ public class Parser {
           }
         }
       }
-
       Character charSplit = buf.toCharArray()[2];
       String[] ddMmYyyyHhMmSsMSmsArray;
       if (charSplit.equals('.')) {

@@ -39,7 +39,7 @@ public class Controller {
         + "сентября октября ноября декабря\"\n"
         + " + \"january february march april may june july august september october november december ");
     System.out.println(
-        "default format(dd mm yy hh:mm:ss:msmsms), if you want change format, please enter 1");
+        "default format("+ format +"), if you want change format, please enter 1");
     System.out.println("if you want to find the difference between dates, please enter 2");
     System.out.println("if you want format dd/mm/yy hh:mm:ss:msmsms, please enter 3");
     System.out.println("if you want format dd/mm/yy hh:mm:ss:msmsms, please enter 4");
@@ -94,9 +94,7 @@ public class Controller {
     Time timeStart = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(firstDate, "format");
     Time timeStop = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(secondDate, "format");
     Time differenceBetweenDates = new NixDate().findDifferenceBetweenDates(timeStart, timeStop);
-    System.out.println(" PRINT PRINT PRINT PRINT");
     new Calendar().print((Calendar) differenceBetweenDates);
-    System.out.println(" PRINT PRINT PRINT PRINT");
 
   }
 

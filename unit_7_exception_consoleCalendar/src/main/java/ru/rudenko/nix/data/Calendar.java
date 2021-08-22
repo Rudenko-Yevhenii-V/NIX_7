@@ -2,6 +2,7 @@ package ru.rudenko.nix.data;
 
 
 import java.io.Serializable;
+import ru.rudenko.nix.exceptionsC.SimulatedException;
 
 /**
  * @author Rudenko Yevhenii
@@ -28,32 +29,37 @@ public class Calendar extends Time implements Serializable {
     super.minutes = minute;
     super.hours = hour;
     super.days = day;
-    super.mounths = mounth;
+    if(mounth == 0){
+      try {
+        throw new SimulatedException(" mounth start with 1");
+      } catch (SimulatedException e) {
+        e.printStackTrace();
+      }
+      super.mounths = 01;
+    }else {
+      super.mounths = mounth;
+    }
+    if (year == 0){
+      try {
+        throw  new SimulatedException(" year start with 1 ");
+      } catch (SimulatedException e) {
+        year = 1;
+        e.printStackTrace();
+      }
+    }
     super.years = year;
     super.time = (millisecond) + (second * 1000) + (minute * 1000 * 60) + (hour * 1000 * 60 * 60)
         + (day * 1000 * 60 * 60 * 24) + (getMillisecondsInMounths(mounth, year))
         + (getMillisecondsInYear(year));
   }
 
-  private long getMillisecondsInYear(long year) {
-    long time = 0;
-    for (int i = 0; i < year; i++) {
-      time = time + (daysInYear(i) * 24 * 60 * 60 * 1000);
-    }
-    return time;
-  }
-
-  private long getMillisecondsInMounths(long mounth, long year) {
-    long time = 0;
-    for (int i = 1; i <= mounth; i++) {
-      time = time + (daysInMounth(i, year) * 24 * 60 * 60 * 1000);
-    }
-    return time;
-  }
-
   public Calendar(long milliseconds) {
     if (milliseconds < 0) {
-      throw new RuntimeException("Exception: milliseconds cant be < 0");
+      try {
+        throw new SimulatedException("Exception: milliseconds cant be < 0");
+      } catch (SimulatedException e) {
+        e.printStackTrace();
+      }
     }
     super.time = milliseconds;
     super.milliseconds = getMillisecondsFromMiliseconds(milliseconds);
@@ -64,6 +70,26 @@ public class Calendar extends Time implements Serializable {
     super.mounths = getMounthsFromMiliseconds(milliseconds);
     super.years = getYearsFromMiliseconds(milliseconds);
   }
+  private long getMillisecondsInYear(long year) {
+    long time = 0;
+    for (int i = 1; i < year; i++) {
+      time = time + (daysInYear(i) * 24 * 60 * 60 * 1000);
+    }
+    return time;
+  }
+
+  private long getMillisecondsInMounths(long mounth, long year) {
+    long time = 0;
+    if (mounth == 1){
+      return 0;
+    }
+    for (int i = 1; i < mounth; i++) {
+      time = time + (daysInMounth(i, year) * 24 * 60 * 60 * 1000);
+    }
+    return time;
+  }
+
+
 
   @Override
   public boolean isLeapYear(long years) {
@@ -85,7 +111,7 @@ public class Calendar extends Time implements Serializable {
 
   public long getMounthsFromMiliseconds(long milliseconds) {
     long daus = milliseconds/1000/60/60/24;
-    numberOfMounth = 0;
+    numberOfMounth = 1;
     int fourYears = (365 * 3 + 366);
     long daysInThisYear = ((daus) % fourYears) % 365;
     long nowYear = getYearsFromMiliseconds(milliseconds);
@@ -97,6 +123,7 @@ public class Calendar extends Time implements Serializable {
         break;
       }
     }
+
     return numberOfMounth;
   }
 
@@ -136,6 +163,9 @@ public class Calendar extends Time implements Serializable {
     int fourYears = (365 * 3 + 366);
     long daysInThisYear = ((milliseconds / 1000 / 60 / 60 / 24) % fourYears) % 365;
     long nowYear = getYearsFromMiliseconds(milliseconds);
+    if (nowYear == 0){
+      nowYear = 1;
+    }
     for (int i = 0; i < 12; i++) {
       if (daysInThisYear > daysInMounth(i + 1, nowYear)) {
         daysInThisYear = daysInThisYear - daysInMounth(i + 1, nowYear);
@@ -265,5 +295,19 @@ public class Calendar extends Time implements Serializable {
     System.out.print(calendar.seconds + " - seconds; ");
     System.out.print(calendar.milliseconds + " - milliseconds; ");
     System.out.println();
+  }
+
+  @Override
+  public String toString() {
+    return "Calendar{" +
+        "time=" + time +
+        ", milliseconds=" + milliseconds +
+        ", seconds=" + seconds +
+        ", minutes=" + minutes +
+        ", hours=" + hours +
+        ", days=" + days +
+        ", mounths=" + mounths +
+        ", years=" + years +
+        '}';
   }
 }
