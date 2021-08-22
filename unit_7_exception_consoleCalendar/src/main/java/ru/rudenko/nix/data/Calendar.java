@@ -238,62 +238,62 @@ public class Calendar extends Time implements Serializable {
   }
 
   public void print(Calendar calendar) {
-    System.out.print(calendar.days + " - days; ");
+    System.out.print(calendar.days + " |");
     switch ((int) calendar.mounths) {
       case 1 : {
-        System.out.print(" 01 Январь/January  - mounths; ");
+        System.out.print(" 01 Январь January |");
       }
       break;
       case 2 : {
-        System.out.print(" 02 Февраль/February  - mounths; ");
+        System.out.print(" 02 Февраль February |");
       }
       break;
       case 3 : {
-        System.out.print(" 03 Март/March  - mounths; ");
+        System.out.print(" 03 Март March  |");
       }
       break;
       case 4 : {
-        System.out.print(" 04 Апрель/April  - mounths; ");
+        System.out.print(" 04 Апрель April  |");
       }
       break;
       case 5 : {
-        System.out.print(" 05 Май/May  - mounths; ");
+        System.out.print(" 05 Май May |");
       }
       break;
       case 6 : {
-        System.out.print(" 06 Июнь/June  - mounths; ");
+        System.out.print(" 06 Июнь June |");
       }
       break;
       case 7 : {
-        System.out.print(" 07 Июль/July  - mounths; ");
+        System.out.print(" 07 Июль July  |");
       }
       break;
       case 8 : {
-        System.out.print(" 08 Август/August  - mounths; ");
+        System.out.print(" 08 Август August  |");
       }
       break;
       case 9 : {
-        System.out.print(" 09 Сентябрь/September  - mounths; ");
+        System.out.print(" 09 Сентябрь September |");
       }
       break;
       case 10 : {
-        System.out.print(" 10  Октябрь/October  - mounths; ");
+        System.out.print(" 10  Октябрь October |");
       }
       break;
       case 11 : {
-        System.out.print(" 11  Ноябрь/November  - mounths; ");
+        System.out.print(" 11  Ноябрь November |");
       }
       break;
       case 12 : {
-        System.out.print(" 12 Декабрь/December  - mounths; ");
+        System.out.print(" 12 Декабрь December |");
       }
       break;
     }
-    System.out.print(calendar.years + " - years; ");
-    System.out.print(calendar.hours + " - hours; ");
-    System.out.print(calendar.minutes + " - minutes; ");
-    System.out.print(calendar.seconds + " - seconds; ");
-    System.out.print(calendar.milliseconds + " - milliseconds; ");
+    System.out.printf(" %04d ", calendar.years);
+    System.out.print(calendar.hours + " : ");
+    System.out.print(calendar.minutes + " : ");
+    System.out.print(calendar.seconds + " : ");
+    System.out.print(calendar.milliseconds);
     System.out.println();
   }
 

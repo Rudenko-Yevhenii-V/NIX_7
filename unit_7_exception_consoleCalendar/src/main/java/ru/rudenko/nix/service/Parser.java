@@ -59,10 +59,8 @@ public class Parser {
         if (!String.valueOf(castDate.charAt(2)).matches("\\d")) {
           spliter = castDate.charAt(2);
         }
-        System.out.println(castDate + " eto data mm/dd/yyyy-" + spliter + "-spliter");
         String[] splitArray = castDate.split(String.valueOf(spliter));
         String outPut = splitArray[0] + "/" + splitArray[1] + "/" + splitArray[2];
-        System.out.println("outPut = " + outPut);
         return outPut;
       }
     }
@@ -86,19 +84,16 @@ public class Parser {
         if (!String.valueOf(castDate.charAt(2)).matches("\\d")) {
           spliter = castDate.charAt(2);
         }
-        System.out.println(castDate + " eto data mm/dd/yyyy-" + spliter + "-spliter");
         String[] splitArray = castDate.split(String.valueOf(spliter));
         String[] outPutSplitArray = new String[splitArray.length];
         outPutSplitArray[0] = splitArray[1];
         outPutSplitArray[1] = splitArray[0];
         outPutSplitArray[2] = splitArray[2];
         String outPut = outPutSplitArray[0] + "/" + outPutSplitArray[1] + "/" + outPutSplitArray[2];
-        System.out.println("outPut = " + outPut);
         return outPut;
       }
     }
     if (format.equals("mmm/dd/yy hh:mm:ss:msmsms")) {
-      System.out.println("mmm/dd/yy");
       Matcher takeDate = Pattern.compile(
           "(янв(?:аря)?|фев(?:раля)?|мар(?:та)?|апр(?:еля)?|мая|июн(?:я)?|июл(?:я)?|авг(?:уста)?|сен(?:тября)?|окт(?:ября)?|ноя(?:бря)?|дек(?:абря)?|"
               + "january?|february?|march?|april?|may|june?|july?|august?|september?|october?|november?|december?)"
@@ -110,16 +105,13 @@ public class Parser {
       char spliter = '/';
       if (takeDate.find()) {
         String castDate = takeDate.group();
-        System.out.println("castDate = " + castDate);
         char[] charsOfCastDate = castDate.toCharArray();
         for (int i = 0; i < charsOfCastDate.length; i++) {
           if (String.valueOf(charsOfCastDate[i]).matches("([/]|[ ]|[.]|[-])")){
-            System.out.println(charsOfCastDate[i] + " charsOfCastDate[i]");
             spliter = charsOfCastDate[i];
             break;
           }
         }
-        System.out.println(castDate + " eto data mm/dd/yyyy-" + spliter + "-spliter");
         String[] splitArray = castDate.split(String.valueOf(spliter));
         switch (splitArray[0]){
           case "января": splitArray[0] ="01";
@@ -152,12 +144,10 @@ public class Parser {
         outPutSplitArray[1] = splitArray[0];
         outPutSplitArray[2] = splitArray[2];
         String outPut = outPutSplitArray[0] + "/" + outPutSplitArray[1] + "/" + outPutSplitArray[2];
-        System.out.println("outPut = " + outPut);
         return outPut;
       }
     }
     if (format.equals("dd/mmm/yy hh:mm:ss:msmsms")) {
-      System.out.println("mmm/dd/yy");
       Matcher takeDate = Pattern.compile("(\\d\\d|\\d| )"
           + "[- /.]"
           + "(янв(?:аря)?|фев(?:раля)?|мар(?:та)?|апр(?:еля)?|мая|июн(?:я)?|июл(?:я)?|авг(?:уста)?|сен(?:тября)?|окт(?:ября)?|ноя(?:бря)?|дек(?:абря)?|"
@@ -168,16 +158,13 @@ public class Parser {
       char spliter = '/';
       if (takeDate.find()) {
         String castDate = takeDate.group();
-        System.out.println("castDate = " + castDate);
         char[] charsOfCastDate = castDate.toCharArray();
         for (int i = 0; i < charsOfCastDate.length; i++) {
           if (String.valueOf(charsOfCastDate[i]).matches("([/]|[ ]|[.]|[-])")){
-            System.out.println(charsOfCastDate[i] + " charsOfCastDate[i]");
             spliter = charsOfCastDate[i];
             break;
           }
         }
-        System.out.println(castDate + " eto data mm/dd/yyyy-" + spliter + "-spliter");
         String[] splitArray = castDate.split(String.valueOf(spliter));
         if (splitArray[1].matches("\\w{3,10}")){
           switch (splitArray[1]){
@@ -237,7 +224,6 @@ public class Parser {
         }
 
         String outPut = splitArray[0] + "/" + splitArray[1] + "/" + splitArray[2];
-        System.out.println("outPut = " + outPut);
         return outPut;
       }
     }
@@ -254,7 +240,6 @@ public class Parser {
     if (matcherTimeNumbers.find()) {
       isHaveDate = true;
       String buf = matcherTimeNumbers.group();
-      System.out.println("buf time = " + buf);
 
       if (!buf.matches("\\d\\d:\\d\\d:\\d\\d:\\d\\d\\d")) {
         String[] split = buf.split("\\:");

@@ -16,13 +16,28 @@ import ru.rudenko.nix.data.Time;
 public class NixDate {
 
   public Time findDifferenceBetweenDates(Time timeStart, Time timeEnd) {
-        Time time = new Calendar(Math.abs(timeEnd.time - timeStart.time));
+    long year = Math.abs(timeEnd.years - timeStart.years)+1;
+    long mounth = Math.abs(timeEnd.mounths - timeStart.mounths) +1;
+    long day = Math.abs(timeEnd.days - timeStart.days);
+    long hour = Math.abs(timeEnd.hours - timeStart.hours);
+    long minute = Math.abs(timeEnd.minutes - timeStart.minutes);
+    long second = Math.abs(timeEnd.seconds - timeStart.seconds);
+    long millisecond = Math.abs(timeEnd.milliseconds - timeStart.milliseconds);
+    Time time = new Calendar(millisecond, second, minute, hour, day, mounth, year);
+
     return time;
   }
 
   public Time timeAddTime(Time timeStart, Time timeEnd) {
 
-    Time time = new Calendar(timeStart.time + timeEnd.time);
+    long year = Math.abs(timeEnd.years + timeStart.years);
+    long mounth = Math.abs(timeEnd.mounths + timeStart.mounths) ;
+    long day = Math.abs(timeEnd.days + timeStart.days);
+    long hour = Math.abs(timeEnd.hours + timeStart.hours);
+    long minute = Math.abs(timeEnd.minutes + timeStart.minutes);
+    long second = Math.abs(timeEnd.seconds + timeStart.seconds);
+    long millisecond = Math.abs(timeEnd.milliseconds + timeStart.milliseconds);
+    Time time = new Calendar(millisecond, second, minute, hour, day, mounth, year);
     return time;
 
   }
@@ -35,14 +50,14 @@ public class NixDate {
   public Time[] sortTimesFromLowToHight(Time[] times) {
     boolean isSorted = false;
     Time buf;
-    while(!isSorted) {
+    while (!isSorted) {
       isSorted = true;
-      for (int i = 0; i < times.length-1; i++) {
-        if(times[i].getTime() > times[i+1].getTime()){
+      for (int i = 0; i < times.length - 1; i++) {
+        if (times[i].getTime() > times[i + 1].getTime()) {
           isSorted = false;
           buf = times[i];
-          times[i] = times[i+1];
-          times[i+1] = buf;
+          times[i] = times[i + 1];
+          times[i + 1] = buf;
         }
       }
     }
@@ -53,14 +68,14 @@ public class NixDate {
   public Time[] sortTimesFromHightToLow(Time[] times) {
     boolean isSorted = false;
     Time buf;
-    while(!isSorted) {
+    while (!isSorted) {
       isSorted = true;
-      for (int i = 0; i < times.length-1; i++) {
-        if(times[i].getTime() < times[i+1].getTime()){
+      for (int i = 0; i < times.length - 1; i++) {
+        if (times[i].getTime() < times[i + 1].getTime()) {
           isSorted = false;
           buf = times[i];
-          times[i] = times[i+1];
-          times[i+1] = buf;
+          times[i] = times[i + 1];
+          times[i + 1] = buf;
         }
       }
     }
