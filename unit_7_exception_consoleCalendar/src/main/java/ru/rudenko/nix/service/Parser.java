@@ -60,8 +60,7 @@ public class Parser {
           spliter = castDate.charAt(2);
         }
         String[] splitArray = castDate.split(String.valueOf(spliter));
-        String outPut = splitArray[0] + "/" + splitArray[1] + "/" + splitArray[2];
-        return outPut;
+        return splitArray[0] + "/" + splitArray[1] + "/" + splitArray[2];
       }
     }
 
@@ -89,8 +88,7 @@ public class Parser {
         outPutSplitArray[0] = splitArray[1];
         outPutSplitArray[1] = splitArray[0];
         outPutSplitArray[2] = splitArray[2];
-        String outPut = outPutSplitArray[0] + "/" + outPutSplitArray[1] + "/" + outPutSplitArray[2];
-        return outPut;
+        return outPutSplitArray[0] + "/" + outPutSplitArray[1] + "/" + outPutSplitArray[2];
       }
     }
     if (format.equals("mmm/dd/yy hh:mm:ss:msmsms")) {
@@ -106,9 +104,9 @@ public class Parser {
       if (takeDate.find()) {
         String castDate = takeDate.group();
         char[] charsOfCastDate = castDate.toCharArray();
-        for (int i = 0; i < charsOfCastDate.length; i++) {
-          if (String.valueOf(charsOfCastDate[i]).matches("([/]|[ ]|[.]|[-])")){
-            spliter = charsOfCastDate[i];
+        for (char c : charsOfCastDate) {
+          if (String.valueOf(c).matches("([/]|[ ]|[.]|[-])")) {
+            spliter = c;
             break;
           }
         }
@@ -143,8 +141,7 @@ public class Parser {
         outPutSplitArray[0] = splitArray[1];
         outPutSplitArray[1] = splitArray[0];
         outPutSplitArray[2] = splitArray[2];
-        String outPut = outPutSplitArray[0] + "/" + outPutSplitArray[1] + "/" + outPutSplitArray[2];
-        return outPut;
+        return outPutSplitArray[0] + "/" + outPutSplitArray[1] + "/" + outPutSplitArray[2];
       }
     }
     if (format.equals("dd/mmm/yy hh:mm:ss:msmsms")) {
@@ -159,9 +156,9 @@ public class Parser {
       if (takeDate.find()) {
         String castDate = takeDate.group();
         char[] charsOfCastDate = castDate.toCharArray();
-        for (int i = 0; i < charsOfCastDate.length; i++) {
-          if (String.valueOf(charsOfCastDate[i]).matches("([/]|[ ]|[.]|[-])")){
-            spliter = charsOfCastDate[i];
+        for (char c : charsOfCastDate) {
+          if (String.valueOf(c).matches("([/]|[ ]|[.]|[-])")) {
+            spliter = c;
             break;
           }
         }
@@ -223,8 +220,7 @@ public class Parser {
 
         }
 
-        String outPut = splitArray[0] + "/" + splitArray[1] + "/" + splitArray[2];
-        return outPut;
+        return splitArray[0] + "/" + splitArray[1] + "/" + splitArray[2];
       }
     }
     return ddMmYyyyHhMmSsMSms;
@@ -239,11 +235,11 @@ public class Parser {
 
     if (matcherTimeNumbers.find()) {
       isHaveDate = true;
-      String buf = matcherTimeNumbers.group();
+      StringBuilder buf = new StringBuilder(matcherTimeNumbers.group());
 
-      if (!buf.matches("\\d\\d:\\d\\d:\\d\\d:\\d\\d\\d")) {
-        String[] split = buf.split("\\:");
-        buf = "";
+      if (!buf.toString().matches("\\d\\d:\\d\\d:\\d\\d:\\d\\d\\d")) {
+        String[] split = buf.toString().split(":");
+        buf = new StringBuilder();
         for (int i = 0; i < split.length; i++) {
           if (split[i].matches("")) {
             split[i] = "00";
@@ -264,36 +260,37 @@ public class Parser {
             }
           }
           if (i == split.length - 1) {
-            buf = buf + split[i];
+            buf.append(split[i]);
             break;
           }
-          buf = buf + split[i] + ":";
+          buf.append(split[i]).append(":");
 
         }
       }
 
       String ddMmYyyyHhMmSsMSmsFirstElem = String.valueOf(buf.charAt(0));
       if (ddMmYyyyHhMmSsMSmsFirstElem.equals(":")) {
-        buf = "00" + buf;
+        buf.insert(0, "00");
       }
       String ddMmYyyyHhMmSsMSmsLastElem = String.valueOf(buf.charAt(buf.length() - 1));
       if (ddMmYyyyHhMmSsMSmsFirstElem.equals(":")) {
-        buf = buf + "0000";
+        buf.append("0000");
       }
-      char[] charsBuf = buf.toCharArray();
+      char[] charsBuf = buf.toString().toCharArray();
       for (int i = 0; i < charsBuf.length; i++) {
         if (String.valueOf(charsBuf[i]).equals(":")) {
           if (String.valueOf(charsBuf[i + 1]).equals(":")) {
-            buf = buf.substring(0, i + 1) + "01" + buf.substring(i + 1, buf.length());
+            buf = new StringBuilder(
+                buf.substring(0, i + 1) + "01" + buf.substring(i + 1, buf.length()));
           }
         }
       }
-      Character charSplit = buf.toCharArray()[2];
+      Character charSplit = buf.toString().toCharArray()[2];
       String[] ddMmYyyyHhMmSsMSmsArray;
       if (charSplit.equals('.')) {
-        ddMmYyyyHhMmSsMSmsArray = buf.split("\\.");
+        ddMmYyyyHhMmSsMSmsArray = buf.toString().split("\\.");
       } else {
-        ddMmYyyyHhMmSsMSmsArray = buf.split(String.valueOf(charSplit));
+        ddMmYyyyHhMmSsMSmsArray = buf.toString().split(String.valueOf(charSplit));
       }
       for (int i = 0; i < ddMmYyyyHhMmSsMSmsArray.length; i++) {
         switch (i + 1) {

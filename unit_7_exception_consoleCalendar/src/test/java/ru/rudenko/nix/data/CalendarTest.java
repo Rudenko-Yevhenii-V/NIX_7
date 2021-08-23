@@ -6,11 +6,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-/**
- * @author Rudenko Yevhenii
- * @created 20/08/2021 - 5:38 PM
- * @project NIX_7
- */
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CalendarTest {
   Calendar calendar = new Calendar();
@@ -32,20 +28,39 @@ class CalendarTest {
   @Test
   @Order(3)
   void getTime() {
-    calendar = new Calendar(200, 20, 50, 01, 5, 7, 2012);
-    Assertions.assertEquals(63477136220200l,  calendar.getTime());
+    calendar = new Calendar(200, 20, 50, 1, 5, 7, 2012);
+    Assertions.assertEquals(63477136220200L,  calendar.getTime());
   }
 
   @Test
   @Order(4)
   void getMounthsFromMiliseconds() {
+    Assertions.assertEquals(1,  calendar.getMounthsFromMiliseconds
+        (0L));
 
     Assertions.assertEquals(2,  calendar.getMounthsFromMiliseconds
-        (3024000000l));
+        (1000*60*60*24* 32L));
+
+    Assertions.assertEquals(3,  calendar.getMounthsFromMiliseconds
+        (1000*60*60*24* 63L));
+
+    Assertions.assertEquals(4,  calendar.getMounthsFromMiliseconds
+        (1000*60*60*24* 93L));
+
+    Assertions.assertEquals(5,  calendar.getMounthsFromMiliseconds
+        (1000*60*60*24* 124L));
+
+    Assertions.assertEquals(6,  calendar.getMounthsFromMiliseconds
+        (1000*60*60*24* 155L));
+
+    Assertions.assertEquals(7,  calendar.getMounthsFromMiliseconds
+        (1000*60*60*24* 186L));
+
     Assertions.assertEquals(1,  calendar.getMounthsFromMiliseconds
-        (0l));
-    Assertions.assertEquals(1,  calendar.getMounthsFromMiliseconds
-        (1000*60*60*24*31*12l));
+        (1000*60*60*24* 365L));
+
+    Assertions.assertEquals(2,  calendar.getMounthsFromMiliseconds
+        (1000*60*60*24* 397L));
 
   }
 
@@ -53,9 +68,9 @@ class CalendarTest {
   @Order(5)
   void getYearsFromMiliseconds() {
     Assertions.assertEquals(1,  calendar.getYearsFromMiliseconds
-        (5529600000l));
+        (5529600000L));
     Assertions.assertEquals(2,  calendar.getYearsFromMiliseconds
-        (1000*60*60*24*370l));
+        (1000*60*60*24* 370L));
   }
 
   @Test
@@ -66,7 +81,7 @@ class CalendarTest {
     Assertions.assertEquals(2,  calendar.getDaysFromMiliseconds
         (1000*60*60*24*2));
     Assertions.assertEquals(30,  calendar.getDaysFromMiliseconds
-        (1000*60*60*24*30l));
+        (1000*60*60*24* 30L));
 
   }
   @Test
@@ -114,7 +129,7 @@ class CalendarTest {
   @Order(9)
   void exchangeTimeOneYear() {
     Calendar calendarYear1 = new Calendar(0,0,0,0,0,1,2);
-    Calendar calendarYear2 = new Calendar(31536000000l);
+    Calendar calendarYear2 = new Calendar(31536000000L);
     Assertions.assertEquals(calendarYear1.time, calendarYear2.time);
     Assertions.assertEquals(calendarYear1.years, calendarYear2.years);
     Assertions.assertEquals(calendarYear1.mounths, calendarYear2.mounths);
