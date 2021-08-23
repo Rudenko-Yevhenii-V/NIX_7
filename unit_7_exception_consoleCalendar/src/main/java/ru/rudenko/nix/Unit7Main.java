@@ -8,7 +8,6 @@ public class Unit7Main {
 
   public static void main(String[] args) {
     System.out.println("\n\n\n\n");
-
     System.out.println(" Привет ПОЛЬЗОВАТЕЛЬ!."
         + "Данная программа предназначена для работы со временем и датами...\n"
         + "Для начала надо выбрать формат: \n"
@@ -40,14 +39,5 @@ public class Unit7Main {
   Scanner scaner = new Scanner(System.in);
   scaner.nextLine();
     new Controller().start();
-//    for (int i = 1; i < 100; i++) {
-////      Calendar calendar = new Calendar(111, 11,51,5,i,2,1002);
-//      Calendar calendar = new Calendar(0, 0,0,0,i,i+1,i+1);
-//      Calendar calendar1 = new Calendar(calendar.time);
-//      System.out.println("calendar = " + calendar);
-//      System.out.println("calendar1 = " + calendar1);
-//      System.out.println("_______________________________________________________________________________");
-//
-//    }
   }
 }

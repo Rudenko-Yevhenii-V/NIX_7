@@ -25,6 +25,63 @@ public class CommonTest {
   }
 
   @Test
+  void checkParserddmmyy() {
+    final Calendar calendar = (Calendar) Parser.getInstance()
+        .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat("04-07-2008 03:05:55:777",
+            "dd/mm/yy hh:mm:ss:msmsms");
+
+    Assertions.assertEquals(calendar.days, 4);
+    Assertions.assertEquals(calendar.mounths, 7);
+    Assertions.assertEquals(calendar.years, 2008);
+    Assertions.assertEquals(calendar.hours, 3);
+    Assertions.assertEquals(calendar.minutes, 5);
+    Assertions.assertEquals(calendar.seconds, 55);
+    Assertions.assertEquals(calendar.milliseconds, 777);
+  }
+  @Test
+  void checkParsermmddyy() {
+    final Calendar calendar = (Calendar) Parser.getInstance()
+        .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat("04-07-2008 03:05:55:777",
+            "mm/dd/yy hh:mm:ss:msmsms");
+
+    Assertions.assertEquals(calendar.days, 7);
+    Assertions.assertEquals(calendar.mounths, 4);
+    Assertions.assertEquals(calendar.years, 2008);
+    Assertions.assertEquals(calendar.hours, 3);
+    Assertions.assertEquals(calendar.minutes, 5);
+    Assertions.assertEquals(calendar.seconds, 55);
+    Assertions.assertEquals(calendar.milliseconds, 777);
+  }
+  @Test
+  void checkParsermmmddyy() {
+    final Calendar calendar = (Calendar) Parser.getInstance()
+        .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat("july-04-2008 03:05:55:777",
+            "mmm/dd/yy hh:mm:ss:msmsms");
+    System.out.println("calendar = " + calendar);
+    Assertions.assertEquals(calendar.days, 4);
+    Assertions.assertEquals(calendar.mounths, 7);
+    Assertions.assertEquals(calendar.years, 2008);
+    Assertions.assertEquals(calendar.hours, 3);
+    Assertions.assertEquals(calendar.minutes, 5);
+    Assertions.assertEquals(calendar.seconds, 55);
+    Assertions.assertEquals(calendar.milliseconds, 777);
+  }
+  @Test
+  void checkParserddmmmyy() {
+    final Calendar calendar = (Calendar) Parser.getInstance()
+        .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat("04-july-2008 03:05:55:777",
+            "dd/mmm/yy hh:mm:ss:msmsms");
+
+    Assertions.assertEquals(calendar.days, 4);
+    Assertions.assertEquals(calendar.mounths, 7);
+    Assertions.assertEquals(calendar.years, 2008);
+    Assertions.assertEquals(calendar.hours, 3);
+    Assertions.assertEquals(calendar.minutes, 5);
+    Assertions.assertEquals(calendar.seconds, 55);
+    Assertions.assertEquals(calendar.milliseconds, 777);
+  }
+
+  @Test
   void checkConvertnext() {
     boolean check = true;
     for (int i = 1; i < 1000; i++) {

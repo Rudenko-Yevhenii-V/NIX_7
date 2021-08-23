@@ -8,7 +8,6 @@ import ru.rudenko.nix.data.Time;
 
 public class Parser {
 
-  private long time;
   private long milliseconds;
   private long seconds;
   private long minutes;
@@ -16,8 +15,6 @@ public class Parser {
   private long days;
   private long mounths = 1;
   private long years;
-  private boolean isHaveDate = false;
-  private final boolean isHaveTime = false;
   private String format = "";
   private static final Parser instance = new Parser();
 
@@ -111,31 +108,60 @@ public class Parser {
           }
         }
         String[] splitArray = castDate.split(String.valueOf(spliter));
-        switch (splitArray[0]){
-          case "января": splitArray[0] ="01";
-          break;
-          case "февраля": splitArray[0] ="02";
-            break;
-          case "марта": splitArray[0] ="03";
-            break;
-          case "апреля": splitArray[0] ="04";
-            break;
-          case "мая": splitArray[0] ="05";
-            break;
-          case "июня": splitArray[0] ="06";
-            break;
-          case "июля": splitArray[0] ="07";
-            break;
-          case "августа": splitArray[0] ="08";
-            break;
-          case "сентября": splitArray[0] ="09";
-            break;
-          case "октября": splitArray[0] ="10";
-            break;
-          case "ноября": splitArray[0] ="11";
-            break;
-          case "декабря": splitArray[0] ="12";
-            break;
+        if (splitArray[0].matches("\\w{3,10}")){
+          switch (splitArray[0]){
+            case "january": splitArray[0] ="01";
+              break;
+            case "february": splitArray[0] ="02";
+              break;
+            case "march": splitArray[0] ="03";
+              break;
+            case "april": splitArray[0] ="04";
+              break;
+            case "may": splitArray[0] ="05";
+              break;
+            case "june": splitArray[0] ="06";
+              break;
+            case "july": splitArray[0] ="07";
+              break;
+            case "august": splitArray[0] ="08";
+              break;
+            case "september": splitArray[0] ="09";
+              break;
+            case "october": splitArray[0] ="10";
+              break;
+            case "november": splitArray[0] ="11";
+              break;
+            case "december": splitArray[0] ="12";
+              break;
+          }
+        }else {
+          switch (splitArray[0]){
+            case "января": splitArray[0] ="01";
+              break;
+            case "февраля": splitArray[0] ="02";
+              break;
+            case "марта": splitArray[0] ="03";
+              break;
+            case "апреля": splitArray[0] ="04";
+              break;
+            case "мая": splitArray[0] ="05";
+              break;
+            case "июня": splitArray[0] ="06";
+              break;
+            case "июля": splitArray[0] ="07";
+              break;
+            case "августа": splitArray[0] ="08";
+              break;
+            case "сентября": splitArray[0] ="09";
+              break;
+            case "октября": splitArray[0] ="10";
+              break;
+            case "ноября": splitArray[0] ="11";
+              break;
+            case "декабря": splitArray[0] ="12";
+              break;
+          }
         }
         String[] outPutSplitArray = new String[splitArray.length];
         outPutSplitArray[0] = splitArray[1];
@@ -234,7 +260,6 @@ public class Parser {
         .matcher(ddMmYyyyHhMmSsMSms);
 
     if (matcherTimeNumbers.find()) {
-      isHaveDate = true;
       StringBuilder buf = new StringBuilder(matcherTimeNumbers.group());
 
       if (!buf.toString().matches("\\d\\d:\\d\\d:\\d\\d:\\d\\d\\d")) {
@@ -272,7 +297,6 @@ public class Parser {
       if (ddMmYyyyHhMmSsMSmsFirstElem.equals(":")) {
         buf.insert(0, "00");
       }
-      String ddMmYyyyHhMmSsMSmsLastElem = String.valueOf(buf.charAt(buf.length() - 1));
       if (ddMmYyyyHhMmSsMSmsFirstElem.equals(":")) {
         buf.append("0000");
       }
@@ -321,7 +345,6 @@ public class Parser {
     Matcher matcherDateNumbers = Pattern.compile(regexHyphen)
         .matcher(ddMmYyyyHhMmSsMSms);
     if (matcherDateNumbers.find()) {
-      isHaveDate = true;
       StringBuilder buf = new StringBuilder(matcherDateNumbers.group());
       char charSplitDate = '/';
       char[] charBufArrays = buf.toString().toCharArray();
