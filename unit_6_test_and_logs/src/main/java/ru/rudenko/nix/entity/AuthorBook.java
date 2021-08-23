@@ -11,6 +11,4 @@ public class AuthorBook {
 
   private String idAuthor;
   private String idBook;
-
-
 }
