@@ -68,6 +68,9 @@ public class Calendar extends Time implements Serializable {
       long test = lIterat * 86400000L;
       time = time + (test);
     }
+    if (year >= 100) {
+      time += (1000 * 60 * 60 * 24L);
+    }
     return time;
   }
 
@@ -81,7 +84,6 @@ public class Calendar extends Time implements Serializable {
     }
     return time;
   }
-
 
   @Override
   public boolean isLeapYear(long years) {
@@ -104,7 +106,11 @@ public class Calendar extends Time implements Serializable {
   public long getMounthsFromMiliseconds(long milliseconds) {
     long daus = milliseconds / 1000 / 60 / 60 / 24;
     numberOfMounth = 1;
-    long daysInThisYear = daus % (daysInYear(getYearsFromMiliseconds(milliseconds)));
+    final long yearsFromMiliseconds = getYearsFromMiliseconds(milliseconds);
+    long daysInThisYear = daus;
+    for (int i = 1; i < yearsFromMiliseconds; i++) {
+      daysInThisYear = daysInThisYear - (daysInYear(i));
+    }
     long nowYear = getYearsFromMiliseconds(milliseconds);
     for (int i = 0; i < 12; i++) {
       if (daysInThisYear >= daysInMounth(i + 1, nowYear)) {
@@ -201,11 +207,7 @@ public class Calendar extends Time implements Serializable {
 
   @Override
   public void addMilliseconds(long milliseconds) {
-    initial(milliseconds);
-  }
-
-  private void initial(long milliseconds) {
-    super.time = time - milliseconds;
+    super.time = time + milliseconds;
     super.milliseconds = getMillisecondsFromMiliseconds(super.time);
     super.seconds = getSecondsFromMiliseconds(super.time);
     super.minutes = getMinutesFromMiliseconds(super.time);
@@ -217,7 +219,14 @@ public class Calendar extends Time implements Serializable {
 
   @Override
   public void subtractMilliseconds(long milliseconds) {
-    initial(milliseconds);
+    super.time = time - milliseconds;
+    super.milliseconds = getMillisecondsFromMiliseconds(super.time);
+    super.seconds = getSecondsFromMiliseconds(super.time);
+    super.minutes = getMinutesFromMiliseconds(super.time);
+    super.hours = getHoursFromMiliseconds(super.time);
+    super.days = getDaysFromMiliseconds(super.time);
+    super.mounths = getMounthsFromMiliseconds(super.time);
+    super.years = getYearsFromMiliseconds(super.time);
   }
 
   public void print(Calendar calendar) {
