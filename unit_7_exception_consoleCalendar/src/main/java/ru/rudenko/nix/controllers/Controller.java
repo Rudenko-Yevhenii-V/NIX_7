@@ -267,7 +267,7 @@ public class Controller {
     try {
       String choise = reader.readLine();
       if (!(choise.equals("1"))) {
-        System.out.println("Enter add date:");
+        System.out.println("Enter next date:");
         secondDate = reader.readLine();
       }
     } catch (IOException e) {
@@ -277,9 +277,16 @@ public class Controller {
         .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(firstDate, format);
     Time timeStop = Parser.getInstance()
         .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(secondDate, format);
+    final Time result = new NixDate().timeSubtractTime(timeStart, timeStop);
+    System.out.println("_______________________________________________");
     new Calendar().print((Calendar) timeStart);
     new Calendar().print((Calendar) timeStop);
-    new Calendar().print((Calendar) new NixDate().timeSubtractTime(timeStart, timeStop));
+    new Calendar().print((Calendar) result);
+    System.out.println(" first date have days - "+timeStart.getTime()/1000/60/60/24+
+        "\nsecond date have days - "+ timeStop.getTime()/1000/60/60/24 +
+        "\nresult have days - " + result.getTime()/1000/60/60/24);
+    System.out.println("_______________________________________________");
+
   }
 
   private void addToTimeDate() {
@@ -315,9 +322,15 @@ public class Controller {
         .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(firstDate, format);
     Time timeStop = Parser.getInstance()
         .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(secondDate, format);
+    final Time result = new NixDate().timeAddTime(timeStart, timeStop);
+    System.out.println("_______________________________________________");
     new Calendar().print((Calendar) timeStart);
     new Calendar().print((Calendar) timeStop);
-    new Calendar().print((Calendar) new NixDate().timeAddTime(timeStart, timeStop));
+    new Calendar().print((Calendar) result);
+    System.out.println(" first date have days - "+timeStart.getTime()/1000/60/60/24+
+        "\nsecond date have days - "+ timeStop.getTime()/1000/60/60/24 +
+        "\nresult have days - " + result.getTime()/1000/60/60/24);
+    System.out.println("_______________________________________________");
   }
 
   private void differenceDates() {

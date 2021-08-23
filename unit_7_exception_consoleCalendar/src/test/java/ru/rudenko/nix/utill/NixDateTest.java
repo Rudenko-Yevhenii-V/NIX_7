@@ -35,11 +35,18 @@ class NixDateTest {
   }
 
   @Test
-  void timeAddTime() {
+  void timeAddTimeSoft() {
     Calendar calendar1 = new Calendar(0, 0, 0, 0, 0, 1, 1);
     Calendar calendar2 = new Calendar(0, 0, 0, 0, 1, 1, 1);
     Calendar result = (Calendar) new NixDate().timeAddTime(calendar1, calendar2);
     Assertions.assertEquals(1000 * 60 * 60 * 24L, result.time);
+  }
+  @Test
+  void timeAddTime() {
+    Calendar calendar1 = new Calendar(2, 4, 5, 5, 5, 3, 2);
+    Calendar calendar2 = new Calendar(44, 7, 6, 5, 5, 4, 1);
+    Calendar result = (Calendar) new NixDate().timeAddTime(calendar1, calendar2);
+    Assertions.assertEquals(result.getTime(), calendar1.getTime() + calendar2.getTime());
   }
 
   @Test
