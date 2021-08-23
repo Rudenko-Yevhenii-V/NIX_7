@@ -110,8 +110,7 @@ public class Calendar extends Time implements Serializable {
   public long getMounthsFromMiliseconds(long milliseconds) {
     long daus = milliseconds / 1000 / 60 / 60 / 24;
     numberOfMounth = 1;
-    int fourYears = (365 * 3 + 366);
-    long daysInThisYear = ((daus) % fourYears) % 365;
+    long daysInThisYear = getDaysFromMiliseconds(milliseconds);
     long nowYear = getYearsFromMiliseconds(milliseconds);
     for (int i = 0; i < 12; i++) {
       if (daysInThisYear >= daysInMounth(i + 1, nowYear)) {
@@ -122,7 +121,7 @@ public class Calendar extends Time implements Serializable {
       }
     }
 
-    return numberOfMounth;
+    return numberOfMounth+1;
   }
 
   @Override

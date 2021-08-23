@@ -1,10 +1,13 @@
 package ru.rudenko.nix.controllers;
 
+import static java.lang.String.format;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 import ru.rudenko.nix.data.Calendar;
 import ru.rudenko.nix.data.Time;
 import ru.rudenko.nix.service.Parser;
@@ -37,12 +40,13 @@ public class Controller {
   private void runNavigation() {
     System.out.println();
     System.out.println(
-        "default format(" + format + "),\nif you want change format,      please enter 1");
-    System.out.println("if you want to find the difference between dates, please enter 2");
-    System.out.println("if you want add To Date Time ,                    please enter 3");
-    System.out.println("if you want subtract Time from Date ,             please enter 4");
-    System.out.println("if you want sort Times From Hight To Low,         please enter 5");
-    System.out.println("if you want sort Times From Low To Hight,         please enter 6");
+        "default format(" + format + "),"
+            + "\nif you want change format,                        please enter 1");
+    System.out.println("if you want sort Times From Hight To Low,         please enter 2");
+    System.out.println("if you want sort Times From Low To Hight,         please enter 3");
+    System.out.println("if you want to find the difference between dates, please enter 4");
+    System.out.println("if you want add To Date Time ,                    please enter 5");
+    System.out.println("if you want subtract Time from Date ,             please enter 6");
     System.out.println("if you want additional functions                  please enter 7");
     System.out.println("if you want exit,                                 please enter 0");
     System.out.println();
@@ -53,19 +57,19 @@ public class Controller {
       case "1":
         setFormat();
         break;
-      case "2":
+      case "4":
         differenceDates();
         break;
-      case "3":
+      case "5":
         addToTimeDate();
         break;
-      case "4":
+      case "6":
         subtract();
         break;
-      case "5":
+      case "2":
         sortTimesFromHightToLow();
         break;
-      case "6":
+      case "3":
         sortTimesFromLowToHight();
         break;
       case "7":
@@ -81,6 +85,58 @@ public class Controller {
   }
 
   private void additional() {
+    System.out.println("Проверить высокосный ли год       нажми 1");
+    System.out.println("Сколько дней в месяце             нажми 2");
+    System.out.println("Перевести дату в милесекунды      нажми 3");
+    System.out.println("Перевести милесекунды в дату      нажми 4");
+    try {
+      String cheker = reader.readLine();
+      switch (cheker) {
+        case "1": {
+          System.out.println("введите год- ");
+          String checkYear = reader.readLine();
+          if (checkYear.matches("\\d{1,4}")) {
+            System.out.println(new Calendar().isLeapYear(Integer.parseInt(checkYear)));
+          }
+        }
+        break;
+        case "2": {
+          System.out.println("введите год- ");
+          String checkYear = reader.readLine();
+          System.out.println("введите месяц числом- ");
+          String checkMoun = reader.readLine();
+
+            System.out.println(new Calendar()
+                .daysInMounth(Integer.parseInt(checkYear), Integer.parseInt(checkMoun)));
+
+        }
+        break;
+        case "3": {
+
+          System.out.println("введите дату в формате к примеру : 04-07-2008 03:05:55:777");
+          String checkDate = reader.readLine();
+          final Time time = Parser.getInstance()
+              .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(checkDate, format);
+          System.out.println(time.getTime());
+        }
+        break;
+
+        case "4": {
+          System.out.println("введите милисекунды");
+          Scanner scanner = new Scanner(System.in);
+          long checkMilis = scanner.nextLong();
+
+          Calendar calendar = new Calendar((long) checkMilis);
+          calendar.print(calendar);
+        }
+        break;
+
+      }
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
   }
 
   private void sortTimesFromLowToHight() {
@@ -95,14 +151,14 @@ public class Controller {
         int caunter = 0;
         times[caunter] = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
             reader.readLine(), format);
-        while (status){
+        while (status) {
           caunter++;
           System.out.println("enter next time and date exempl: 04-07-2008 03:05:55:777");
-          times = Arrays.copyOf(times, caunter+1);
+          times = Arrays.copyOf(times, caunter + 1);
           times[caunter] = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
               reader.readLine(), format);
           System.out.println("if you watn stop add dates, enter 1 any else to cantinue");
-          if(reader.readLine().equals("1")){
+          if (reader.readLine().equals("1")) {
             status = false;
           }
         }
@@ -113,24 +169,25 @@ public class Controller {
         final char[] chars = reader.readLine().toCharArray();
         String result = "";
         for (int i = 0; i < chars.length; i++) {
-          if (String.valueOf(chars[i]).matches("\\d")){
+          if (String.valueOf(chars[i]).matches("\\d")) {
             result = result + chars[i];
           }
         }
         int numbers = Integer.parseInt(result);
         for (int i = 0; i < numbers; i++) {
           int dd = (new Random().nextInt((31) + 1));
-          int mm = (new Random().nextInt((12 - 1) + 1) + 1);
-          int yyyy = (new Random().nextInt((3000 - 1) + 1) + 1);
+          String mm = format("%02d", (new Random().nextInt((12 - 2) + 1) + 2));
+          int yyyy = (new Random().nextInt(((3000 - 5) + 1) + 5));
           int hh = (new Random().nextInt((23) + 1));
           int mi = (new Random().nextInt((59) + 1));
           int ss = (new Random().nextInt((59) + 1));
           int msm = (new Random().nextInt((999) + 1));
-          times = Arrays.copyOf(times, i+1);
+          times = Arrays.copyOf(times, i + 1);
           times[i] = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
-              dd + "-" + mm + "-" + yyyy + " " + hh + ":" + mi + ":" + ss + ":" + msm , format);
+              dd + "-" + mm + "-" + yyyy + " " + hh + ":" + mi + ":" + ss + ":" + msm, format);
         }
       }
+
       final Time[] timesSorted = new NixDate().sortTimesFromLowToHight(times);
       for (int i = 0; i < timesSorted.length; i++) {
         new Calendar().print((Calendar) timesSorted[i]);
@@ -152,14 +209,14 @@ public class Controller {
         int caunter = 0;
         times[caunter] = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
             reader.readLine(), format);
-        while (status){
+        while (status) {
           caunter++;
           System.out.println("enter next time and date exempl: 04-07-2008 03:05:55:777");
-          times = Arrays.copyOf(times, caunter+1);
+          times = Arrays.copyOf(times, caunter + 1);
           times[caunter] = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
               reader.readLine(), format);
           System.out.println("if you watn stop add dates, enter 1 any else to cantinue");
-          if(reader.readLine().equals("1")){
+          if (reader.readLine().equals("1")) {
             status = false;
           }
         }
@@ -170,22 +227,22 @@ public class Controller {
         final char[] chars = reader.readLine().toCharArray();
         String result = "";
         for (int i = 0; i < chars.length; i++) {
-          if (String.valueOf(chars[i]).matches("\\d")){
+          if (String.valueOf(chars[i]).matches("\\d")) {
             result = result + chars[i];
           }
         }
         int numbers = Integer.parseInt(result);
         for (int i = 0; i < numbers; i++) {
           int dd = (new Random().nextInt((31) + 1));
-          int mm = (new Random().nextInt((12 - 1) + 1) + 1);
+          String mm = format("%02d", (new Random().nextInt((12 - 2) + 1) + 2));
           int yyyy = (new Random().nextInt((3000 - 1) + 1) + 1);
           int hh = (new Random().nextInt((23) + 1));
           int mi = (new Random().nextInt((59) + 1));
           int ss = (new Random().nextInt((59) + 1));
           int msm = (new Random().nextInt((999) + 1));
-          times = Arrays.copyOf(times, i+1);
+          times = Arrays.copyOf(times, i + 1);
           times[i] = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
-              dd + "-" + mm + "-" + yyyy + " " + hh + ":" + mi + ":" + ss + ":" + msm , format);
+              dd + "-" + mm + "-" + yyyy + " " + hh + ":" + mi + ":" + ss + ":" + msm, format);
         }
       }
       final Time[] timesSorted = new NixDate().sortTimesFromHightToLow(times);
@@ -308,6 +365,7 @@ public class Controller {
     Time timeStop = Parser.getInstance()
         .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(secondDate, format);
     Time differenceBetweenDates = new NixDate().findDifferenceBetweenDates(timeStart, timeStop);
+
     System.out.println("if you want result millisecond, enter 1");
     System.out.println("if you want result second,      enter 2");
     System.out.println("if you want result minute,      enter 3");
@@ -315,8 +373,7 @@ public class Controller {
     System.out.println("if you want result day,         enter 5");
     System.out.println("if you want result mounth,      enter 6");
     System.out.println("if you want result year,        enter 7");
-    new Calendar().print((Calendar) timeStart);
-    new Calendar().print((Calendar) timeStop);
+
     try {
       String answ = reader.readLine();
       switch (answ) {
@@ -324,22 +381,25 @@ public class Controller {
           System.out.println(differenceBetweenDates.getTime() + " millisecond");
           break;
         case "2":
-          System.out.println(differenceBetweenDates.getTime()/1000 + " second");
+          System.out.println(differenceBetweenDates.getTime() / 1000 + " second");
           break;
         case "3":
-          System.out.println(differenceBetweenDates.getTime()/1000/60 + " minute");
+          System.out.println(differenceBetweenDates.getTime() / 1000 / 60 + " minute");
           break;
         case "4":
-          System.out.println(differenceBetweenDates.getTime()/1000/60/60 + " hour");
+          System.out.println(differenceBetweenDates.getTime() / 1000 / 60 / 60 + " hour");
           break;
         case "5":
-          System.out.println(differenceBetweenDates.getTime()/1000/60/60/24 + " day");
+          System.out.println(differenceBetweenDates.getTime() / 1000 / 60 / 60 / 24 + " day");
           break;
         case "6":
-          System.out.println(new Calendar().getMounthsFromMiliseconds(differenceBetweenDates.getTime()) + " mounth");
+          System.out.println(
+              new Calendar().getMounthsFromMiliseconds(differenceBetweenDates.getTime())
+                  + " mounth");
           break;
         case "7":
-          System.out.println(new Calendar().getYearsFromMiliseconds(differenceBetweenDates.getTime()) + " year");
+          System.out.println(
+              new Calendar().getYearsFromMiliseconds(differenceBetweenDates.getTime()) + " year");
           break;
         default:
           System.out.println("wrong choise!");

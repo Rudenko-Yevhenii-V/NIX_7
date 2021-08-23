@@ -29,16 +29,16 @@ class NixDateTest {
         .getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
             "Some text 12-12-2008 Some text 20:21:55:567 Some tex", "dd/mm/yy hh:mm:ss:msmsms");
     Time timeStop2 = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
-        "Some text 13-12-2008 Some text 20:21:55:567 Some tex", "dd/mm/yy hh:mm:ss:msmsms");
+        "Some text 11-12-2008 Some text 20:21:55:567 Some tex", "dd/mm/yy hh:mm:ss:msmsms");
     Time differenceBetweenDates2 = new NixDate().findDifferenceBetweenDates(timeStart2, timeStop2);
-    Assertions.assertEquals(1000*60*60*24, differenceBetweenDates2.time);
+    Assertions.assertEquals(1000*60*60*24l, differenceBetweenDates2.time);
     Time timeStart3 = Parser
         .getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
             "Some text 12-11-2008 Some text 20:21:55:567 Some tex", "dd/mm/yy hh:mm:ss:msmsms");
     Time timeStop3 = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
-        "Some text 12-12-2008 Some text 20:21:55:567 Some tex", "dd/mm/yy hh:mm:ss:msmsms");
+        "Some text 11-11-2007 Some text 20:21:55:567 Some tex", "dd/mm/yy hh:mm:ss:msmsms");
     Time differenceBetweenDates3 = new NixDate().findDifferenceBetweenDates(timeStart3, timeStop3);
-    Assertions.assertEquals(1000*60*60*24*31l, differenceBetweenDates3.time);
+    Assertions.assertEquals(31708800000l, differenceBetweenDates3.time);
   }
 
   @Test
@@ -63,7 +63,7 @@ class NixDateTest {
   @Test
   void timeSubtractTime2() {
     Calendar calendar1 = new Calendar(777,55, 5, 3, 4, 7,2008);
-    Calendar calendar2 = new Calendar(111,1,1,1,1,2,8);
+    Calendar calendar2 = new Calendar(777,55, 5, 3, 3, 7,2008);
     Calendar result = (Calendar) new NixDate().timeSubtractTime(calendar1, calendar2);
     System.out.println("calendar1 = " + calendar1);
     System.out.println("calendar2 = " + calendar2);

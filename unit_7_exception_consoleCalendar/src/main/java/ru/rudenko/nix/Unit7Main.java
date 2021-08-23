@@ -15,6 +15,8 @@ import ru.rudenko.nix.service.Parser;
 public class Unit7Main {
 
   public static void main(String[] args) {
+    System.out.println("\n\n\n\n");
+
     System.out.println(" Привет ПОЛЬЗОВАТЕЛЬ!."
         + "Данная программа предназначена для работы со временем и датами...\n"
         + "Для начала надо выбрать формат: \n"
@@ -38,6 +40,10 @@ public class Unit7Main {
         + "- сравнивать перечень дат по убыванию sortTimesFromHightToLow \n"
         + "- сравнивать перечень дат по возрастанию sortTimesFromLowToHight \n"
         + "- ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ!!! \n"
+        + "   --Проверить высокосный ли год      \n"
+        + "   --Сколько дней в месяце             \n"
+        + "   --Перевести милесекунды в дату    \n"
+        + "   --Перевести дату в милесекунды    \n\n\n"
         + "Для продолжения нажми ENTER\n");
   Scanner scaner = new Scanner(System.in);
   String in = scaner.nextLine();
