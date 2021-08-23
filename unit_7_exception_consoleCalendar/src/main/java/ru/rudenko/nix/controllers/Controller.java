@@ -109,7 +109,7 @@ public class Controller {
         }
         break;
         case "3": {
-          System.out.println("введите дату в формате к примеру : 04-07-2008 03:05:55:777");
+          System.out.println("введите дату в формате к примеру : 04-07-0008 03:05:55:777");
           String checkDate = reader.readLine();
           final Time time = Parser.getInstance()
               .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(checkDate, format);
