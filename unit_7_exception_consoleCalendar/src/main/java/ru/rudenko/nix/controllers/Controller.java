@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.data.Calendar;
 import ru.rudenko.nix.data.Time;
 import ru.rudenko.nix.service.Parser;
@@ -15,7 +17,8 @@ import ru.rudenko.nix.utill.NixDate;
 
 
 public class Controller {
-
+  private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
+  private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
   BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
   private String format = "dd/mm/yy hh:mm:ss:msmsms";
 
@@ -84,6 +87,7 @@ public class Controller {
   }
 
   private void additional() {
+    LOGGER_INFO.info("additional");
     System.out.println("Проверить высокосный ли год       нажми 1");
     System.out.println("Сколько дней в месяце             нажми 2");
     System.out.println("Перевести дату в милесекунды      нажми 3");
@@ -239,6 +243,7 @@ public class Controller {
         new Calendar().print((Calendar) time);
       }
     } catch (IOException e) {
+      LOGGER_WARN.warn( e.toString());
       e.printStackTrace();
     }
   }
@@ -256,6 +261,7 @@ public class Controller {
         firstDate = reader.readLine();
       }
     } catch (IOException e) {
+      LOGGER_WARN.warn(e.toString());
       e.printStackTrace();
     }
     System.out
@@ -271,6 +277,7 @@ public class Controller {
         secondDate = reader.readLine();
       }
     } catch (IOException e) {
+      LOGGER_WARN.warn(e.toString());
       e.printStackTrace();
     }
     Time timeStart = Parser.getInstance()
@@ -302,6 +309,7 @@ public class Controller {
         firstDate = reader.readLine();
       }
     } catch (IOException e) {
+      LOGGER_WARN.warn(e.toString());
       e.printStackTrace();
     }
     System.out
@@ -316,6 +324,7 @@ public class Controller {
         secondDate = reader.readLine();
       }
     } catch (IOException e) {
+      LOGGER_WARN.warn(e.toString());
       e.printStackTrace();
     }
     Time timeStart = Parser.getInstance()
@@ -346,6 +355,7 @@ public class Controller {
         firstDate = reader.readLine();
       }
     } catch (IOException e) {
+      LOGGER_WARN.warn(e.toString());
       e.printStackTrace();
     }
     System.out
@@ -360,6 +370,7 @@ public class Controller {
         secondDate = reader.readLine();
       }
     } catch (IOException e) {
+      LOGGER_WARN.warn(e.toString());
       e.printStackTrace();
     }
     Time timeStart = Parser.getInstance()
@@ -406,6 +417,7 @@ public class Controller {
           break;
       }
     } catch (IOException e) {
+      LOGGER_WARN.warn(e.toString());
       e.printStackTrace();
     }
   }
@@ -419,6 +431,7 @@ public class Controller {
     try {
       choice = reader.readLine();
     } catch (IOException e) {
+      LOGGER_WARN.warn(e.toString());
       e.printStackTrace();
     }
     switch (choice) {

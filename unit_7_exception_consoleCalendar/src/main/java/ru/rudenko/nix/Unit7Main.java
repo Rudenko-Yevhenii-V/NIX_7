@@ -1,12 +1,16 @@
 package ru.rudenko.nix;
 
 import java.util.Scanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.rudenko.nix.controllers.Controller;
 
 
 public class Unit7Main {
-
+  private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
+  private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
   public static void main(String[] args) {
+    LOGGER_INFO.info("Start!");
     System.out.println("\n\n\n\n");
     System.out.println(" Привет ПОЛЬЗОВАТЕЛЬ!."
         + "Данная программа предназначена для работы со временем и датами...\n"

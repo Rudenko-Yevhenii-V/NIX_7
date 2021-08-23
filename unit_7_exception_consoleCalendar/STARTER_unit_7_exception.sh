@@ -1,5 +1,5 @@
 #!/bin/bash
-mvn -f pom.xml clean install -U
-java -jar target/unit_7_exception_consoleCalendar.jar
+sh run_test.sh
+sh run_life.sh
 printf 'press [ENTER] to continue...'
 read _

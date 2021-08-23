@@ -42,6 +42,26 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>test</id>
+      <properties>
+        <log.warn>${log.path}/warn.log</log.warn>
+        <log.info>${log.path}/info.log</log.info>
+        <log.error>${log.path}/error.log</log.error>
+        <log.path>${logs.folder}/${logs.test.folder}</log.path>
+      </properties>
+    </profile>
+    <profile>
+      <id>life</id>
+      <properties>
+        <log.warn>${log.path}/warn.log</log.warn>
+        <log.info>${log.path}/info.log</log.info>
+        <log.error>${log.path}/error.log</log.error>
+        <log.path>${logs.folder}/${logs.life.folder}</log.path>
+      </properties>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
