@@ -30,7 +30,7 @@ class CalendarTest {
   @Order(3)
   void getTime() {
     calendar = new Calendar(200, 20, 50, 1, 5, 7, 2012);
-    Assertions.assertEquals(63477222620200L, calendar.getTime());
+    Assertions.assertEquals(63478432220200L, calendar.getTime());
   }
 
   @Test
@@ -101,8 +101,6 @@ class CalendarTest {
     Assertions.assertEquals(calendar3.minutes, calendar4.minutes);
     Assertions.assertEquals(calendar3.seconds, calendar4.seconds);
     Assertions.assertEquals(calendar3.milliseconds, calendar4.milliseconds);
-
-
   }
 
   @Test
@@ -134,5 +132,4 @@ class CalendarTest {
     Assertions.assertEquals(calendarYear1.seconds, calendarYear2.seconds);
     Assertions.assertEquals(calendarYear1.milliseconds, calendarYear2.milliseconds);
   }
-
 }

@@ -2,16 +2,8 @@ package ru.rudenko.nix;
 
 import java.util.Scanner;
 import ru.rudenko.nix.controllers.Controller;
-import ru.rudenko.nix.data.Calendar;
-import ru.rudenko.nix.data.Time;
-import ru.rudenko.nix.exceptionsC.SimulatedException;
-import ru.rudenko.nix.service.Parser;
 
-/**
- * @author Rudenko Yevhenii
- * @created 19/08/2021 - 12:41 PM
- * @project NIX_7
- */
+
 public class Unit7Main {
 
   public static void main(String[] args) {
@@ -46,7 +38,7 @@ public class Unit7Main {
         + "   --Перевести дату в милесекунды    \n\n\n"
         + "Для продолжения нажми ENTER\n");
   Scanner scaner = new Scanner(System.in);
-  String in = scaner.nextLine();
+  scaner.nextLine();
     new Controller().start();
 //    for (int i = 1; i < 100; i++) {
 ////      Calendar calendar = new Calendar(111, 11,51,5,i,2,1002);
