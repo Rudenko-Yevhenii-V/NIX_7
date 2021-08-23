@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.rudenko.nix.service.Parser;
 
-
 public class CommonTest {
 
   @Test
@@ -22,10 +21,6 @@ public class CommonTest {
   void checkConvert() {
     Calendar calendar1 = new Calendar(0, 0, 0, 0, 0, 3, 1);
     Calendar calendar2 = new Calendar(calendar1.getTime());
-    System.out.println(((calendar1.getTime()) == (calendar2.getTime())) + " - "
-        + calendar1.time / 1000 / 60 / 60 / 24
-        + " --" + calendar2.time / 1000 / 60 / 60 / 24);
-    calendar1.print(calendar1);
-    calendar1.print(calendar2);
+    Assertions.assertEquals(calendar1.mounths, calendar2.mounths);
   }
 }
