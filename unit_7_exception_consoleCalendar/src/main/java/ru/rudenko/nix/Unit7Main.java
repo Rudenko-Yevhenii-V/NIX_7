@@ -33,34 +33,23 @@ public class Unit7Main {
         + "Методы:\n"
         + "- Смена форматта ввода setFormat \n"
         + "- Результат разници двух дат differenceDates \n"
-        + "- прибавить к времени еще время addToTimeDate \n"
-        + "- Результат вычетания с даты timeSubtractTime \n"
-        + "- Результат вычетания с даты subtract \n"
+        + "- прибавить к времени год мес день и тд. , что не надо {0} addToTimeDate \n"
+        + "- Результат вычетания с даты  timeSubtractTime \n"
+        + "- сравнивать перечень дат по убыванию sortTimesFromHightToLow \n"
+        + "- сравнивать перечень дат по возрастанию sortTimesFromLowToHight \n"
+        + "- ДОПОЛНИТЕЛЬНЫЕ ФУНКЦИИ!!! \n"
         + "Для продолжения нажми ENTER\n");
   Scanner scaner = new Scanner(System.in);
   String in = scaner.nextLine();
     new Controller().start();
+//    for (int i = 1; i < 100; i++) {
+////      Calendar calendar = new Calendar(111, 11,51,5,i,2,1002);
+//      Calendar calendar = new Calendar(0, 0,0,0,i,i+1,i+1);
+//      Calendar calendar1 = new Calendar(calendar.time);
+//      System.out.println("calendar = " + calendar);
+//      System.out.println("calendar1 = " + calendar1);
+//      System.out.println("_______________________________________________________________________________");
 //
-////  try {
-////    throw new SimulatedException(" some wrong");
-////  } catch (SimulatedException e) {
-////    e.printStackTrace();
-////  }
-//
-//    Time timeStart = Parser.getInstance().ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat(
-//        "ome text 10-12-2001 Some text 20:21:55: Some tex",
-//
-//
-////        "coming from the 1-july-034 to 10:55:44:689 the 30.11.2009",
-//        "dd/mm/yy hh:mm:ss:msmsms");
-//new Calendar().print((Calendar) timeStart);
-////    Some text 12-22-001 Some text 20:21:55:567 Some tex
-//
-//
-////  new Calendar().print((Calendar) timeStart);
-////
-//// Calendar calendar = new Calendar(888888888888888l);
-//// calendar.print(calendar);
-
+//    }
   }
 }

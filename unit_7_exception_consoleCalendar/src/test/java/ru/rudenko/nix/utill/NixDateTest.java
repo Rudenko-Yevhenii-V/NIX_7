@@ -44,14 +44,33 @@ class NixDateTest {
   @Test
   void timeAddTime() {
     Calendar calendar1 = new Calendar(0,0, 0, 0, 0, 1,1);
-    Calendar calendar2 = new Calendar(1,1,1,1,10,2,2);
+    Calendar calendar2 = new Calendar(0,0,0,0,1,1,1);
     Calendar result = (Calendar) new NixDate().timeAddTime(calendar1, calendar2);
-    new Calendar().print(result);
+    Assertions.assertEquals(1000*60*60*24l, result.time);
+
   }
 
   @Test
-  void timeSubtractTime() {
+  void timeSubtractTime1() {
+    Calendar calendar1 = new Calendar(0,0, 0, 0, 5, 6,1122);
+    Calendar calendar2 = new Calendar(0,0,0,0,4,6,1122);
+    Calendar result = (Calendar) new NixDate().timeSubtractTime(calendar1, calendar2);
+    System.out.println("calendar1 = " + calendar1);
+    System.out.println("calendar2 = " + calendar2);
+    System.out.println("result = " + result);
+    Assertions.assertEquals(1000*60*60*24l, result.time);
   }
+  @Test
+  void timeSubtractTime2() {
+    Calendar calendar1 = new Calendar(777,55, 5, 3, 4, 7,2008);
+    Calendar calendar2 = new Calendar(111,1,1,1,1,2,8);
+    Calendar result = (Calendar) new NixDate().timeSubtractTime(calendar1, calendar2);
+    System.out.println("calendar1 = " + calendar1);
+    System.out.println("calendar2 = " + calendar2);
+    System.out.println("result = " + result);
+    Assertions.assertEquals(1000*60*60*24l, result.time);
+  }
+
 
   @Test
   void sortTimesFromLowToHight() {

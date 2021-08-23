@@ -17,40 +17,35 @@ public class Calendar extends Time implements Serializable {
   public Calendar() {
   }
 
-  public Calendar(long millisecond,
-      long second,
-      long minute,
-      long hour,
-      long day,
-      long mounth,
+  public Calendar(long millisecond, long second, long minute, long hour, long day, long mounth,
       long year) {
     super.milliseconds = millisecond;
     super.seconds = second;
     super.minutes = minute;
     super.hours = hour;
     super.days = day;
-    if(mounth == 0){
+    if (mounth == 0) {
       try {
         throw new SimulatedException(" mounth start with 1");
       } catch (SimulatedException e) {
         e.printStackTrace();
       }
-      super.mounths = 01;
-    }else {
+      super.mounths = 1;
+    } else {
       super.mounths = mounth;
     }
-    if (year == 0){
+    if (year == 0) {
       try {
-        throw  new SimulatedException(" year start with 1 ");
+        throw new SimulatedException(" year start with 1 ");
       } catch (SimulatedException e) {
         year = 1;
         e.printStackTrace();
       }
     }
     super.years = year;
-    super.time = (millisecond) + (second * 1000) + (minute * 1000 * 60) + (hour * 1000 * 60 * 60)
-        + (day * 1000 * 60 * 60 * 24) + (getMillisecondsInMounths(mounth, year))
-        + (getMillisecondsInYear(year));
+    super.time = (millisecond) + (second * 1000l) + (minute * 1000 * 60l) + (hour * 1000 * 60 * 60l)
+        + (day * 1000 * 60 * 60 * 24l) + (getMillisecondsInMounths(mounth, year))
+        + ((long)getMillisecondsInYear(year));
   }
 
   public Calendar(long milliseconds) {
@@ -70,25 +65,28 @@ public class Calendar extends Time implements Serializable {
     super.mounths = getMounthsFromMiliseconds(milliseconds);
     super.years = getYearsFromMiliseconds(milliseconds);
   }
+//complite
   private long getMillisecondsInYear(long year) {
     long time = 0;
     for (int i = 1; i < year; i++) {
-      time = time + (daysInYear(i) * 24 * 60 * 60 * 1000);
+      final long l = daysInYear(i);
+      long test = (long)l* 86400000l;
+      time = time + (test);
     }
     return time;
   }
 
-  private long getMillisecondsInMounths(long mounth, long year) {
+  public long getMillisecondsInMounths(long mounth, long year) {
     long time = 0;
-    if (mounth == 1){
+    if (mounth == 1) {
       return 0;
     }
     for (int i = 1; i < mounth; i++) {
       time = time + (daysInMounth(i, year) * 24 * 60 * 60 * 1000);
     }
+
     return time;
   }
-
 
 
   @Override
@@ -110,13 +108,13 @@ public class Calendar extends Time implements Serializable {
   }
 
   public long getMounthsFromMiliseconds(long milliseconds) {
-    long daus = milliseconds/1000/60/60/24;
+    long daus = milliseconds / 1000 / 60 / 60 / 24;
     numberOfMounth = 1;
     int fourYears = (365 * 3 + 366);
     long daysInThisYear = ((daus) % fourYears) % 365;
     long nowYear = getYearsFromMiliseconds(milliseconds);
     for (int i = 0; i < 12; i++) {
-      if (daysInThisYear > daysInMounth(i + 1, nowYear)) {
+      if (daysInThisYear >= daysInMounth(i + 1, nowYear)) {
         numberOfMounth++;
         daysInThisYear = daysInThisYear - daysInMounth(i + 1, nowYear);
       } else {
@@ -133,7 +131,7 @@ public class Calendar extends Time implements Serializable {
     int count = 0;
     long days = milliseconds / 24 / 60 / 60 / 1000;
     while (true) {
-      if (days > 366) {
+      if (days >= 365) {
         switch (++count) {
           case 1:
           case 2:
@@ -163,11 +161,11 @@ public class Calendar extends Time implements Serializable {
     int fourYears = (365 * 3 + 366);
     long daysInThisYear = ((milliseconds / 1000 / 60 / 60 / 24) % fourYears) % 365;
     long nowYear = getYearsFromMiliseconds(milliseconds);
-    if (nowYear == 0){
+    if (nowYear == 0) {
       nowYear = 1;
     }
     for (int i = 0; i < 12; i++) {
-      if (daysInThisYear > daysInMounth(i + 1, nowYear)) {
+      if (daysInThisYear >= daysInMounth(i + 1, nowYear)) {
         daysInThisYear = daysInThisYear - daysInMounth(i + 1, nowYear);
       } else {
         break;
@@ -240,52 +238,52 @@ public class Calendar extends Time implements Serializable {
   public void print(Calendar calendar) {
     System.out.print(calendar.days + " |");
     switch ((int) calendar.mounths) {
-      case 1 : {
-        System.out.print(" 01 Январь January |");
+      case 1: {
+        System.out.print("  Январь January     |");
       }
       break;
-      case 2 : {
-        System.out.print(" 02 Февраль February |");
+      case 2: {
+        System.out.print("  Февраль February   |");
       }
       break;
-      case 3 : {
-        System.out.print(" 03 Март March  |");
+      case 3: {
+        System.out.print("  Март March         |");
       }
       break;
-      case 4 : {
-        System.out.print(" 04 Апрель April  |");
+      case 4: {
+        System.out.print("  Апрель April       |");
       }
       break;
-      case 5 : {
-        System.out.print(" 05 Май May |");
+      case 5: {
+        System.out.print("  Май May            |");
       }
       break;
-      case 6 : {
-        System.out.print(" 06 Июнь June |");
+      case 6: {
+        System.out.print("  Июнь June          |");
       }
       break;
-      case 7 : {
-        System.out.print(" 07 Июль July  |");
+      case 7: {
+        System.out.print("  Июль July          |");
       }
       break;
-      case 8 : {
-        System.out.print(" 08 Август August  |");
+      case 8: {
+        System.out.print("  Август August      |");
       }
       break;
-      case 9 : {
-        System.out.print(" 09 Сентябрь September |");
+      case 9: {
+        System.out.print("  Сентябрь September |");
       }
       break;
-      case 10 : {
-        System.out.print(" 10  Октябрь October |");
+      case 10: {
+        System.out.print("   Октябрь October   |");
       }
       break;
-      case 11 : {
-        System.out.print(" 11  Ноябрь November |");
+      case 11: {
+        System.out.print("   Ноябрь November |");
       }
       break;
-      case 12 : {
-        System.out.print(" 12 Декабрь December |");
+      case 12: {
+        System.out.print("  Декабрь December |");
       }
       break;
     }

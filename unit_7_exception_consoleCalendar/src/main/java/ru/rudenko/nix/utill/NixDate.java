@@ -16,41 +16,26 @@ import ru.rudenko.nix.data.Time;
 public class NixDate {
 
   public Time findDifferenceBetweenDates(Time timeStart, Time timeEnd) {
-    long year = Math.abs(timeEnd.years - timeStart.years)+1;
-    long mounth = Math.abs(timeEnd.mounths - timeStart.mounths) +1;
-    long day = Math.abs(timeEnd.days - timeStart.days);
-    long hour = Math.abs(timeEnd.hours - timeStart.hours);
-    long minute = Math.abs(timeEnd.minutes - timeStart.minutes);
-    long second = Math.abs(timeEnd.seconds - timeStart.seconds);
-    long millisecond = Math.abs(timeEnd.milliseconds - timeStart.milliseconds);
-    Time time = new Calendar(millisecond, second, minute, hour, day, mounth, year);
+//    long year = Math.abs(timeEnd.years - timeStart.years)+1;
+//    long mounth = Math.abs(timeEnd.mounths - timeStart.mounths) +1;
+//    long day = Math.abs(timeEnd.days - timeStart.days);
+//    long hour = Math.abs(timeEnd.hours - timeStart.hours);
+//    long minute = Math.abs(timeEnd.minutes - timeStart.minutes);
+//    long second = Math.abs(timeEnd.seconds - timeStart.seconds);
+//    long millisecond = Math.abs(timeEnd.milliseconds - timeStart.milliseconds);
+//    Time time = new Calendar(millisecond, second, minute, hour, day, mounth, year);
+    Time time = new Calendar(timeStart.time - timeEnd.time);
 
     return time;
   }
 
   public Time timeAddTime(Time timeStart, Time timeEnd) {
-
-    long year = Math.abs(timeEnd.years + timeStart.years);
-    long mounth = Math.abs(timeEnd.mounths + timeStart.mounths) ;
-    long day = Math.abs(timeEnd.days + timeStart.days);
-    long hour = Math.abs(timeEnd.hours + timeStart.hours);
-    long minute = Math.abs(timeEnd.minutes + timeStart.minutes);
-    long second = Math.abs(timeEnd.seconds + timeStart.seconds);
-    long millisecond = Math.abs(timeEnd.milliseconds + timeStart.milliseconds);
-    Time time = new Calendar(millisecond, second, minute, hour, day, mounth, year);
+    Time time = new Calendar(timeStart.time + timeEnd.time);
     return time;
-
   }
 
   public Time timeSubtractTime(Time timeEnd, Time  timeStart) {
-    long year = timeEnd.years - timeStart.years;
-    long mounth = timeEnd.mounths - timeStart.mounths ;
-    long day = timeEnd.days - timeStart.days;
-    long hour = timeEnd.hours - timeStart.hours;
-    long minute = timeEnd.minutes - timeStart.minutes;
-    long second = timeEnd.seconds - timeStart.seconds;
-    long millisecond = timeEnd.milliseconds - timeStart.milliseconds;
-    Time time = new Calendar(millisecond, second, minute, hour, day, mounth, year);
+    Time time = new Calendar(timeEnd.time - timeStart.time);
     return time;
   }
 
