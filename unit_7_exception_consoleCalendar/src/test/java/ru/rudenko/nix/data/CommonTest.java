@@ -23,50 +23,46 @@ public class CommonTest {
     Calendar calendar2 = new Calendar(calendar1.getTime());
     Assertions.assertEquals(calendar1.mounths, calendar2.mounths);
   }
+
   @Test
   void checkConvertnext() {
     boolean check = true;
-//    for (int i = 1; i < 1000; i++) {
-      Calendar calendar11 = new Calendar(777,55,5,3,4,7,8);
-    Calendar calendar12 = (Calendar) Parser.getInstance()
-        .ParseDdMmYyyyHhMmSsMSmsToCalendarDateFormat("04-07-2008 03:05:55:777", "dd/mm/yy hh:mm:ss:msmsms");
-      Calendar calendar2 = new Calendar(calendar11.getTime());//63350910355777
-    System.out.println("calendar11 = " + calendar11);
-    System.out.println("calendar12 = " + calendar12);
-    System.out.println("calendar2 = " + calendar2);
-    System.out.println("__________________________");
-//      if (!(calendar1.days == calendar2.days)){
-//        System.out.println("calendar1 = " + calendar1);
-//        System.out.println("calendar2 = " + calendar2);
-//        System.out.println("__________________________");
-//        check = false;
-//      }
-//      if (!(calendar1.mounths == calendar2.mounths)){
-//        System.out.println("calendar1 = " + calendar1);
-//        System.out.println("calendar2 = " + calendar2);
-//        System.out.println("__________________________");
-//        check = false;
-//      }
-//      if (!(calendar1.years == calendar2.years)){
-//        System.out.println("calendar1 = " + calendar1);
-//        System.out.println("calendar2 = " + calendar2);
-//        System.out.println("__________________________");
-//        check = false;
-//      }
-//      if (!(calendar1.hours == calendar2.hours)){
-//        System.out.println("calendar1 = " + calendar1);
-//        System.out.println("calendar2 = " + calendar2);
-//        System.out.println("__________________________");
-//        check = false;
-//      }
-//      if (!(calendar1.minutes == calendar2.minutes)){
-//        System.out.println("calendar1 = " + calendar1);
-//        System.out.println("calendar2 = " + calendar2);
-//        System.out.println("__________________________");
-//        check = false;
-//      }
+    for (int i = 1; i < 1000; i++) {
+      Calendar calendar1 = new Calendar(777, 55, 5, 3, 4,
+          7, 100 + i);
+      Calendar calendar2 = new Calendar(calendar1.getTime());
+      if (!(calendar1.days == calendar2.days)) {
+        System.out.println("calendar1 = " + calendar1);
+        System.out.println("calendar2 = " + calendar2);
+        System.out.println("__________________________");
+        check = false;
+      }
+      if (!(calendar1.mounths == calendar2.mounths)) {
+        System.out.println("calendar1 = " + calendar1);
+        System.out.println("calendar2 = " + calendar2);
+        System.out.println("__________________________");
+        check = false;
+      }
+      if (!(calendar1.years == calendar2.years)) {
+        System.out.println("calendar1 = " + calendar1);
+        System.out.println("calendar2 = " + calendar2);
+        System.out.println("__________________________");
+        check = false;
+      }
+      if (!(calendar1.hours == calendar2.hours)) {
+        System.out.println("calendar1 = " + calendar1);
+        System.out.println("calendar2 = " + calendar2);
+        System.out.println("__________________________");
+        check = false;
+      }
+      if (!(calendar1.minutes == calendar2.minutes)) {
+        System.out.println("calendar1 = " + calendar1);
+        System.out.println("calendar2 = " + calendar2);
+        System.out.println("__________________________");
+        check = false;
+      }
     }
-//   Assertions.assertTrue(check);
-//  }
+    Assertions.assertTrue(check);
+  }
 }
 

@@ -68,8 +68,13 @@ public class Calendar extends Time implements Serializable {
       long test = lIterat * 86400000L;
       time = time + (test);
     }
-    if (year >= 100) {
-      time += (1000 * 60 * 60 * 24L);
+    for (int i = 1; i <= year/100; i++) {
+      if (year >= ((100*i)+1)) {
+        time += (1000 * 60 * 60 * 24L);
+      }
+      if (year >= ((400*i)+1)) {
+        time -= (1000 * 60 * 60 * 24L);
+      }
     }
     return time;
   }
