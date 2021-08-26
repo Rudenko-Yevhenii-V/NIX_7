@@ -13,8 +13,9 @@
     <module>unit_3_base_types</module>
     <module>unit_4_arrays</module>
     <module>unit_6_test_and_logs</module>
-    <module>unit_8_crud_lookup</module>
+    <module>unit_lib_crud_lookup</module>
     <module>unit_7_exception_consoleCalendar</module>
+    <module>unit_8_collections_rudenko</module>
 
   </modules>
 
