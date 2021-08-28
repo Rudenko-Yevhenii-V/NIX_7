@@ -1,10 +1,5 @@
 package ry.rudenko.yevhenii.homeWorkCollections;
 
-
-import java.util.Arrays;
-import java.util.Objects;
-
-
 public class MathSet implements IMathSet {
 
   private int capacity = 0;
@@ -44,18 +39,18 @@ public class MathSet implements IMathSet {
   public void add(Number n) {
     int count = numbers.length;
     count++;
-    numbers = Arrays.copyOf(numbers, count);
+    numbers = java.util.Arrays.copyOf(numbers, count);
     numbers[count - 1] = n;
     numbers = leaveUniqueElements(numbers);
   }
 
   @Override
   public void add(Number... n) {
-    for (int i = 0; i < n.length; i++) {
+    for (Number number : n) {
       int count = numbers.length;
       count++;
-      numbers = Arrays.copyOf(numbers, count);
-      numbers[count - 1] = n[i];
+      numbers = java.util.Arrays.copyOf(numbers, count);
+      numbers[count - 1] = number;
       numbers = leaveUniqueElements(numbers);
     }
   }
@@ -82,22 +77,22 @@ public class MathSet implements IMathSet {
     Number[] second = ms.getNumbers();
     Number[] result = new Number[0];
     int count = result.length;
-    for (int i = 0; i < first.length; i++) {
-      for (int j = 0; j < second.length; j++) {
-        if(first[i] == null || second[j] == null){
-          if (first[i] == null && second[j] == null){
+    for (Number number : first) {
+      for (Number value : second) {
+        if (number == null || value == null) {
+          if (number == null && value == null) {
             count++;
-            result = Arrays.copyOf(numbers, count);
-            result[count - 1] = first[i];
+            result = java.util.Arrays.copyOf(numbers, count);
+            result[count - 1] = number;
             result = leaveUniqueElements(numbers);
             continue;
           }
           continue;
         }
-        if (first[i].equals(second[j])) {
+        if (number.equals(value)) {
           count++;
-          result = Arrays.copyOf(result, count);
-          result[count - 1] = first[i];
+          result = java.util.Arrays.copyOf(result, count);
+          result[count - 1] = number;
           result = leaveUniqueElements(result);
         }
       }
@@ -116,22 +111,22 @@ public class MathSet implements IMathSet {
     Number[] second = mS.getNumbers();
     Number[] result = new Number[0];
     int count = result.length;
-    for (int i = 0; i < first.length; i++) {
-      for (int j = 0; j < second.length; j++) {
-        if(first[i] == null || second[j] == null){
-          if (first[i] == null && second[j] == null){
+    for (Number value : first) {
+      for (Number number : second) {
+        if (value == null || number == null) {
+          if (value == null && number == null) {
             count++;
-            result = Arrays.copyOf(numbers, count);
-            result[count - 1] = first[i];
+            result = java.util.Arrays.copyOf(numbers, count);
+            result[count - 1] = value;
             result = leaveUniqueElements(numbers);
             continue;
           }
           continue;
         }
-        if (first[i].equals(second[j])) {
+        if (value.equals(number)) {
           count++;
-          result = Arrays.copyOf(result, count);
-          result[count - 1] = first[i];
+          result = java.util.Arrays.copyOf(result, count);
+          result[count - 1] = value;
           result = leaveUniqueElements(result);
         }
       }
@@ -141,82 +136,328 @@ public class MathSet implements IMathSet {
 
   @Override
   public void sortDesc() {
-
+    numbers = leaveUniqueElements(numbers);
+    boolean isSorted = false;
+    Number buf;
+    while (!isSorted) {
+      isSorted = true;
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] == null) {
+          numbers[i] = 1234123499;
+        }
+      }
+      for (int i = 0; i < numbers.length - 1; i++) {
+        if ((Integer) numbers[i] < (Integer) numbers[i + 1]) {
+          isSorted = false;
+          buf = numbers[i];
+          numbers[i] = numbers[i + 1];
+          numbers[i + 1] = buf;
+        }
+      }
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i].equals(1234123499)) {
+          numbers[i] = null;
+        }
+      }
+    }
   }
 
   @Override
   public void sortDesc(int firstIndex, int lastIndex) {
-
+    int counter = 0;
+    Number[] buffer = new Number[lastIndex - firstIndex];
+    for (int i = 0; i < lastIndex - firstIndex; i++) {
+      buffer[counter] = numbers[firstIndex - 1 + i];
+      counter++;
+    }
+    numbers = buffer;
+    boolean isSorted = false;
+    Number buf;
+    while (!isSorted) {
+      isSorted = true;
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] == null) {
+          numbers[i] = 1234123499;
+        }
+      }
+      for (int i = 0; i < numbers.length - 1; i++) {
+        if ((Integer) numbers[i] < (Integer) numbers[i + 1]) {
+          isSorted = false;
+          buf = numbers[i];
+          numbers[i] = numbers[i + 1];
+          numbers[i + 1] = buf;
+        }
+      }
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i].equals(1234123499)) {
+          numbers[i] = null;
+        }
+      }
+    }
   }
 
   @Override
   public void sortDesc(Number value) {
-
+    int counter = 0;
+    int index = 0;
+    for (int i = 0; i < numbers.length; i++) {
+      if (numbers[i].equals(value)){
+        index = i;
+        break;
+      }
+    }
+    Number[] buffer = new Number[numbers.length - index +1];
+    for (int i = 0; i < buffer.length; i++) {
+      buffer[counter] = numbers[index - 1 + i];
+      counter++;
+    }
+    numbers = buffer;
+    boolean isSorted = false;
+    Number buf;
+    while (!isSorted) {
+      isSorted = true;
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] == null) {
+          numbers[i] = 1234123499;
+        }
+      }
+      for (int i = 0; i < numbers.length - 1; i++) {
+        if ((Integer) numbers[i] < (Integer) numbers[i + 1]) {
+          isSorted = false;
+          buf = numbers[i];
+          numbers[i] = numbers[i + 1];
+          numbers[i + 1] = buf;
+        }
+      }
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i].equals(1234123499)) {
+          numbers[i] = null;
+        }
+      }
+    }
   }
 
   @Override
   public void sortAsc() {
-
+    numbers = leaveUniqueElements(numbers);
+    boolean isSorted = false;
+    Number buf;
+    while (!isSorted) {
+      isSorted = true;
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] == null) {
+          numbers[i] = 1234123499;
+        }
+      }
+      for (int i = 0; i < numbers.length - 1; i++) {
+        if ((Integer) numbers[i] > (Integer) numbers[i + 1]) {
+          isSorted = false;
+          buf = numbers[i];
+          numbers[i] = numbers[i + 1];
+          numbers[i + 1] = buf;
+        }
+      }
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i].equals(1234123499)) {
+          numbers[i] = null;
+        }
+      }
+    }
   }
 
   @Override
   public void sortAsc(int firstIndex, int lastIndex) {
-
+    int counter = 0;
+    Number[] buffer = new Number[lastIndex - firstIndex];
+    for (int i = 0; i < lastIndex - firstIndex; i++) {
+      buffer[counter] = numbers[firstIndex - 1 + i];
+      counter++;
+    }
+    numbers = buffer;
+    boolean isSorted = false;
+    Number buf;
+    while (!isSorted) {
+      isSorted = true;
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] == null) {
+          numbers[i] = 1234123499;
+        }
+      }
+      for (int i = 0; i < numbers.length - 1; i++) {
+        if ((Integer) numbers[i] > (Integer) numbers[i + 1]) {
+          isSorted = false;
+          buf = numbers[i];
+          numbers[i] = numbers[i + 1];
+          numbers[i + 1] = buf;
+        }
+      }
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i].equals(1234123499)) {
+          numbers[i] = null;
+        }
+      }
+    }
   }
 
   @Override
   public void sortAsc(Number value) {
-
+    int counter = 0;
+    int index = 0;
+    for (int i = 0; i < numbers.length; i++) {
+      if (numbers[i].equals(value)){
+        index = i;
+        break;
+      }
+    }
+    Number[] buffer = new Number[numbers.length - index +1];
+    for (int i = 0; i < buffer.length; i++) {
+      buffer[counter] = numbers[index - 1 + i];
+      counter++;
+    }
+    numbers = buffer;
+    boolean isSorted = false;
+    Number buf;
+    while (!isSorted) {
+      isSorted = true;
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i] == null) {
+          numbers[i] = 1234123499;
+        }
+      }
+      for (int i = 0; i < numbers.length - 1; i++) {
+        if ((Integer) numbers[i] > (Integer) numbers[i + 1]) {
+          isSorted = false;
+          buf = numbers[i];
+          numbers[i] = numbers[i + 1];
+          numbers[i + 1] = buf;
+        }
+      }
+      for (int i = 0; i < numbers.length; i++) {
+        if (numbers[i].equals(1234123499)) {
+          numbers[i] = null;
+        }
+      }
+    }
   }
 
   @Override
   public Number get(int index) {
-    return null;
+    return numbers[index];
   }
 
   @Override
   public Number getMax() {
-    return null;
+    Number max = numbers[0];
+    for (Number number : numbers) {
+      if (number == null) {
+        continue;
+      }
+      if ((Integer) max < (Integer) number) {
+        max = number;
+      }
+    }
+    return max;
   }
 
   @Override
   public Number getMin() {
-    return null;
+    Number min = numbers[0];
+    for (Number number : numbers) {
+      if (number == null) {
+        continue;
+      }
+      if ((Integer) min > (Integer) number) {
+        min = number;
+      }
+    }
+    return min;
   }
 
   @Override
   public Number getAverage() {
-    return null;
+    double sum = 0;
+    for(int i=0; i <numbers.length; i++){
+      if(numbers[i] == null){
+        numbers[i] = 0;
+      }
+    }
+    for (Number number : numbers) {
+      sum += Double.valueOf((Integer) number);
+    }
+    return sum/numbers.length;
   }
 
   @Override
   public Number getMedian() {
-    return null;
+    numbers = leaveUniqueElements(numbers);
+
+    double median;
+    if (numbers.length % 2 == 0)
+      median = ((Integer)numbers[numbers.length/2] + (Integer)numbers[numbers.length/2 - 1])/2;
+    else
+      median = (Integer) numbers[numbers.length/2];
+    return median;
   }
 
   @Override
   public Number[] toArray() {
-    return new Number[0];
+    numbers = leaveUniqueElements(numbers);
+    return numbers;
   }
 
   @Override
   public Number[] toArray(int firstIndex, int lastIndex) {
-    return new Number[0];
+    int counter = 0;
+    Number[] buffer = new Number[lastIndex - firstIndex];
+    for (int i = 0; i < lastIndex - firstIndex; i++) {
+      buffer[counter] = numbers[firstIndex - 1 + i];
+      counter++;
+    }
+    numbers = buffer;
+    numbers = leaveUniqueElements(numbers);
+    return numbers;
   }
 
   @Override
   public void clear() {
+    this.numbers = new Number[0];
 
   }
 
   @Override
-  public void clear(int firstIndex, int lastIndex) {
-
+  public MathSet cut(int firstIndex, int lastIndex) {
+    Number[] buffer = this.numbers;
+    Number[] first = new Number[firstIndex];
+    Number[] second = new Number[buffer.length - lastIndex];
+    if (first.length >= 0)
+      System.arraycopy(buffer, 0, first, 0, first.length);
+    if (second.length >= 0)
+      System.arraycopy(buffer, lastIndex, second, 0, second.length);
+    return new MathSet(first, second);
   }
 
   @Override
   public void clear(Number[] numbers) {
-
+    numbers = leaveUniqueElements(numbers);
+    this.numbers = leaveUniqueElements(this.numbers);
+    Number[] buffer = new Number[0];
+    for (Number number : this.numbers) {
+      boolean isHave = true;
+      for (Number value : numbers) {
+        if (value.equals(number)) {
+          isHave = false;
+          break;
+        }
+      }
+      if (isHave) {
+        int count = buffer.length;
+        count++;
+        buffer = java.util.Arrays.copyOf(buffer, count);
+        buffer[count - 1] = number;
+        buffer = leaveUniqueElements(buffer);
+      }
+    }
+    this.numbers = buffer;
   }
 
   public int getCapacity() {
@@ -235,33 +476,13 @@ public class MathSet implements IMathSet {
     this.numbers = numbers;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    MathSet mathSet = (MathSet) o;
-    return capacity == mathSet.capacity &&
-        Arrays.equals(numbers, mathSet.numbers);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = Objects.hash(capacity);
-    result = 31 * result + Arrays.hashCode(numbers);
-    return result;
-  }
-
   @SafeVarargs
   public static <T> T[] concatAll(T[] first, T[]... rest) {
     int totalLength = first.length;
     for (T[] array : rest) {
       totalLength += array.length;
     }
-    T[] result = Arrays.copyOf(first, totalLength);
+    T[] result = java.util.Arrays.copyOf(first, totalLength);
     int offset = first.length;
     for (T[] array : rest) {
       System.arraycopy(array, 0, result, offset, array.length);
@@ -275,39 +496,31 @@ public class MathSet implements IMathSet {
     boolean isHaveNull = false;
     Number[] resultNumbers = new Number[1];
     resultNumbers[0] = numbers[0];
-    for (int i = 0; i < numbers.length; i++) {
+    for (Number number : numbers) {
       boolean isHaveElement = false;
       if (isHaveNull) {
-        if (numbers[i] == null) {
+        if (number == null) {
           continue;
         }
       }
-      for (int j = 0; j < resultNumbers.length; j++) {
+      for (Number resultNumber : resultNumbers) {
         if (!isHaveNull) {
-          if (numbers[i] == null) {
+          if (number == null) {
             isHaveNull = true;
           }
         }
-        if (!(numbers[i] == null || resultNumbers[j] == null)) {
-          if (numbers[i].equals(resultNumbers[j])) {
+        if (!(number == null || resultNumber == null)) {
+          if (number.equals(resultNumber)) {
             isHaveElement = true;
           }
         }
       }
       if (!isHaveElement) {
         count++;
-        resultNumbers = Arrays.copyOf(resultNumbers, count);
-        resultNumbers[count - 1] = numbers[i];
+        resultNumbers = java.util.Arrays.copyOf(resultNumbers, count);
+        resultNumbers[count - 1] = number;
       }
     }
     return resultNumbers;
-  }
-
-  @Override
-  public String toString() {
-    return "MathSet{" +
-        "capacity=" + capacity +
-        ", numbers=" + Arrays.toString(numbers) +
-        '}';
   }
 }

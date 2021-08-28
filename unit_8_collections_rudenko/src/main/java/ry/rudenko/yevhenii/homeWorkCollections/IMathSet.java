@@ -1,49 +1,48 @@
 package ry.rudenko.yevhenii.homeWorkCollections;
 
-
-import ry.rudenko.yevhenii.collections.CHashSet;
-
 public interface IMathSet {
 
-  public void add(Number n);
+  void add(Number n);
 
-  public void add(Number... n);
+  void add(Number... n);
 
-  public void join(MathSet ms);
+  void join(MathSet ms);
 
-  public void join(MathSet... ms);
-  public void intersection(MathSet ms);
-  public void intersection (MathSet ... ms);
+  void join(MathSet... ms);
 
-  public void sortDesc();
+  void intersection(MathSet ms);
 
-  public void sortDesc(int firstIndex, int lastIndex);
+  void intersection(MathSet... ms);
 
-  public void sortDesc(Number value);
+  void sortDesc();
 
-  public void sortAsc();
+  void sortDesc(int firstIndex, int lastIndex);
 
-  public void sortAsc(int firstIndex, int lastIndex);
+  void sortDesc(Number value);
 
-  public void sortAsc(Number value);
+  void sortAsc();
 
-  public Number get(int index);
+  void sortAsc(int firstIndex, int lastIndex);
 
-  public Number getMax();
+  void sortAsc(Number value);
 
-  public Number getMin();
+  Number get(int index);
 
-  public Number getAverage();
+  Number getMax();
 
-  public Number getMedian();
+  Number getMin();
 
-  public Number[] toArray();
+  Number getAverage();
 
-  public Number[] toArray(int firstIndex, int lastIndex);
+  Number getMedian();
 
-  public void clear();
+  Number[] toArray();
 
-  public void clear(int firstIndex, int lastIndex);
+  Number[] toArray(int firstIndex, int lastIndex);
 
-  public void clear(Number[] numbers);
+  void clear();
+
+  MathSet cut(int firstIndex, int lastIndex);
+
+  void clear(Number[] numbers);
 }

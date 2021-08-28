@@ -1,10 +1,6 @@
 package ry.rudenko.yevhenii.homeWorkCollections;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -145,76 +141,151 @@ class MathSetTest {
     MathSet mathSet2 = new MathSet();
     mathSet2.add(11, 12, 12, 13, 7, 3, null);
     MathSet mathSet3 = new MathSet();
-    mathSet3.add( 7, 3, null, 123,234234);
+    mathSet3.add(7, 3, null, 123, 234234);
     MathSet mathSet4 = new MathSet();
     mathSet4.add(11, 12, 12, 13, 7, 3, 3456435);
     mathSet1.intersection(mathSet2, mathSet3, mathSet4);
-    Number[] expectedNumbers1 = {7, 3,12, null};
+    Number[] expectedNumbers1 = {7, 3, 12, null};
     Assertions.assertArrayEquals(expectedNumbers1, mathSet1.getNumbers());
   }
 
   @Test
   void sortDesc() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 12, 13, 7, 3, null);
+    mathSet2.sortDesc();
+    Number[] expectedNumbers1 = {null, 13, 12, 11, 7, 3};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.getNumbers());
   }
 
   @Test
-  void testSortDesc() {
+  void testSortDescFirstLast() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 12, 13, 7, 3, null);
+    mathSet2.sortDesc(2, 7);
+    Number[] expectedNumbers1 = {null, 13, 12, 7, 3};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.getNumbers());
   }
 
   @Test
-  void testSortDesc1() {
+  void testSortDescValue() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 12, 13, 7, 3);
+    mathSet2.sortDesc(99);
+    Number[] expectedNumbers1 = {99, 13, 12, 7, 3};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.getNumbers());
   }
 
   @Test
   void sortAsc() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 12, 13, 7, 3, null);
+    mathSet2.sortAsc();
+    Number[] expectedNumbers1 = {3, 7, 11, 12, 13, null};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.getNumbers());
   }
 
   @Test
   void testSortAsc() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 12, 13, 7, 3, null);
+    mathSet2.sortAsc(2, 7);
+    Number[] expectedNumbers1 = {3, 7, 12, 13, null};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.getNumbers());
   }
 
   @Test
-  void testSortAsc1() {
+  void testSortAscValue() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 12, 13, 7, 3);
+    mathSet2.sortAsc(99);
+    Number[] expectedNumbers1 = {3, 7, 12, 13, 99};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.getNumbers());
   }
 
   @Test
   void get() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 12, 13, 7, 3);
+    Assertions.assertEquals(99, mathSet2.get(2));
   }
 
   @Test
   void getMax() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 12, 13, 7, 3);
+    Assertions.assertEquals(99, mathSet2.getMax());
   }
 
   @Test
   void getMin() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 12, 13, 7, 3);
+    Assertions.assertEquals(3, mathSet2.getMin());
   }
 
   @Test
   void getAverage() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 13, 7, 3);
+    System.out.println("mathSet2.getAverage() = " + mathSet2.getAverage());
+    double exp = (11 + 12 + 99 + 13 + 7 + 3) / 6D;
+    Assertions.assertEquals(exp, mathSet2.getAverage());
   }
 
   @Test
   void getMedian() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 13, 7, 3, 9);
+    System.out.println("mathSet2.getMedian() = " + mathSet2.getMedian());
+    double exp = 13.0;
+    Assertions.assertEquals(exp, mathSet2.getMedian());
   }
 
   @Test
   void toArray() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 13, 13, 7, 3, 9);
+    Number[] expectedNumbers1 = {11, 12, 99, 13, 7, 3, 9};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.toArray());
+
   }
 
   @Test
   void testToArray() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 13, 13, 7, 3, 9);
+    final Number[] numbers = mathSet2.toArray(2, 5);
+    Number[] expectedNumbers1 = {12, 99, 13};
+    Assertions.assertArrayEquals(expectedNumbers1, numbers);
   }
 
   @Test
   void clear() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 13, 13, 7, 3, 9);
+    mathSet2.clear();
+    Number[] expectedNumbers1 = {};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.getNumbers());
   }
 
   @Test
-  void testClear() {
+  void cut() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 13, 13, 7, 3, 9);
+    MathSet mathSet= mathSet2.cut(2, 5);
+    Number[] expectedNumbers1 = {11, 12, 3, 9};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet.getNumbers());
   }
 
   @Test
   void testClear1() {
+    MathSet mathSet2 = new MathSet();
+    mathSet2.add(11, 12, 99, 13, 13, 7, 3, 9);
+    Number[] clear = {11, 13, 2, 3};
+    mathSet2.clear(clear);
+    Number[] expectedNumbers1 = {12, 99, 7, 9};
+    Assertions.assertArrayEquals(expectedNumbers1, mathSet2.getNumbers());
   }
 
   @Test
