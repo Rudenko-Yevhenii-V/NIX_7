@@ -39,7 +39,7 @@ public class MathSet implements IMathSet {
   public void add(Number n) {
     int count = numbers.length;
     count++;
-    numbers = java.util.Arrays.copyOf(numbers, count);
+    numbers = copyOf(numbers, count);
     numbers[count - 1] = n;
     numbers = leaveUniqueElements(numbers);
   }
@@ -49,7 +49,7 @@ public class MathSet implements IMathSet {
     for (Number number : n) {
       int count = numbers.length;
       count++;
-      numbers = java.util.Arrays.copyOf(numbers, count);
+      numbers = copyOf(numbers, count);
       numbers[count - 1] = number;
       numbers = leaveUniqueElements(numbers);
     }
@@ -82,7 +82,7 @@ public class MathSet implements IMathSet {
         if (number == null || value == null) {
           if (number == null && value == null) {
             count++;
-            result = java.util.Arrays.copyOf(numbers, count);
+            result = copyOf(numbers, count);
             result[count - 1] = number;
             result = leaveUniqueElements(numbers);
             continue;
@@ -91,13 +91,21 @@ public class MathSet implements IMathSet {
         }
         if (number.equals(value)) {
           count++;
-          result = java.util.Arrays.copyOf(result, count);
+          result = copyOf(result, count);
           result[count - 1] = number;
           result = leaveUniqueElements(result);
         }
       }
     }
     this.numbers = result;
+  }
+
+  private Number[] copyOf(Number[] numbers, int count) {
+    Number[] buffer = new Number[count];
+    for (int i = 0; i < numbers.length; i++) {
+      buffer[i] = numbers[i];
+    }
+    return buffer;
   }
 
   @Override
@@ -116,7 +124,7 @@ public class MathSet implements IMathSet {
         if (value == null || number == null) {
           if (value == null && number == null) {
             count++;
-            result = java.util.Arrays.copyOf(numbers, count);
+            result = copyOf(numbers, count);
             result[count - 1] = value;
             result = leaveUniqueElements(numbers);
             continue;
@@ -125,7 +133,7 @@ public class MathSet implements IMathSet {
         }
         if (value.equals(number)) {
           count++;
-          result = java.util.Arrays.copyOf(result, count);
+          result = copyOf(result, count);
           result[count - 1] = value;
           result = leaveUniqueElements(result);
         }
@@ -201,12 +209,12 @@ public class MathSet implements IMathSet {
     int counter = 0;
     int index = 0;
     for (int i = 0; i < numbers.length; i++) {
-      if (numbers[i].equals(value)){
+      if (numbers[i].equals(value)) {
         index = i;
         break;
       }
     }
-    Number[] buffer = new Number[numbers.length - index +1];
+    Number[] buffer = new Number[numbers.length - index + 1];
     for (int i = 0; i < buffer.length; i++) {
       buffer[counter] = numbers[index - 1 + i];
       counter++;
@@ -304,12 +312,12 @@ public class MathSet implements IMathSet {
     int counter = 0;
     int index = 0;
     for (int i = 0; i < numbers.length; i++) {
-      if (numbers[i].equals(value)){
+      if (numbers[i].equals(value)) {
         index = i;
         break;
       }
     }
-    Number[] buffer = new Number[numbers.length - index +1];
+    Number[] buffer = new Number[numbers.length - index + 1];
     for (int i = 0; i < buffer.length; i++) {
       buffer[counter] = numbers[index - 1 + i];
       counter++;
@@ -376,15 +384,15 @@ public class MathSet implements IMathSet {
   @Override
   public Number getAverage() {
     double sum = 0;
-    for(int i=0; i <numbers.length; i++){
-      if(numbers[i] == null){
+    for (int i = 0; i < numbers.length; i++) {
+      if (numbers[i] == null) {
         numbers[i] = 0;
       }
     }
     for (Number number : numbers) {
       sum += Double.valueOf((Integer) number);
     }
-    return sum/numbers.length;
+    return sum / numbers.length;
   }
 
   @Override
@@ -392,10 +400,12 @@ public class MathSet implements IMathSet {
     numbers = leaveUniqueElements(numbers);
 
     double median;
-    if (numbers.length % 2 == 0)
-      median = ((Integer)numbers[numbers.length/2] + (Integer)numbers[numbers.length/2 - 1])/2;
-    else
-      median = (Integer) numbers[numbers.length/2];
+    if (numbers.length % 2 == 0) {
+      median =
+          ((Integer) numbers[numbers.length / 2] + (Integer) numbers[numbers.length / 2 - 1]) / 2;
+    } else {
+      median = (Integer) numbers[numbers.length / 2];
+    }
     return median;
   }
 
@@ -429,10 +439,12 @@ public class MathSet implements IMathSet {
     Number[] buffer = this.numbers;
     Number[] first = new Number[firstIndex];
     Number[] second = new Number[buffer.length - lastIndex];
-    if (first.length >= 0)
+    if (first.length >= 0) {
       System.arraycopy(buffer, 0, first, 0, first.length);
-    if (second.length >= 0)
+    }
+    if (second.length >= 0) {
       System.arraycopy(buffer, lastIndex, second, 0, second.length);
+    }
     return new MathSet(first, second);
   }
 
@@ -452,7 +464,7 @@ public class MathSet implements IMathSet {
       if (isHave) {
         int count = buffer.length;
         count++;
-        buffer = java.util.Arrays.copyOf(buffer, count);
+        buffer = copyOf(buffer, count);
         buffer[count - 1] = number;
         buffer = leaveUniqueElements(buffer);
       }
@@ -517,7 +529,7 @@ public class MathSet implements IMathSet {
       }
       if (!isHaveElement) {
         count++;
-        resultNumbers = java.util.Arrays.copyOf(resultNumbers, count);
+        resultNumbers = copyOf(resultNumbers, count);
         resultNumbers[count - 1] = number;
       }
     }

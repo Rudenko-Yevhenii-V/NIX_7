@@ -44,8 +44,7 @@ class MathSetTest {
 
   @Test
   void constrMathSet() {
-    Number[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 2345, 5, 11};
-    MathSet mathSet1 = new MathSet(numbers);
+    MathSet mathSet1 = new MathSet(new Number[]{1, 2, 3, 4, 5, 6, 7, 8, 2345, 5, 11});
     MathSet mathSet2 = new MathSet(mathSet1);
     Number[] expectedNumbers = {1, 2, 3, 4, 5, 6, 7, 8, 2345, 11};
     for (int i = 0; i < mathSet2.getNumbers().length; i++) {
@@ -273,7 +272,7 @@ class MathSetTest {
   void cut() {
     MathSet mathSet2 = new MathSet();
     mathSet2.add(11, 12, 99, 13, 13, 7, 3, 9);
-    MathSet mathSet= mathSet2.cut(2, 5);
+    MathSet mathSet = mathSet2.cut(2, 5);
     Number[] expectedNumbers1 = {11, 12, 3, 9};
     Assertions.assertArrayEquals(expectedNumbers1, mathSet.getNumbers());
   }
