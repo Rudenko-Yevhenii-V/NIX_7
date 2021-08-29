@@ -24,7 +24,7 @@ public class WindowConstructors extends JFrame {
     JPanel one1 = new JPanel(new FlowLayout());
     JLabel label1 = new JLabel("MathSet()");
     JButton jButton1 = new JButton("create");
-    JTextField jTextField1 = new JTextField(widthColumText);
+    JTextField jTextField1 = new JTextField(widthColumText+5);
     one1.add(label1);
     one1.add(jButton1);
     one1.add(jTextField1);

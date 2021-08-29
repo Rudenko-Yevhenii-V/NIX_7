@@ -7,7 +7,7 @@ import ry.rudenko.yevhenii.windows.WindowMethods;
 public class CollectionsMain {
 
   public static void main(String[] args) {
-    System.out.println("Class MathSet have!\n"
+    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nClass MathSet have!\n"
         + "Constructors:\n"
         + "1. MathSet()\n"
         + "2. MathSet(int capacity)\n"
