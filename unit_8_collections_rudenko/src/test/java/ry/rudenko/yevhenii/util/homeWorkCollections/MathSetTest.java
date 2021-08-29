@@ -227,7 +227,6 @@ class MathSetTest {
   void getAverage() {
     MathSet mathSet2 = new MathSet();
     mathSet2.add(11, 12, 99, 13, 7, 3);
-    System.out.println("mathSet2.getAverage() = " + mathSet2.getAverage());
     double exp = (11 + 12 + 99 + 13 + 7 + 3) / 6D;
     Assertions.assertEquals(exp, mathSet2.getAverage());
   }
@@ -236,7 +235,6 @@ class MathSetTest {
   void getMedian() {
     MathSet mathSet2 = new MathSet();
     mathSet2.add(11, 12, 99, 13, 7, 3, 9);
-    System.out.println("mathSet2.getMedian() = " + mathSet2.getMedian());
     double exp = 13.0;
     Assertions.assertEquals(exp, mathSet2.getMedian());
   }
