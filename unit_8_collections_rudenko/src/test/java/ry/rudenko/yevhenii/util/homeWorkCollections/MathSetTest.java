@@ -1,4 +1,4 @@
-package ry.rudenko.yevhenii.homeWorkCollections;
+package ry.rudenko.yevhenii.util.homeWorkCollections;
 
 
 import org.junit.jupiter.api.Assertions;
@@ -144,7 +144,7 @@ class MathSetTest {
     MathSet mathSet4 = new MathSet();
     mathSet4.add(11, 12, 12, 13, 7, 3, 3456435);
     mathSet1.intersection(mathSet2, mathSet3, mathSet4);
-    Number[] expectedNumbers1 = {7, 3, 12, null};
+    Number[] expectedNumbers1 = {7, 3, 12};
     Assertions.assertArrayEquals(expectedNumbers1, mathSet1.getNumbers());
   }
 

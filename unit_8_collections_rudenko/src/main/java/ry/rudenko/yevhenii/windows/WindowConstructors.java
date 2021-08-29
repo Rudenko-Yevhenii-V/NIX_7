@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import ry.rudenko.yevhenii.homeWorkCollections.MathSet;
+import ry.rudenko.yevhenii.util.homeWorkCollections.MathSet;
 
 public class WindowConstructors extends JFrame {
 

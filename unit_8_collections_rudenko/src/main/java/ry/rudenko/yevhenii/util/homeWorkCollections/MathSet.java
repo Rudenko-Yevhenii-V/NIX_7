@@ -1,4 +1,4 @@
-package ry.rudenko.yevhenii.homeWorkCollections;
+package ry.rudenko.yevhenii.util.homeWorkCollections;
 
 public class MathSet implements IMathSet {
 
@@ -82,7 +82,7 @@ public class MathSet implements IMathSet {
         if (number == null || value == null) {
           if (number == null && value == null) {
             count++;
-            result = copyOf(numbers, count);
+            result = copyOf(result, count);
             result[count - 1] = number;
             result = leaveUniqueElements(numbers);
             continue;
@@ -110,36 +110,9 @@ public class MathSet implements IMathSet {
 
   @Override
   public void intersection(MathSet... ms) {
-    MathSet mS = new MathSet(ms);
-    if (this.numbers.length == 0 || mS.getNumbers().length == 0) {
-      this.numbers = new Number[0];
-      return;
+    for (int i = 0; i < ms.length; i++) {
+      intersection(ms[i]);
     }
-    Number[] first = this.numbers;
-    Number[] second = mS.getNumbers();
-    Number[] result = new Number[0];
-    int count = result.length;
-    for (Number value : first) {
-      for (Number number : second) {
-        if (value == null || number == null) {
-          if (value == null && number == null) {
-            count++;
-            result = copyOf(numbers, count);
-            result[count - 1] = value;
-            result = leaveUniqueElements(numbers);
-            continue;
-          }
-          continue;
-        }
-        if (value.equals(number)) {
-          count++;
-          result = copyOf(result, count);
-          result[count - 1] = value;
-          result = leaveUniqueElements(result);
-        }
-      }
-    }
-    this.numbers = result;
   }
 
   @Override

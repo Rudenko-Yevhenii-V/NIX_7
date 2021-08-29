@@ -1,5 +1,6 @@
 package ry.rudenko.yevhenii;
 
+import java.util.Scanner;
 import ry.rudenko.yevhenii.windows.WindowConstructors;
 import ry.rudenko.yevhenii.windows.WindowMethods;
 
@@ -36,10 +37,11 @@ public class CollectionsMain {
         + "19. Number[] toArray(int firstIndex, int lastIndex);\n"
         + "20.MathSet cut(int firstIndex, int lastIndex)\n"
         + "21. void clear()\n"
-        + "22.void clear(Number[] numbers)\n\n\n press Enter to continue");
-//    Scanner scanner = new Scanner(System.in);
-//    scanner.nextLine();
-//    new WindowConstructors().setVisible(true);
-    new WindowMethods().setVisible(true);
+        + "22.void clear(Number[] numbers)\n\n\n  Enter 1 to class demonstration \n  Enter else to exit");
+    Scanner scanner = new Scanner(System.in);
+    String answer = scanner.nextLine();
+    if (answer.equals("1")){
+      new WindowConstructors().setVisible(true);
+    }
   }
 }

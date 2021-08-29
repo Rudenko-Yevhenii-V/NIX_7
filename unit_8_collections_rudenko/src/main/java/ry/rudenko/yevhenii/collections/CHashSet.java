@@ -2,7 +2,6 @@ package ry.rudenko.yevhenii.collections;
 
 import java.util.Arrays;
 import ry.rudenko.yevhenii.collections.linked.Backet;
-import ry.rudenko.yevhenii.homeWorkCollections.IMathSet;
 
 public class CHashSet {
 

@@ -1,4 +1,4 @@
-package ry.rudenko.yevhenii.homeWorkCollections;
+package ry.rudenko.yevhenii.util.homeWorkCollections;
 
 public interface IMathSet {
 
