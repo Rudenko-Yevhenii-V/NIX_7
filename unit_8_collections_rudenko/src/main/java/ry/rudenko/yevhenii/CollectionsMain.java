@@ -2,7 +2,6 @@ package ry.rudenko.yevhenii;
 
 import java.util.Scanner;
 import ry.rudenko.yevhenii.windows.WindowConstructors;
-import ry.rudenko.yevhenii.windows.WindowMethods;
 
 public class CollectionsMain {
 
