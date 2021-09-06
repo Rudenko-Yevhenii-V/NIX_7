@@ -105,7 +105,7 @@ public class JsonDBUsers {
 
   public void writeUsers(List<User> list) {
     try {
-      objectMapper.writeValue(new File("filesJSON/userArray.json"), list);
+      objectMapper.writeValue(new File("userArray.json"), list);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -113,7 +113,7 @@ public class JsonDBUsers {
 
   public void writeToken(List<Token> list) {
     try {
-      objectMapper.writeValue(new File("filesJSON/tokenArray.json"), list);
+      objectMapper.writeValue(new File("tokenArray.json"), list);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -123,9 +123,9 @@ public class JsonDBUsers {
     List<Token> readOUT = new ArrayList<>();
     try {
       List<Token> authorsOUT = new ArrayList<>();
-      if (new File("filesJSON/tokenArray.json").exists()) {
+      if (new File("tokenArray.json").exists()) {
         authorsOUT = objectMapper.readValue(
-            new File("filesJSON/tokenArray.json"),
+            new File("tokenArray.json"),
             new TypeReference<List<Token>>() {
             });
       }
@@ -140,9 +140,9 @@ public class JsonDBUsers {
     List<User> readOUT = new ArrayList<>();
     try {
         List<User> bookOUT = new ArrayList<>();
-        if (new File("filesJSON/userArray.json").exists()) {
+        if (new File("userArray.json").exists()) {
           bookOUT = objectMapper.readValue(
-              new File("filesJSON/userArray.json"),
+              new File("userArray.json"),
               new TypeReference<List<User>>() {
               });
         }

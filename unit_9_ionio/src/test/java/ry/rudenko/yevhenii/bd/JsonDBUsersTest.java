@@ -2,6 +2,8 @@ package ry.rudenko.yevhenii.bd;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import ry.rudenko.yevhenii.entity.Token;
 import ry.rudenko.yevhenii.entity.User;
@@ -27,7 +29,9 @@ class JsonDBUsersTest {
     user1.setLastName("LastName" + chengeUser);
     user1.setEmail("Email" + chengeUser);
     user1.setPassword("Password" + chengeUser);
-    jsonDBUsers.create(user1);
+    List<User> list = new ArrayList<>();
+    list.add(user1);
+    jsonDBUsers.writeUsers(list);
   }
   @Test
   void createToken() {

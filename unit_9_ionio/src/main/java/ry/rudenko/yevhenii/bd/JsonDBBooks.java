@@ -40,13 +40,13 @@ public class JsonDBBooks {
   public void write(IBooksAuthors[] array) {
     try {
       if(array.getClass().equals(Book[].class)){
-        objectMapper.writeValue(new File("filesJSON/bookArray.json"), array);
+        objectMapper.writeValue(new File("bookArray.json"), array);
       }
       if(array.getClass().equals(Author[].class)){
-        objectMapper.writeValue(new File("filesJSON/authorArray.json"), array);
+        objectMapper.writeValue(new File("authorArray.json"), array);
       }
       if(array.getClass().equals(AuthorBook[].class)){
-        objectMapper.writeValue(new File("filesJSON/authorBookArray.json"), array);
+        objectMapper.writeValue(new File("authorBookArray.json"), array);
       }
     } catch (IOException e) {
       e.printStackTrace();
@@ -58,9 +58,9 @@ public class JsonDBBooks {
     try {
       if(array.getClass().equals(Book[].class)){
         Book[] bookOUT = null;
-        if (new File("filesJSON/bookArray.json").exists()){
+        if (new File("bookArray.json").exists()){
           bookOUT = objectMapper.readValue(
-              new File("filesJSON/bookArray.json"),
+              new File("bookArray.json"),
               new TypeReference<Book[]>() {
               });
         }
@@ -69,9 +69,9 @@ public class JsonDBBooks {
       }
       if(array.getClass().equals(Author[].class)){
         Author[] authorsOUT = null;
-        if (new File("filesJSON/authorArray.json").exists()){
+        if (new File("authorArray.json").exists()){
           authorsOUT = objectMapper.readValue(
-              new File("filesJSON/authorArray.json"),
+              new File("authorArray.json"),
               new TypeReference<Author[]>() {
               });
         }
@@ -80,9 +80,9 @@ public class JsonDBBooks {
       }
       if(array.getClass().equals(AuthorBook[].class)){
         AuthorBook[] authorBooksOUT = null;
-        if (new File("filesJSON/authorBookArray.json").exists()){
+        if (new File("authorBookArray.json").exists()){
           authorBooksOUT = objectMapper.readValue(
-              new File("filesJSON/authorBookArray.json"),
+              new File("authorBookArray.json"),
               new TypeReference<AuthorBook[]>() {
               });
         }
