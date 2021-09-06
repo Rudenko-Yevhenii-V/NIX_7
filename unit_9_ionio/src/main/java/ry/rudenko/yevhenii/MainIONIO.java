@@ -2,6 +2,8 @@ package ry.rudenko.yevhenii;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ry.rudenko.yevhenii.windows.RegWindow;
+import ry.rudenko.yevhenii.windows.ShowModule;
 
 /**
  * @author Rudenko Yevhenii
@@ -13,6 +15,13 @@ public class MainIONIO {
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
   public static void main(String[] args) {
     LOGGER_INFO.info("test main");
-    System.out.println("args = ");
+//    RegWindow loginWindow = new RegWindow();
+//    loginWindow.setVisible(true);
+    ShowModule showModule = new ShowModule();
+    showModule.setVisible(true);
+
+
+
+
   }
 }
