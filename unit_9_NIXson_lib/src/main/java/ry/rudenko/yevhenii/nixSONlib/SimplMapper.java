@@ -1,6 +1,7 @@
 package ry.rudenko.yevhenii.nixSONlib;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author Rudenko Yevhenii
@@ -8,11 +9,12 @@ import java.io.File;
  * @project NIX_7
  */
 public class SimplMapper {
-  public void writeValue(File resultFile, Object value) {
-    System.out.println("SimplMapper.writeValue");
+  public String writeValue(List<Object> list) {
+    return "list JSON string";
   }
-  public void writeValue() {
-    System.out.println("SimplMapper.writeValue");
+  public String writeValue(Object[] array) {
+    return "array JSON string";
   }
+
 
 }
