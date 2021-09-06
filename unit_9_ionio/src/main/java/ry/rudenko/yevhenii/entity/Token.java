@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Token {
+public class Token implements IBooksAuthors{
 
     private String id;
     private String userId;

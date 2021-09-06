@@ -56,9 +56,6 @@ public class BookDaoImpl {
         ("table books has last element : " + books[books.length - 1].getId() + " " + books[
             books.length - 1].getNameOfBook()));
     LOGGER_INFO.info("Exit from create book");
-    for (Book book1 : books) {
-      System.out.println("book1 = " + book1);
-    }
     arraysbd.write(books);
   }
 

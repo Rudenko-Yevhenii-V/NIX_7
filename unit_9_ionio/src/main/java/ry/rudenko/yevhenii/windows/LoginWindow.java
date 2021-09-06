@@ -22,11 +22,14 @@ public class LoginWindow extends JFrame {
     JLabel jLabelPass = new JLabel("enter your password");
     JPasswordField jPasswordField = new JPasswordField(15);
     JButton jButton = new JButton("ENTER");
+    JButton jButtonRegistration = new JButton("registration");
+
     mainPanel.add(jLabelname);
     mainPanel.add(name);
     mainPanel.add(jLabelPass);
     mainPanel.add(jPasswordField);
     mainPanel.add(jButton);
+    mainPanel.add(jButtonRegistration);
     add(mainPanel, BorderLayout.SOUTH);
     pack();
     jButton.addActionListener(actionEvent -> {
@@ -51,6 +54,11 @@ public class LoginWindow extends JFrame {
           new ShowModule().setVisible(true);
         }
       }
+    });
+    jButtonRegistration.addActionListener(actionEvent -> {
+      this.setVisible(false);
+      this.removeAll();
+      new RegWindow().setVisible(true);
     });
   }
 }

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class User {
+public class User implements IBooksAuthors{
 
     private String id;
     private String firstName;
