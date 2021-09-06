@@ -114,6 +114,7 @@
   </dependencies>
   <properties>
     <logs.life.folder>life_logs</logs.life.folder>
+    <commons.codec.version>1.11</commons.codec.version>
     <maven.compiler.source>11</maven.compiler.source>
     <logs.test.folder>test_logs</logs.test.folder>
     <junit.jupiter.version>5.7.0</junit.jupiter.version>
