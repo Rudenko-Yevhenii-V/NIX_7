@@ -1,12 +1,12 @@
 package ry.rudenko.yevhenii.facade.impl;
 
-import ua.com.alevel.dto.UserDto;
-import ua.com.alevel.entity.User;
-import ua.com.alevel.facade.UserFacade;
-import ua.com.alevel.service.SecurityService;
-import ua.com.alevel.service.UserService;
-import ua.com.alevel.service.impl.SecurityServiceImpl;
-import ua.com.alevel.service.impl.UserServiceImpl;
+import ry.rudenko.yevhenii.dto.UserDto;
+import ry.rudenko.yevhenii.entity.User;
+import ry.rudenko.yevhenii.facade.UserFacade;
+import ry.rudenko.yevhenii.service.SecurityService;
+import ry.rudenko.yevhenii.service.UserService;
+import ry.rudenko.yevhenii.service.impl.SecurityServiceImpl;
+import ry.rudenko.yevhenii.service.impl.UserServiceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;

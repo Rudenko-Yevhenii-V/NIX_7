@@ -1,6 +1,6 @@
 package ry.rudenko.yevhenii.facade;
 
-import ua.com.alevel.dto.UserDto;
+import ry.rudenko.yevhenii.dto.UserDto;
 
 import java.util.List;
 

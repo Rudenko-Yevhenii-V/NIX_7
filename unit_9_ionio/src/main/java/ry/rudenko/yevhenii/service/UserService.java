@@ -1,6 +1,6 @@
 package ry.rudenko.yevhenii.service;
 
-import ua.com.alevel.entity.User;
+import ry.rudenko.yevhenii.entity.User;
 
 import java.util.List;
 

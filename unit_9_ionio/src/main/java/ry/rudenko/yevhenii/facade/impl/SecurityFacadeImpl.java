@@ -1,8 +1,8 @@
 package ry.rudenko.yevhenii.facade.impl;
 
-import ua.com.alevel.facade.SecurityFacade;
-import ua.com.alevel.service.SecurityService;
-import ua.com.alevel.service.impl.SecurityServiceImpl;
+import ry.rudenko.yevhenii.facade.SecurityFacade;
+import ry.rudenko.yevhenii.service.SecurityService;
+import ry.rudenko.yevhenii.service.impl.SecurityServiceImpl;
 
 public class SecurityFacadeImpl implements SecurityFacade {
 

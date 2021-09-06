@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import ua.com.alevel.controller.UserController;
+import ry.rudenko.yevhenii.controller.UserController;
 
 public class LoginWindow extends JFrame {
 

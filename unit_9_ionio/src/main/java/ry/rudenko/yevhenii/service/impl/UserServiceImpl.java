@@ -1,10 +1,10 @@
 package ry.rudenko.yevhenii.service.impl;
 
-import ua.com.alevel.dao.UserDao;
-import ua.com.alevel.dao.impl.UserDaoImpl;
-import ua.com.alevel.entity.User;
-import ua.com.alevel.service.UserService;
-import ua.com.alevel.util.SecurityUtil;
+import ry.rudenko.yevhenii.dao.UserDao;
+import ry.rudenko.yevhenii.dao.impl.UserDaoImpl;
+import ry.rudenko.yevhenii.entity.User;
+import ry.rudenko.yevhenii.service.UserService;
+import ry.rudenko.yevhenii.util.SecurityUtil;
 
 import java.util.List;
 

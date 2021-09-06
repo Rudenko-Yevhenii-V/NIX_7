@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ry.rudenko.yevhenii.bd.JsonDBBooks;
 import ry.rudenko.yevhenii.entity.AuthorBook;
-import ry.rudenko.yevhenii.entity.Book;
 
 public class AuthorBookDaoImpl {
 

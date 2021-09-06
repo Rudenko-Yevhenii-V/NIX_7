@@ -5,11 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import org.testng.collections.Lists;
-import ry.rudenko.yevhenii.entity.IBooksAuthors;
 import ry.rudenko.yevhenii.entity.Token;
 import ry.rudenko.yevhenii.entity.User;
 
@@ -52,23 +49,23 @@ public class JsonDBUsers {
   }
 
   public List<User> findAll() {
-    return users;
+    return readUser(users);
   }
 
   public boolean existByEmail(String email) {
-    return users.stream().anyMatch(user -> user.getEmail().equals(email));
+    return readUser(users).stream().anyMatch(user -> user.getEmail().equals(email));
   }
 
   public boolean existById(String id) {
-    return users.stream().anyMatch(user -> user.getId().equals(id));
+    return readUser(users).stream().anyMatch(user -> user.getId().equals(id));
   }
 
   public User findById(String id) {
-    return users.stream().filter(user -> user.getId().equals(id)).findFirst().get();
+    return readUser(users).stream().filter(user -> user.getId().equals(id)).findFirst().get();
   }
 
   public User findUserIdByEmailAndPassword(String email, String password) {
-    return users.stream()
+    return readUser(users).stream()
         .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
         .findAny()
         .orElse(null);
@@ -77,24 +74,24 @@ public class JsonDBUsers {
 
 
   public boolean existByToken(String token) {
-    return tokens.stream().anyMatch(token1 -> token.equals(token1.getToken()));
+    return readToken(tokens).stream().anyMatch(token1 -> token.equals(token1.getToken()));
   }
 
   public Token findByToken(String token) {
-    return tokens.stream().filter(token1 -> token1.getToken().equals(token)).findFirst().get();
+    return readToken(tokens).stream().filter(token1 -> token1.getToken().equals(token)).findFirst().get();
   }
 
   private String generateId(Entity entity) {
     String id = UUID.randomUUID().toString();
     switch (entity) {
       case USER: {
-        if (users.stream().anyMatch(user -> user.getId().equals(id))) {
+        if (readUser(users).stream().anyMatch(user -> user.getId().equals(id))) {
           return generateId(entity);
         }
       }
       break;
       case TOKEN: {
-        if (tokens.stream().anyMatch(token -> token.getId().equals(id))) {
+        if (readToken(tokens).stream().anyMatch(token -> token.getId().equals(id))) {
           return generateId(entity);
         }
       }
