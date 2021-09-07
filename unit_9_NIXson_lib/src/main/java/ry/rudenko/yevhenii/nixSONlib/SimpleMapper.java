@@ -54,24 +54,20 @@ public class SimpleMapper {
     returnJson.append("]");
     return returnJson.toString();
   }
-  public <T> List<T> readJsonToList(String json, T clazz){
+
+
+
+
+
+
+
+  public <T> List<T> readJsonToList(String json, T someO){
     List<Field> fieldList = new ArrayList<>();
     int counter = 0;
+    int counField = 0;
     List<T> list = new ArrayList<>();
-    final Field[] declaredFields = clazz.getClass().getDeclaredFields();
-    for (Field declaredField : declaredFields) {
-      declaredField.setAccessible(true);
-      try {
-        Field field = clazz.getClass().getDeclaredField(declaredField.getName());
-        field.setAccessible(true);
-        fieldList.add(field);
+    final Class<?> clazz = someO.getClass();
 
-//        field.set(clazz, "1");
-
-      } catch (NoSuchFieldException e) {
-        e.printStackTrace();
-      }
-    }
 
     json = json.substring(1, json.length() - 1);
     json = json.replaceAll("\\{", "(");
@@ -79,7 +75,24 @@ public class SimpleMapper {
     Pattern pattern = Pattern.compile("\\((.*?)\\)");
     Matcher matcher = pattern.matcher(json);
     while (matcher.find()) {
-//      createObject(clazz);
+      final Object object = createObject(clazz);
+      final Field[] declaredFields = object.getClass().getDeclaredFields();
+      for (Field declaredField : declaredFields) {
+        declaredField.setAccessible(true);
+        try {
+          Field field = object.getClass().getDeclaredField(declaredField.getName());
+          field.setAccessible(true);
+          if(counField < 2){
+            fieldList.add(field);
+            counField++;
+          }
+
+//        field.set(clazz, "1");
+
+        } catch (NoSuchFieldException e) {
+          e.printStackTrace();
+        }
+      }
       String objStr =  json.substring(matcher.start(), matcher.end());
       objStr = objStr.substring(1, objStr.length() - 1);
       System.out.println("objStr = " + objStr);
@@ -101,20 +114,31 @@ public class SimpleMapper {
         }
         value = value.substring(2, value.length()-1);
         try {
-          fieldList.get(counter).set(clazz, value);
+          fieldList.get(counter).set(object, value);
           counter++;
+          System.out.println("fieldList.size() = " + fieldList.size());
           if (counter>=fieldList.size()){
             counter = 0;
-            System.out.println("clazz.toString() = " + clazz.toString());
-            list.add(clazz);
+            System.out.println("clazz.toString() = " + object.toString());
+            list.add((T) object);
           }
         } catch (IllegalAccessException e) {
           e.printStackTrace();
         }
       }
     }
+    for (int i = 0; i < list.size(); i++) {
+      System.out.println("list.get(i).toString() = " + list.get(i).toString());
+
+    }
     return list;
   }
+
+
+
+
+
+
 
   private Object  createObject(Class clazz) {
     Object o = null;

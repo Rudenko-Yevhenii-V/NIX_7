@@ -19,8 +19,13 @@ public class MainIONIO {
     String myJson = "[{\"id\":\"1\",\"nameOfBook\":\"Harry Potter\"},{\"id\":\"2\",\"nameOfBook\""
         + ":\"Harry Potter2\"},{\"id\":\"3\",\"nameOfBook\":\"Harry Potter3\"}]";
 
-    final List<Book> booksReturn = simpleMapper.readJsonToList(myJson, new Book());
-    System.out.println("booksReturn.toString() = " + booksReturn.toString());
+    final List<Book> booksReturn =  simpleMapper.readJsonToList(myJson, new Book());
+
+    for (Book book : booksReturn) {
+      System.out.println("book.getId() = " + book.getId());
+      System.out.println("book.getNameOfBook() = " + book.getNameOfBook());
+    }
+
 //    Book[] books;
 //    List<Book> list = new ArrayList<>();
 //    Book book1 = new Book();
