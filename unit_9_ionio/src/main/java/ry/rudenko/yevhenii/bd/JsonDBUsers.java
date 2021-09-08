@@ -2,13 +2,16 @@ package ry.rudenko.yevhenii.bd;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import ry.rudenko.yevhenii.entity.Token;
 import ry.rudenko.yevhenii.entity.User;
+import ry.rudenko.yevhenii.nixSONlib.SimpleMapper;
 
 public class JsonDBUsers {
 
@@ -16,6 +19,7 @@ public class JsonDBUsers {
   private  List<User> users = new ArrayList<>();
   private  List<Token> tokens = new ArrayList<>();
   private final ObjectMapper objectMapper = new ObjectMapper();
+  private SimpleMapper simpleMapper = new SimpleMapper();
 
   private JsonDBUsers() {
   }
@@ -25,14 +29,14 @@ public class JsonDBUsers {
   }
 
   public void create(User user) {
-    users=readUser(new ArrayList<User>());
+    users=readUser();
     user.setId(generateId(Entity.USER));
     users.add(user);
     writeUsers(users);
   }
 
   public void createToken(Token token) {
-    tokens=readToken(new ArrayList<Token>());
+    tokens=readToken();
     token.setId(generateId(Entity.TOKEN));
     tokens.add(token);
     writeToken(tokens);
@@ -49,23 +53,23 @@ public class JsonDBUsers {
   }
 
   public List<User> findAll() {
-    return readUser(users);
+    return readUser();
   }
 
   public boolean existByEmail(String email) {
-    return readUser(users).stream().anyMatch(user -> user.getEmail().equals(email));
+    return readUser().stream().anyMatch(user -> user.getEmail().equals(email));
   }
 
   public boolean existById(String id) {
-    return readUser(users).stream().anyMatch(user -> user.getId().equals(id));
+    return readUser().stream().anyMatch(user -> user.getId().equals(id));
   }
 
   public User findById(String id) {
-    return readUser(users).stream().filter(user -> user.getId().equals(id)).findFirst().get();
+    return readUser().stream().filter(user -> user.getId().equals(id)).findFirst().get();
   }
 
   public User findUserIdByEmailAndPassword(String email, String password) {
-    return readUser(users).stream()
+    return readUser().stream()
         .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
         .findAny()
         .orElse(null);
@@ -74,24 +78,24 @@ public class JsonDBUsers {
 
 
   public boolean existByToken(String token) {
-    return readToken(tokens).stream().anyMatch(token1 -> token.equals(token1.getToken()));
+    return readToken().stream().anyMatch(token1 -> token.equals(token1.getToken()));
   }
 
   public Token findByToken(String token) {
-    return readToken(tokens).stream().filter(token1 -> token1.getToken().equals(token)).findFirst().get();
+    return readToken().stream().filter(token1 -> token1.getToken().equals(token)).findFirst().get();
   }
 
   private String generateId(Entity entity) {
     String id = UUID.randomUUID().toString();
     switch (entity) {
       case USER: {
-        if (readUser(users).stream().anyMatch(user -> user.getId().equals(id))) {
+        if (readUser().stream().anyMatch(user -> user.getId().equals(id))) {
           return generateId(entity);
         }
       }
       break;
       case TOKEN: {
-        if (readToken(tokens).stream().anyMatch(token -> token.getId().equals(id))) {
+        if (readToken().stream().anyMatch(token -> token.getId().equals(id))) {
           return generateId(entity);
         }
       }
@@ -104,23 +108,44 @@ public class JsonDBUsers {
   }
 
   public void writeUsers(List<User> list) {
-    try {
-      objectMapper.writeValue(new File("userArray.json"), list);
-    } catch (IOException e) {
-      e.printStackTrace();
+
+    String stringJson = simpleMapper.writeListToJson(list);
+    File file = new File("userArray.json");
+    try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
+    ) {
+      bufferedWriter.write(stringJson);
+    }catch (IOException e){
+      System.out.println("e = " + e.getMessage());
     }
+
+
+//    try {
+//      objectMapper.writeValue(new File("userArray.json"), list);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
   }
 
   public void writeToken(List<Token> list) {
-    try {
-      objectMapper.writeValue(new File("tokenArray.json"), list);
-    } catch (IOException e) {
-      e.printStackTrace();
+    String stringJson = simpleMapper.writeListToJson(list);
+    File file = new File("tokenArray.json");
+    try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
+    ) {
+      bufferedWriter.write(stringJson);
+    }catch (IOException e){
+      System.out.println("e = " + e.getMessage());
     }
+
+//    try {
+//      objectMapper.writeValue(new File("tokenArray.json"), list);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
   }
 
-  public List<Token> readToken(List<Token> list) {
+  public List<Token> readToken() {
     List<Token> readOUT = new ArrayList<>();
+
     try {
       List<Token> authorsOUT = new ArrayList<>();
       if (new File("tokenArray.json").exists()) {
@@ -136,7 +161,7 @@ public class JsonDBUsers {
     return readOUT;
   }
 
-  public List<User> readUser(List<User> list) {
+  public List<User> readUser() {
     List<User> readOUT = new ArrayList<>();
     try {
         List<User> bookOUT = new ArrayList<>();

@@ -22,7 +22,7 @@ class JsonDBUsersTest {
   @Test
   void create() {
     JsonDBUsers jsonDBUsers = JsonDBUsers.getInstance();
-    int chengeUser = 2;
+    int chengeUser = 3;
     User user1 = new User();
     user1.setId("Id " + chengeUser);
     user1.setFirstName("FirstName" + chengeUser);
@@ -43,50 +43,12 @@ class JsonDBUsersTest {
     token1.setUserId("UserId " + chengeUser);
     jsonDBUsers.createToken(token1);
   }
-
-  @Test
-  void update() {
-  }
-
-  @Test
-  void delete() {
-  }
-
-  @Test
-  void findAll() {
-  }
-
-  @Test
-  void existByEmail() {
-  }
-
-  @Test
-  void existById() {
-  }
-
-  @Test
-  void findById() {
-  }
-
-  @Test
-  void findUserIdByEmailAndPassword() {
-  }
-
-
-
-  @Test
-  void existByToken() {
-  }
-
-  @Test
-  void findByToken() {
-  }
-
-  @Test
-  void write() {
-  }
-
   @Test
   void read() {
+    JsonDBUsers jsonDBUsers = JsonDBUsers.getInstance();
+    final List<Token> tokens = jsonDBUsers.readToken();
+    for (Token token : tokens) {
+      System.out.println("token = " + token.getId() + " : " + token.getToken());
+    }
   }
 }

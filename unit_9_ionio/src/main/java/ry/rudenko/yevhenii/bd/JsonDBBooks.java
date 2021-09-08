@@ -3,12 +3,15 @@ package ry.rudenko.yevhenii.bd;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import ry.rudenko.yevhenii.entity.Author;
 import ry.rudenko.yevhenii.entity.AuthorBook;
 import ry.rudenko.yevhenii.entity.Book;
 import ry.rudenko.yevhenii.entity.IBooksAuthors;
+import ry.rudenko.yevhenii.nixSONlib.SimpleMapper;
 
 public class JsonDBBooks {
 
@@ -17,6 +20,8 @@ public class JsonDBBooks {
   private Author[] authors = new Author[1];
   private final ObjectMapper objectMapper = new ObjectMapper();
   private static final JsonDBBooks instance = new JsonDBBooks();
+  private SimpleMapper simpleMapper = new SimpleMapper();
+
 
   private JsonDBBooks() {
   }
@@ -38,19 +43,39 @@ public class JsonDBBooks {
   }
 
   public void write(IBooksAuthors[] array) {
-    try {
       if(array.getClass().equals(Book[].class)){
-        objectMapper.writeValue(new File("bookArray.json"), array);
+        String stringJson = simpleMapper.writeArrayToJson(array);
+        File file = new File("bookArray.json");
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
+        ) {
+          bufferedWriter.write(stringJson);
+        }catch (IOException e){
+          System.out.println("e = " + e.getMessage());
+        }
+//        objectMapper.writeValue(new File("bookArray.json"), array);
       }
       if(array.getClass().equals(Author[].class)){
-        objectMapper.writeValue(new File("authorArray.json"), array);
+        String stringJson = simpleMapper.writeArrayToJson(array);
+        File file = new File("authorArray.json");
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
+        ) {
+          bufferedWriter.write(stringJson);
+        }catch (IOException e){
+          System.out.println("e = " + e.getMessage());
+        }
+//        objectMapper.writeValue(new File("authorArray.json"), array);
       }
       if(array.getClass().equals(AuthorBook[].class)){
-        objectMapper.writeValue(new File("authorBookArray.json"), array);
+        String stringJson = simpleMapper.writeArrayToJson(array);
+        File file = new File("authorBookArray.json");
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
+        ) {
+          bufferedWriter.write(stringJson);
+        }catch (IOException e){
+          System.out.println("e = " + e.getMessage());
+        }
+//        objectMapper.writeValue(new File("authorBookArray.json"), array);
       }
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
   public IBooksAuthors[] read(IBooksAuthors[] array) {

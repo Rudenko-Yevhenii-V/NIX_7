@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ry.rudenko.yevhenii.entity.Book;
 import ry.rudenko.yevhenii.nixSONlib.SimpleMapper;
+import ry.rudenko.yevhenii.windows.LoginWindow;
 
 public class MainIONIO {
 
@@ -15,16 +16,18 @@ public class MainIONIO {
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
 
   public static void main(String[] args) {
-    SimpleMapper simpleMapper = new SimpleMapper();
-    String myJson = "[{\"id\":\"1\",\"nameOfBook\":\"Harry Potter\"},{\"id\":\"2\",\"nameOfBook\""
-        + ":\"Harry Potter2\"},{\"id\":\"3\",\"nameOfBook\":\"Harry Potter3\"}]";
 
-    final List<Book> booksReturn =  simpleMapper.readJsonToList(myJson, new Book());
 
-    for (Book book : booksReturn) {
-      System.out.println("book.getId() = " + book.getId());
-      System.out.println("book.getNameOfBook() = " + book.getNameOfBook());
-    }
+//    SimpleMapper simpleMapper = new SimpleMapper();
+//    String myJson = "[{\"id\":\"1\",\"nameOfBook\":\"Harry Potter\"},{\"id\":\"2\",\"nameOfBook\""
+//        + ":\"Harry Potter2\"},{\"id\":\"3\",\"nameOfBook\":\"Harry Potter3\"}]";
+//
+//    final List<Book> booksReturn =  simpleMapper.readJsonToList(myJson, new Book());
+//
+//    for (Book book : booksReturn) {
+//      System.out.println("book.getId() = " + book.getId());
+//      System.out.println("book.getNameOfBook() = " + book.getNameOfBook());
+//    }
 
 //    Book[] books;
 //    List<Book> list = new ArrayList<>();
@@ -78,8 +81,8 @@ public class MainIONIO {
 
 
 
-//    LOGGER_INFO.info("test main");
-//    LoginWindow loginWindow = new LoginWindow();
-//    loginWindow.setVisible(true);
+    LOGGER_INFO.info("test main");
+    LoginWindow loginWindow = new LoginWindow();
+    loginWindow.setVisible(true);
   }
 }
