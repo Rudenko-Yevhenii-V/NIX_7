@@ -5,14 +5,14 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ry.rudenko.yevhenii.bd.JsonDBBooks;
+import ry.rudenko.yevhenii.dao.BookDao;
 import ry.rudenko.yevhenii.entity.Book;
 
-public class BookDaoImpl {
+public class BookDaoImpl implements BookDao {
 
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
   private int count = 1;
-  private int counterForgenerateIdBooks = 0;
   JsonDBBooks arraysbd = JsonDBBooks.getInstance();
   private Book[] books;
 
@@ -129,7 +129,6 @@ public class BookDaoImpl {
 
   private String generateId() {
     String id = (UUID.randomUUID().toString());
-    counterForgenerateIdBooks++;
     if ((books.length) > 2) {
       for (Book book : books) {
         if ((book.getId()).equals(id)) {

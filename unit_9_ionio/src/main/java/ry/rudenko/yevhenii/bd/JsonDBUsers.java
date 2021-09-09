@@ -16,9 +16,8 @@ import ry.rudenko.yevhenii.nixSONlib.SimpleMapper;
 public class JsonDBUsers {
 
   private static final JsonDBUsers instance = new JsonDBUsers();
-  private  List<User> users = new ArrayList<>();
-  private  List<Token> tokens = new ArrayList<>();
-  private SimpleMapper simpleMapper = new SimpleMapper();
+  private List<User> users = new ArrayList<>();
+  private final SimpleMapper simpleMapper = new SimpleMapper();
 
   private JsonDBUsers() {
   }
@@ -28,14 +27,14 @@ public class JsonDBUsers {
   }
 
   public void create(User user) {
-    users=readUser();
+    users = readUser();
     user.setId(generateId(Entity.USER));
     users.add(user);
     writeUsers(users);
   }
 
   public void createToken(Token token) {
-    tokens=readToken();
+    List<Token> tokens = readToken();
     token.setId(generateId(Entity.TOKEN));
     tokens.add(token);
     writeToken(tokens);
@@ -59,10 +58,6 @@ public class JsonDBUsers {
     return readUser().stream().anyMatch(user -> user.getEmail().equals(email));
   }
 
-  public boolean existById(String id) {
-    return readUser().stream().anyMatch(user -> user.getId().equals(id));
-  }
-
   public User findById(String id) {
     return readUser().stream().filter(user -> user.getId().equals(id)).findFirst().get();
   }
@@ -73,7 +68,6 @@ public class JsonDBUsers {
         .findAny()
         .orElse(null);
   }
-
 
 
   public boolean existByToken(String token) {
@@ -109,10 +103,10 @@ public class JsonDBUsers {
   public void writeUsers(List<User> list) {
     String stringJson = simpleMapper.writeListToJson(list);
     File file = new File("userArray.json");
-    try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
+    try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
     ) {
       bufferedWriter.write(stringJson);
-    }catch (IOException e){
+    } catch (IOException e) {
       System.out.println("e = " + e.getMessage());
     }
   }
@@ -120,10 +114,10 @@ public class JsonDBUsers {
   public void writeToken(List<Token> list) {
     String stringJson = simpleMapper.writeListToJson(list);
     File file = new File("tokenArray.json");
-    try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
+    try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
     ) {
       bufferedWriter.write(stringJson);
-    }catch (IOException e){
+    } catch (IOException e) {
       System.out.println("e = " + e.getMessage());
     }
   }
@@ -132,10 +126,10 @@ public class JsonDBUsers {
     List<Token> readOUT;
     String stringJson = null;
     File file = new File("tokenArray.json");
-    try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
+    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
     ) {
       stringJson = bufferedReader.readLine();
-    }catch (IOException e){
+    } catch (IOException e) {
       System.out.println("e = " + e.getMessage());
     }
     readOUT = simpleMapper.readJsonToList(stringJson, new Token());
@@ -146,10 +140,10 @@ public class JsonDBUsers {
     List<User> readOUT;
     String stringJson = null;
     File file = new File("userArray.json");
-    try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
+    try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
     ) {
       stringJson = bufferedReader.readLine();
-    }catch (IOException e){
+    } catch (IOException e) {
       System.out.println("e = " + e.getMessage());
     }
     readOUT = simpleMapper.readJsonToList(stringJson, new User());

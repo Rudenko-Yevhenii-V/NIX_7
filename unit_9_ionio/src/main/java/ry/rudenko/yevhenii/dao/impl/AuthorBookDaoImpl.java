@@ -17,8 +17,8 @@ public class AuthorBookDaoImpl {
     authorsbooks = JsonDBBooks.getInstance().getAuthorsbooks();
     if (authorsbooks == null) {
       authorsbooks = new AuthorBook[1];
-    }else {
-      count = authorsbooks.length+1;
+    } else {
+      count = authorsbooks.length + 1;
     }
   }
 
@@ -114,18 +114,6 @@ public class AuthorBookDaoImpl {
         continue;
       }
       if ((authorsbook.getIdBook()).equals(idBook)) {
-        return authorsbook;
-      }
-    }
-    return null;
-  }
-
-  public AuthorBook findBookByidAuthor(String idAuthor) {
-    for (AuthorBook authorsbook : authorsbooks) {
-      if (authorsbook == null) {
-        continue;
-      }
-      if ((authorsbook.getIdAuthor()).equals(idAuthor)) {
         return authorsbook;
       }
     }

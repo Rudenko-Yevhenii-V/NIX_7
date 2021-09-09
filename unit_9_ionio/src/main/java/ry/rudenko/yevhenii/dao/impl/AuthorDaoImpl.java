@@ -5,13 +5,13 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ry.rudenko.yevhenii.bd.JsonDBBooks;
+import ry.rudenko.yevhenii.dao.AuthorDao;
 import ry.rudenko.yevhenii.entity.Author;
 
-public class AuthorDaoImpl {
+public class AuthorDaoImpl implements AuthorDao {
 
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
-  private int counterForgenerateIdAuthors = 0;
   private int count = 1;
   private Author[] authorsArray;
 
@@ -19,8 +19,8 @@ public class AuthorDaoImpl {
     authorsArray = JsonDBBooks.getInstance().getAuthors();
     if (authorsArray == null) {
       authorsArray = new Author[1];
-    }else {
-      count = authorsArray.length+1;
+    } else {
+      count = authorsArray.length + 1;
     }
   }
 
@@ -129,7 +129,6 @@ public class AuthorDaoImpl {
 
   private String generateId() {
     String id = (UUID.randomUUID().toString());
-    counterForgenerateIdAuthors++;
     if ((authorsArray.length) > 2) {
       for (Author author : authorsArray) {
         if ((author.getId()).equals(id)) {
