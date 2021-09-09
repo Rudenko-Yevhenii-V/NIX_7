@@ -3,6 +3,7 @@ package ry.rudenko.yevhenii.service.impl;
 import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ry.rudenko.yevhenii.bd.JsonDBBooks;
 import ry.rudenko.yevhenii.dao.impl.AuthorBookDaoImpl;
 import ry.rudenko.yevhenii.dao.impl.AuthorDaoImpl;
 import ry.rudenko.yevhenii.dao.impl.BookDaoImpl;
@@ -122,6 +123,7 @@ public class CRUDServiceImpl implements CRUDService {
           }
         }
       }
+      JsonDBBooks.getInstance().write(allAuthorsBooks);
     }
     if (!(authorNameSave2.equals(authorName2))) {
       Author author2Update = new Author();
@@ -139,6 +141,7 @@ public class CRUDServiceImpl implements CRUDService {
           }
         }
       }
+      JsonDBBooks.getInstance().write(allAuthorsBooks);
     }
     if (!(authorNameSave3.equals(authorName3))) {
       Author author3Update = new Author();
@@ -156,7 +159,7 @@ public class CRUDServiceImpl implements CRUDService {
           }
         }
       }
+      JsonDBBooks.getInstance().write(allAuthorsBooks);
     }
-
   }
 }

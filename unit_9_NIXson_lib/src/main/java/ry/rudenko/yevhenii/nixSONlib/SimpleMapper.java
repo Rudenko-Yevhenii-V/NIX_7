@@ -58,6 +58,9 @@ public class SimpleMapper {
   }
 
   public <T> List<T> readJsonToList(String json, T someO) {
+    if (json != null){
+      json = json.replaceAll("\n", "");
+    }
     List<T> list = new ArrayList<>();
     if (!(json == null)) {
       List<Field> fieldList = new ArrayList<>();

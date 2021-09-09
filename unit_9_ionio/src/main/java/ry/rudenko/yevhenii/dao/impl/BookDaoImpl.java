@@ -13,11 +13,11 @@ public class BookDaoImpl implements BookDao {
   private static final Logger LOGGER_INFO = LoggerFactory.getLogger("info");
   private static final Logger LOGGER_WARN = LoggerFactory.getLogger("warn");
   private int count = 1;
-  JsonDBBooks arraysbd = JsonDBBooks.getInstance();
+  JsonDBBooks jsonDBBooks = JsonDBBooks.getInstance();
   private Book[] books;
 
   public BookDaoImpl() {
-    books = arraysbd.getBooks();
+    books = jsonDBBooks.getBooks();
     if (books == null) {
       books = new Book[1];
     }else {
@@ -56,7 +56,7 @@ public class BookDaoImpl implements BookDao {
         ("table books has last element : " + books[books.length - 1].getId() + " " + books[
             books.length - 1].getNameOfBook()));
     LOGGER_INFO.info("Exit from create book");
-    arraysbd.write(books);
+    jsonDBBooks.write(books);
   }
 
   public void update(Book book) {
@@ -70,7 +70,7 @@ public class BookDaoImpl implements BookDao {
     }
     Book inDbBook = findBookById(book.getId());
     inDbBook.setNameOfBook(book.getNameOfBook());
-    arraysbd.write(books);
+    jsonDBBooks.write(books);
   }
 
   public void delete(String id) {
@@ -97,7 +97,7 @@ public class BookDaoImpl implements BookDao {
     books = bufferArray;
     LOGGER_WARN.warn("total books in db books before deleting- " + findAllBooks().length);
     LOGGER_WARN.warn("isExist book in db - " + findBookById(id));
-    arraysbd.write(books);
+    jsonDBBooks.write(books);
   }
 
   public Book findBookById(String id) {
