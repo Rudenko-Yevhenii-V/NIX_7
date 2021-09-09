@@ -50,9 +50,13 @@ class JsonDBBooksTest {
   @Test
   void testRead() {
     Book[] books = new Book[0];
-    final IBooksAuthors[] read = jsonDBBooks.read(books);
-    for (IBooksAuthors iBooksAuthors : read) {
-      System.out.println("iBooksAuthors = " + iBooksAuthors);
+    final IBooksAuthors[] readEx = jsonDBBooks.read(books);
+    final IBooksAuthors[] readReal = jsonDBBooks.read(books);
+    for (IBooksAuthors iBooksAuthors : readEx) {
+      System.out.println("Ex = " + iBooksAuthors);
+    }
+    for (IBooksAuthors iBooksAuthors : readReal) {
+      System.out.println("Real = " + iBooksAuthors);
     }
   }
   @Test

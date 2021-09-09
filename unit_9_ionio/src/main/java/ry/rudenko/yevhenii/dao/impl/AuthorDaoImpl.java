@@ -128,9 +128,7 @@ public class AuthorDaoImpl {
   }
 
   private String generateId() {
-    String id = (counterForgenerateIdAuthors + " AUTHOR "
-        + UUID.randomUUID().toString()
-    );
+    String id = (UUID.randomUUID().toString());
     counterForgenerateIdAuthors++;
     if ((authorsArray.length) > 2) {
       for (Author author : authorsArray) {

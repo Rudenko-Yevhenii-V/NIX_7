@@ -128,9 +128,7 @@ public class BookDaoImpl {
   }
 
   private String generateId() {
-    String id = (counterForgenerateIdBooks + " BOOK  "
-        + UUID.randomUUID().toString()
-    );
+    String id = (UUID.randomUUID().toString());
     counterForgenerateIdBooks++;
     if ((books.length) > 2) {
       for (Book book : books) {

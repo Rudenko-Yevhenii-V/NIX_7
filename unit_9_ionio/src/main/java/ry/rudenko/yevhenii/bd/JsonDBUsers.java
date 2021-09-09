@@ -1,9 +1,9 @@
 package ry.rudenko.yevhenii.bd;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +18,6 @@ public class JsonDBUsers {
   private static final JsonDBUsers instance = new JsonDBUsers();
   private  List<User> users = new ArrayList<>();
   private  List<Token> tokens = new ArrayList<>();
-  private final ObjectMapper objectMapper = new ObjectMapper();
   private SimpleMapper simpleMapper = new SimpleMapper();
 
   private JsonDBUsers() {
@@ -108,7 +107,6 @@ public class JsonDBUsers {
   }
 
   public void writeUsers(List<User> list) {
-
     String stringJson = simpleMapper.writeListToJson(list);
     File file = new File("userArray.json");
     try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))
@@ -117,13 +115,6 @@ public class JsonDBUsers {
     }catch (IOException e){
       System.out.println("e = " + e.getMessage());
     }
-
-
-//    try {
-//      objectMapper.writeValue(new File("userArray.json"), list);
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
   }
 
   public void writeToken(List<Token> list) {
@@ -135,46 +126,33 @@ public class JsonDBUsers {
     }catch (IOException e){
       System.out.println("e = " + e.getMessage());
     }
-
-//    try {
-//      objectMapper.writeValue(new File("tokenArray.json"), list);
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
   }
 
   public List<Token> readToken() {
-    List<Token> readOUT = new ArrayList<>();
-
-    try {
-      List<Token> authorsOUT = new ArrayList<>();
-      if (new File("tokenArray.json").exists()) {
-        authorsOUT = objectMapper.readValue(
-            new File("tokenArray.json"),
-            new TypeReference<List<Token>>() {
-            });
-      }
-      readOUT = authorsOUT;
-    } catch (IOException e) {
-      e.printStackTrace();
+    List<Token> readOUT;
+    String stringJson = null;
+    File file = new File("tokenArray.json");
+    try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
+    ) {
+      stringJson = bufferedReader.readLine();
+    }catch (IOException e){
+      System.out.println("e = " + e.getMessage());
     }
+    readOUT = simpleMapper.readJsonToList(stringJson, new Token());
     return readOUT;
   }
 
   public List<User> readUser() {
-    List<User> readOUT = new ArrayList<>();
-    try {
-        List<User> bookOUT = new ArrayList<>();
-        if (new File("userArray.json").exists()) {
-          bookOUT = objectMapper.readValue(
-              new File("userArray.json"),
-              new TypeReference<List<User>>() {
-              });
-        }
-        readOUT = bookOUT;
-    } catch (IOException e) {
-      e.printStackTrace();
+    List<User> readOUT;
+    String stringJson = null;
+    File file = new File("userArray.json");
+    try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))
+    ) {
+      stringJson = bufferedReader.readLine();
+    }catch (IOException e){
+      System.out.println("e = " + e.getMessage());
     }
+    readOUT = simpleMapper.readJsonToList(stringJson, new User());
     return readOUT;
   }
 }

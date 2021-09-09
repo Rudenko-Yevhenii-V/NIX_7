@@ -45,7 +45,10 @@ public class CRUDServiceImpl implements CRUDService {
       authorsId[count - 1] = new AuthorDaoImpl().findAuthorById(author.getId())
           .getId();
     }
-    final String idBook = new BookDaoImpl().findBookById(book.getId()).getId();
+    final String id = book.getId();
+
+    final Book bookById = new BookDaoImpl().findBookById(id);
+    final String idBook = bookById.getId();
 
     authorBookDao.create(idBook, authorsId);
   }

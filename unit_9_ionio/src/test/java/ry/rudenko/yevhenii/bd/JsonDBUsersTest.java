@@ -48,7 +48,8 @@ class JsonDBUsersTest {
     JsonDBUsers jsonDBUsers = JsonDBUsers.getInstance();
     final List<Token> tokens = jsonDBUsers.readToken();
     for (Token token : tokens) {
-      System.out.println("token = " + token.getId() + " : " + token.getToken());
+      System.out.println("token = getId() - " + token.getId()+ " : getUserId() - " + token.getUserId() + " : getToken() - " + token.getToken());
     }
   }
+
 }
