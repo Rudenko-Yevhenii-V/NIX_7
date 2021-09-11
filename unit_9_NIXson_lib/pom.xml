@@ -12,6 +12,7 @@
   <groupId>ry.rudenko.yevhenii</groupId>
   <artifactId>unit_9_NIXson_lib</artifactId>
   <properties>
+    <java.version>11</java.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <junit.version>4.13.1</junit.version>
@@ -53,6 +54,12 @@
       <artifactId>commons-codec</artifactId>
       <version>${commons.codec.version}</version>
     </dependency>
+    <!-- GSON -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.6</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -88,6 +95,14 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>11</source>
+          <target>11</target>
+        </configuration>
       </plugin>
     </plugins>
   </build>
