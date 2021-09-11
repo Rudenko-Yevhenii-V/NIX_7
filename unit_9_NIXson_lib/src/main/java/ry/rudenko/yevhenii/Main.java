@@ -33,6 +33,7 @@ public class Main {
       writeObject(testJson.field8);
       writeObject(testJson.field9);
       writeObject(testJson.field10);
+      count++;
     }
   }
 

@@ -16,16 +16,18 @@ public class UniversalMapper {
       json = json.replaceAll("\n", "");
       json = json.replaceAll("\\s+", "");
       if (json.charAt(0) == '[') {
-        System.out.println("ELEMENTS OF JSON!!!!");
-//        Pattern pattern1 = Pattern.compile(
-//            "\"([\\w\\d]*?)\"[:]((18945213155465498732139654(.+?)18945213155465498732139654)|"
-//                + "([\\[](.*?)[]])|((.*?)[,]))");
-//
-//        Matcher matcher1 = pattern1.matcher(elementJson);
-//        while (matcher1.find()) {
-
-
-
+        json = json.substring(1, json.length() - 1);
+        json = replaceBrackets(json);
+        Pattern pattern1 = Pattern.compile(
+            "18945213155465498732139654(.+?)18945213155465498732139654");
+        Matcher matcher1 = pattern1.matcher(json);
+        while (matcher1.find()) {
+          String objJson = json.substring(matcher1.start(), matcher1.end());
+          objJson = objJson.replaceAll("18945213155465498732139654", "");
+          objJson = "{" + objJson + "}";
+          final List<T> list = parseJson(objJson, someObj);
+          listT.add(list.get(0));
+        }
       } else {
       json = json.substring(1, json.length() - 1) + ",";
       Class<?> clazz = someObj.getClass();
@@ -40,9 +42,8 @@ public class UniversalMapper {
           final char[] chars = fieldsAndValues.toCharArray();
           boolean cheker = false;
           for (char aChar : chars) {
-            if (cheker) {
+            if (cheker)
               value = value + (aChar);
-            }
             if (aChar == ':') {
               cheker = true;
             }
@@ -75,7 +76,6 @@ public class UniversalMapper {
     }
     return false;
   }
-
 
   private String replaceBrackets(String inputText) {
     Stack stack = new Stack();

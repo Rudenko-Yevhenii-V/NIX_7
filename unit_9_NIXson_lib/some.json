@@ -1,3 +1,4 @@
+[
 {
   "key1" : "v;jksdhf;sadjhf;sajdhf;aksjhfd;a",
   "key2" : "val2",
@@ -38,4 +39,18 @@
 
   },
   "key8" : "val8"
-}
+},
+  {
+    "key1" : "v;jksdhf;sadjhf;sajdhf;aksjhfd;a",
+    "key2" : "val2",
+    "key3" : "val3",
+    "key4" : 4,
+    "key5" : [
+      1,4,6
+    ]
+  },
+  {
+    "key2" : "val2",
+    "key3" : "val3"
+  }
+  ]
