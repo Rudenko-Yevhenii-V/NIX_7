@@ -22,7 +22,7 @@ public class Main {
     final List<TestJson> testJsons = universalMapper.parseJson(json, new TestJson());
     int count = 1;
     for (TestJson testJson : testJsons) {
-      System.out.println("\n\n\n" + count + " Object of List<TestJson>\n");
+      System.out.println("\n\n" + count + " Object of List<TestJson>");
       writeObject(testJson.field1);
       writeObject(testJson.field2);
       writeObject(testJson.field3);
@@ -45,13 +45,21 @@ public class Main {
     if (isClassObj(field1)) {
       nextWriteObj(count, field1);
     } else {
+     if(field1.toString().charAt(0) == '['){
+       if(field1.getClass().getSimpleName().equals("Integer[]")){
+         String outPutArray = "Integer[]{";
+         for (Integer integer : (Integer[]) field1) {
+           outPutArray = outPutArray + integer+", ";
+         }outPutArray = outPutArray + "}";
+         field1 = outPutArray;
+       }
+       }
       print(count, field1);
     }
   }
 
   private static void print(int count, Object o) {
     System.out.println("    ".repeat(Math.max(0, count)) + "TestJson.field = " + o);
-
   }
 
   private static void writeObject(Object field1, int count) {
@@ -61,6 +69,16 @@ public class Main {
     if (isClassObj(field1)) {
         nextWriteObj(count, field1);
     } else {
+      if(field1.getClass().getSimpleName().equals("Integer[]")){
+        String outPutArray = "Integer[]{";
+        for (Integer integer : (Integer[]) field1) {
+          outPutArray = outPutArray + integer+", ";
+        }outPutArray = outPutArray + "}";
+        field1 = outPutArray;
+      }
+//      if (){
+//
+//      }
       print(count, field1);
     }
   }
