@@ -51,7 +51,7 @@ public class LoginWindow extends JFrame {
           }
           this.setVisible(false);
           this.removeAll();
-          new ShowModule().setVisible(true);
+          new HelloWindow().setVisible(true);
         }
       }
     });

@@ -58,7 +58,7 @@ public class ShowModule extends JFrame {
     JPanel panelSeachBookByAuhtorName = new JPanel();
     JTextField jTextFieldSeachByAuthorName = new JTextField(15);
     panelSeachBookByAuhtorName.add(jTextFieldSeachByAuthorName);
-    JButton jButtonSeachByAuthorName = new JButton(" Search for a books by author name");
+    JButton jButtonSeachByAuthorName = new JButton("RETURN TO CHOICE");
     panelSeachBookByAuhtorName.add(jButtonSeachByAuthorName);
     JPanel mainPanel = new JPanel(new BorderLayout());
     mainPanel.add(panelAddData, BorderLayout.NORTH);
@@ -164,10 +164,17 @@ public class ShowModule extends JFrame {
 
       }
     }
+    jButtonSeachByAuthorName.setBackground(Color.CYAN);
     mainPanel.add(autoGeneratePanel, BorderLayout.SOUTH);
+    mainPanel.add(jButtonSeachByAuthorName);
     add(mainPanel, BorderLayout.SOUTH);
     pack();
     //jButtonAdd
+    jButtonSeachByAuthorName.addActionListener(actionEvent -> {
+      this.setVisible(false);
+      this.removeAll();
+      new HelloWindow().setVisible(true);
+    });
     jButtonAdd.addActionListener(e -> {
           if (validatorFieldNotEmpty(jTextFieldBook11) &&
               validatorFieldNotEmpty(jTextFieldAuthor11)

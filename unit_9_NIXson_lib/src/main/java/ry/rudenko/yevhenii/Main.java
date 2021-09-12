@@ -4,6 +4,7 @@ package ry.rudenko.yevhenii;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import ry.rudenko.yevhenii.nixSONlib.TestJson;
 import ry.rudenko.yevhenii.nixSONlib.UniversalMapper;
@@ -20,6 +21,7 @@ public class Main {
     }
 
     final List<TestJson> testJsons = universalMapper.parseJson(json, new TestJson());
+
     int count = 1;
     for (TestJson testJson : testJsons) {
       System.out.println("\n\n" + count + " Object of List<TestJson>");
@@ -33,6 +35,17 @@ public class Main {
       writeObject(testJson.field8);
       writeObject(testJson.field9);
       writeObject(testJson.field10);
+      writeObject(testJson.field11);
+      writeObject(testJson.field12);
+      writeObject(testJson.field13);
+      writeObject(testJson.field14);
+      writeObject(testJson.field15);
+      writeObject(testJson.field16);
+      writeObject(testJson.field17);
+      writeObject(testJson.field18);
+      writeObject(testJson.field19);
+      writeObject(testJson.field20);
+      writeObject(testJson.field21);
       count++;
     }
   }
@@ -47,13 +60,33 @@ public class Main {
     } else {
      if(field1.toString().charAt(0) == '['){
        if(field1.getClass().getSimpleName().equals("Integer[]")){
-         String outPutArray = "Integer[]{";
+         StringBuilder outPutArray = new StringBuilder("Integer[]{");
          for (Integer integer : (Integer[]) field1) {
-           outPutArray = outPutArray + integer+", ";
-         }outPutArray = outPutArray + "}";
-         field1 = outPutArray;
+           outPutArray.append(integer).append(", ");
+         }
+         outPutArray = new StringBuilder(outPutArray.substring(0, outPutArray.length() - 2));
+         outPutArray.append("}");
+         field1 = outPutArray.toString();
        }
+
+        if (field1.getClass().getSimpleName().equals("ArrayList")){
+          StringBuilder outPutArray = new StringBuilder("ArrayList<TestJson>{");
+          for (TestJson testJson : (ArrayList<TestJson>) field1) {
+            outPutArray.append(testJson).append(",");
+          }
+          outPutArray = new StringBuilder(outPutArray.substring(0, outPutArray.length() - 1));
+          outPutArray.append("}");
+          field1 = outPutArray.toString();
+        }
+       if (field1.getClass().getSimpleName().equals("String[]")){
+         StringBuilder outPutArray = new StringBuilder("String[]{");
+         for (String d : (String[]) field1) {
+           outPutArray.append(d).append(",");
+         }
+         outPutArray = new StringBuilder(outPutArray.substring(0, outPutArray.length() - 1) + "}");
+         field1 = outPutArray.toString();
        }
+     }
       print(count, field1);
     }
   }
@@ -61,7 +94,6 @@ public class Main {
   private static void print(int count, Object o) {
     System.out.println("    ".repeat(Math.max(0, count)) + "TestJson.field = " + o);
   }
-
   private static void writeObject(Object field1, int count) {
     if (field1 == null) {
       return;
@@ -69,16 +101,36 @@ public class Main {
     if (isClassObj(field1)) {
         nextWriteObj(count, field1);
     } else {
-      if(field1.getClass().getSimpleName().equals("Integer[]")){
-        String outPutArray = "Integer[]{";
-        for (Integer integer : (Integer[]) field1) {
-          outPutArray = outPutArray + integer+", ";
-        }outPutArray = outPutArray + "}";
-        field1 = outPutArray;
+      if(field1.toString().charAt(0) == '['){
+        if(field1.getClass().getSimpleName().equals("Integer[]")){
+          StringBuilder outPutArray = new StringBuilder("Integer[]{");
+          for (Integer integer : (Integer[]) field1) {
+            outPutArray.append(integer).append(", ");
+          }
+          outPutArray = new StringBuilder(outPutArray.substring(0, outPutArray.length() - 1));
+          outPutArray.append("}");
+          field1 = outPutArray.toString();
+        }
+
+        if (field1.getClass().getSimpleName().equals("ArrayList")){
+          StringBuilder outPutArray = new StringBuilder("ArrayList<TestJson>{");
+          for (TestJson testJson : (ArrayList<TestJson>) field1) {
+            outPutArray.append(testJson).append(",");
+          }
+          outPutArray = new StringBuilder(outPutArray.substring(0, outPutArray.length() - 1));
+          outPutArray.append("}");
+          field1 = outPutArray.toString();
+        }
+        if (field1.getClass().getSimpleName().equals("String[]")){
+          StringBuilder outPutArray = new StringBuilder("String[]{");
+          for (String d : (String[]) field1) {
+            outPutArray.append(d).append(",");
+          }
+          outPutArray = new StringBuilder(outPutArray.substring(0, outPutArray.length() - 1) + "}");
+          field1 = outPutArray.toString();
+        }
       }
-//      if (){
-//
-//      }
+
       print(count, field1);
     }
   }

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class UniversalMapper {
 
-  public <T> List<T> parseJson(String json, T someObj){
+  public <T> List<T> parseJson(String json, T someObj) {
     List<T> listT = new ArrayList<>();
     if (json != null) {
       json = json.replaceAll("\n", "");
@@ -32,7 +32,7 @@ public class UniversalMapper {
         boolean isArraInt = false;
 
         json = json.substring(1, json.length() - 1) + ",";
-      Class<?> clazz = someObj.getClass();
+        Class<?> clazz = someObj.getClass();
         final Object object = createObject(clazz);
         final Field[] fields = object.getClass().getFields();
         String elementJson = json;
@@ -44,64 +44,71 @@ public class UniversalMapper {
           final char[] chars = fieldsAndValues.toCharArray();
           boolean cheker = false;
           for (char aChar : chars) {
-            if (cheker)
+            if (cheker) {
               value.append(aChar);
+            }
             if (aChar == ':') {
               cheker = true;
             }
           }
-          if (value.charAt(0) == '['){
-            String  valueArr = String.valueOf(value).substring(1, value.length() - 1);
+          if (value.charAt(0) == '[') {
+            List<T> listT1 = new ArrayList<>();
+            String valueArr = String.valueOf(value).substring(1, value.length() - 1);
             Pattern testPatt = Pattern.compile(
                 "\"(.+?)\":(.+?),");
             Matcher matcherTest = testPatt.matcher(valueArr);
-            if (matcherTest.find()){
-              List<T> listArr = new ArrayList<>();
-              Object oArray = new Object();
+            if (matcherTest.find()) {
+              isArraObj = true;
+              Object oArray;
               valueArr = valueArr.replaceAll("18945213155465498732139654", "");
               valueArr = valueArr + ",";
-              Pattern pattern12 = Pattern.compile(
-                  "\"(.+?)\":(.+?),");
-              Matcher matcher12 = pattern12.matcher(valueArr);
-              while (matcher12.find()){
-                isArraObj = true;
-                String fieldAndValueStr = valueArr.substring(matcher12.start(), matcher12.end());
-                final List<T> list = parseJson(fieldAndValueStr, someObj);
-                listArr.add(list.get(0));
+              String needListOfObjekts = String.valueOf(value);
+              needListOfObjekts = needListOfObjekts.substring(1, needListOfObjekts.length() - 1);
+              System.out.println("needListOfObjekts = " + needListOfObjekts);
+              Pattern pattern1tt = Pattern.compile(
+                  "18945213155465498732139654(.+?)18945213155465498732139654");
+              Matcher matcher1tt = pattern1tt.matcher(needListOfObjekts);
+              while (matcher1tt.find()) {
+                String objJson = needListOfObjekts.substring(matcher1tt.start(), matcher1tt.end());
+                objJson = objJson.replaceAll("18945213155465498732139654", "");
+                objJson = "{" + objJson + "}";
+                System.out.println("fffffffffffffffobjJson = " + objJson);
+                final List<T> list = parseJson(objJson, someObj);
+                listT1.add(list.get(0));
               }
-              oArray = listArr;
+              System.out.println("listT1.size() = " + listT1.size());
+              oArray = listT1;
               listT.add((T) oArray);
             }
             String first = String.valueOf(valueArr.charAt(0));
 
-              if (first.matches("\\d")){
-                isArraInt = true;
-                final char[] chars1 = valueArr.toCharArray();
-                int counterNumbersInArray = 1;
-                for (char c : chars1) {
-                  if (c == ','){
-                    counterNumbersInArray++;
-                  }
+            if (first.matches("\\d")) {
+              isArraInt = true;
+              final char[] chars1 = valueArr.toCharArray();
+              int counterNumbersInArray = 1;
+              for (char c : chars1) {
+                if (c == ',') {
+                  counterNumbersInArray++;
                 }
-                Integer[] arrayIntObj = new Integer[counterNumbersInArray];
-                counterNumbersInArray = 0;
-                for (char c : chars1) {
-                  if (!(c == ',')){
-                    arrayIntObj[counterNumbersInArray] = Integer.parseInt(String.valueOf(c));
-                    counterNumbersInArray++;
-                  }
-                }
-                try {
-                  fields[i].set(object, arrayIntObj);
-                } catch (IllegalAccessException e) {
-                  e.printStackTrace();
-                }
-                continue;
               }
-            if(!isArraObj||!isArraInt){
-              System.out.println("fffffffffffffffffffvalueArr = " + valueArr);
+              Integer[] arrayIntObj = new Integer[counterNumbersInArray];
+              counterNumbersInArray = 0;
+              for (char c : chars1) {
+                if (!(c == ',')) {
+                  arrayIntObj[counterNumbersInArray] = Integer.parseInt(String.valueOf(c));
+                  counterNumbersInArray++;
+                }
+              }
+              try {
+                fields[i].set(object, arrayIntObj);
+              } catch (IllegalAccessException e) {
+                e.printStackTrace();
+              }
+              continue;
+            }
+            if (!isArraObj || !isArraInt) {
               final String[] split = valueArr.split(",");
-              Object objStr = new Object();
+              Object objStr;
               objStr = split;
               try {
                 fields[i].set(object, objStr);
@@ -110,18 +117,17 @@ public class UniversalMapper {
                 e.printStackTrace();
               }
             }
-
           }
           try {
             boolean isObjekt = isObjekt(value.toString());
-            if (isObjekt){
+            if (isObjekt) {
               fieldsAndValues = fieldsAndValues.replaceAll("18945213155465498732139654", "");
               fieldsAndValues = fieldsAndValues + ',';
               final List<T> list = parseJson(fieldsAndValues, someObj);
               fields[i].set(object, list.get(0));
               continue;
             }
-              fields[i].set(object, value.toString());
+            fields[i].set(object, value.toString());
           } catch (IllegalAccessException e) {
             e.printStackTrace();
           }
@@ -169,6 +175,7 @@ public class UniversalMapper {
     inputText = inputTextBuilder.toString();
     return inputText;
   }
+
   private Object createObject(Class clazz) {
     Object o = null;
     try {
@@ -178,17 +185,17 @@ public class UniversalMapper {
     }
     return o;
   }
+
   private List<String> findFieldsAndValuesInJsonElement(String elementJson) {
     List<String> list = new ArrayList<>();
     Pattern pattern1 = Pattern.compile(
         "\"([\\w\\d]*?)\"[:]((18945213155465498732139654(.+?)18945213155465498732139654)|"
             + "([\\[](.*?)[]])|((.*?)[,]))");
-
     Matcher matcher1 = pattern1.matcher(elementJson);
     while (matcher1.find()) {
       String fieldAndValueStr = elementJson.substring(matcher1.start(), matcher1.end());
-      if (fieldAndValueStr.charAt(fieldAndValueStr.length()-1) == ','){
-        fieldAndValueStr = fieldAndValueStr.substring(0, fieldAndValueStr.length()-1);
+      if (fieldAndValueStr.charAt(fieldAndValueStr.length() - 1) == ',') {
+        fieldAndValueStr = fieldAndValueStr.substring(0, fieldAndValueStr.length() - 1);
       }
       list.add(fieldAndValueStr);
     }
