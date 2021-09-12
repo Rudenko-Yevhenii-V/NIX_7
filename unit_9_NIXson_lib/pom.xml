@@ -11,6 +11,8 @@
 
   <groupId>ry.rudenko.yevhenii</groupId>
   <artifactId>unit_9_NIXson_lib</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
   <properties>
     <java.version>11</java.version>
     <maven.compiler.source>11</maven.compiler.source>
@@ -54,10 +56,11 @@
       <artifactId>commons-codec</artifactId>
       <version>${commons.codec.version}</version>
     </dependency>
+
   </dependencies>
 
   <build>
-    <finalName>NIXsonLIB</finalName>
+    <finalName>app</finalName>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
