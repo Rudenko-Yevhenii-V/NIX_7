@@ -20,7 +20,7 @@ public class ParserWindow extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     JPanel mainPanel = new JPanel();
     JLabel jLabelname = new JLabel("Enter Json");
-    JTextArea jTextArea = new JTextArea(50, 50);
+    JTextArea jTextArea = new JTextArea(70, 70);
     jTextArea.setText("[\n"
         + "{\n"
         + "  \"key1\" : \"v;jksdhf;sadjhf;sajdhf;aksjhfd;a\",\n"
