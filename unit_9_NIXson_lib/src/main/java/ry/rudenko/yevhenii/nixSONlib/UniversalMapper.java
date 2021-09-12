@@ -64,7 +64,6 @@ public class UniversalMapper {
               valueArr = valueArr + ",";
               String needListOfObjekts = String.valueOf(value);
               needListOfObjekts = needListOfObjekts.substring(1, needListOfObjekts.length() - 1);
-              System.out.println("needListOfObjekts = " + needListOfObjekts);
               Pattern pattern1tt = Pattern.compile(
                   "18945213155465498732139654(.+?)18945213155465498732139654");
               Matcher matcher1tt = pattern1tt.matcher(needListOfObjekts);
@@ -72,11 +71,9 @@ public class UniversalMapper {
                 String objJson = needListOfObjekts.substring(matcher1tt.start(), matcher1tt.end());
                 objJson = objJson.replaceAll("18945213155465498732139654", "");
                 objJson = "{" + objJson + "}";
-                System.out.println("fffffffffffffffobjJson = " + objJson);
                 final List<T> list = parseJson(objJson, someObj);
                 listT1.add(list.get(0));
               }
-              System.out.println("listT1.size() = " + listT1.size());
               oArray = listT1;
               listT.add((T) oArray);
             }
