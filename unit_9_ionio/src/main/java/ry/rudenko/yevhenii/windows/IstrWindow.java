@@ -20,7 +20,7 @@ public class IstrWindow extends JFrame {
     JLabel jLabelname3 = new JLabel("TEST PARSER JSON window only for demonstration!");
     JLabel jLabelname4 = new JLabel("Exemple json = {\"id\":\"1\",\"name\":\"J. K. Rowling\"}");
     JLabel jLabelname5 = new JLabel("Convert to : Book.id = 1, Book.name = \"J. K. Rowling\"");
-    JLabel jLabelname6 = new JLabel("If you have a questions ask me telegram channel)");
+    JLabel jLabelname6 = new JLabel("for other students(If you have a questions ask me telegram)");
     JButton jButton = new JButton("NEXT");
     mainPanel.add(jLabelname);
     mainPanel.add(jLabelname2);
