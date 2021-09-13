@@ -13,14 +13,14 @@ public class FindFirstUniqueName {
     final List<String> list = Arrays.asList(names.split("\n"));
     Set<String> setOfNames = new HashSet<>();
     List<String> temp = new ArrayList<>();
-    for (int i = 0; i < list.size(); i++) {
-      if (!checkName(list.get(i))) {
+    for (String s : list) {
+      if (!checkName(s)) {
         continue;
       }
-      if (setOfNames.add(list.get(i))) {
-        temp.add(list.get(i));
+      if (setOfNames.add(s)) {
+        temp.add(s);
       } else {
-        temp.remove(list.get(i));
+        temp.remove(s);
       }
     }
     return temp.get(0);
