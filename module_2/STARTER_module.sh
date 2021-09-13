@@ -4,9 +4,13 @@
 cd findFirstUniqueName/
 sh runfind.sh
 cd ../
+cd mostProfitableWay/
+sh runWay.sh
+cd ../
+cd returnListOfDates/
+sh runDates.sh
+cd ../
 cd entry/
 sh runEntry.sh
-#mvn -f pom.xml clean install -U
-#java -jar target/app.jar
 printf 'press [ENTER] to continue...'
 read _
