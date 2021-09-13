@@ -15,7 +15,7 @@
 
 
   <build>
-    <finalName>app</finalName>
+    <finalName>appFirst</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

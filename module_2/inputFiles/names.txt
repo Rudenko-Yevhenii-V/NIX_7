@@ -12,7 +12,6 @@ Bella
 Adriana
 Miranda
 Giselle
-name
 Name
 Zendaya
 Deva

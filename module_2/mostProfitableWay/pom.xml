@@ -11,7 +11,7 @@
 
   <artifactId>mostProfitableWay</artifactId>
   <build>
-    <finalName>app</finalName>
+    <finalName>appWay</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
