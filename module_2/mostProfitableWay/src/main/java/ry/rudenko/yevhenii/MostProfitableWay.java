@@ -5,8 +5,7 @@ import java.util.Map;
 
 public class MostProfitableWay {
 
-  Dijkstra dijkstra = new Dijkstra();
-
+  private final Dijkstra dijkstra = new Dijkstra();
   public String mostProfitableWay(String inputCity) {
     StringBuilder retOutput = new StringBuilder();
     Map<String, Integer> cityes = new HashMap<>();
@@ -43,15 +42,18 @@ public class MostProfitableWay {
                 .arraycopy(inputMatrix[start - 1 + i], step, adjMatrix[i], 0, stop - start + 1);
         }
         int[] result = dijkstra.getShortestPaths(adjMatrix);
-        String out = split1[0] + " is "+result[result.length - 1]+" hours ahead of "+split1[1]+".";
-        retOutput.append(out).append("\n");
+        retOutput.append(result[result.length - 1]).append("\n");
         continue;
       }
       if (s.matches("[0-9]*\\s[0-9]*")) {
         final String[] s1 = s.split(" ");
+        if(Integer.parseInt(s1[1]) > 200000){
+          s1[1] = "200000";
+        }
         inputMatrix[inputMatrixCount][Integer.parseInt(s1[0])-1] = Integer.parseInt(s1[1]);
       }
     }
+
     return retOutput.toString();
   }
 }
