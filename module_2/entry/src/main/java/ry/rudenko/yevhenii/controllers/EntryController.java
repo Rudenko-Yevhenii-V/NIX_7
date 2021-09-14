@@ -31,7 +31,7 @@ public class EntryController {
         System.out.println(stringFromFile);
         final String firstUniqueName = findFirstUniqueName
             .findFirstUniqueName(stringFromFile);
-        System.out.println("first unique name : " + firstUniqueName);
+        System.out.println("\nfirst unique name : " + firstUniqueName);
         new WriteOutputFiles().writeFileFromString(firstUniqueName, "outputName");
         System.out.println("press enter to continue!");
         br.readLine();
@@ -42,7 +42,7 @@ public class EntryController {
         final String stringFromFileDates = new ReadInputFiles().getStringFromFile(INPUT_FILE_DATES);
         System.out.println(stringFromFileDates);
         final String returnDates = returnListOfDates.returnListOfDates(stringFromFileDates);
-        System.out.println("valid and formatted dates : " + returnDates);
+        System.out.println("\nvalid and formatted dates : " + returnDates);
         new WriteOutputFiles().writeFileFromString(returnDates, "outputDates");
         System.out.println("press enter to continue!");
         br.readLine();
@@ -55,7 +55,7 @@ public class EntryController {
         new WriteOutputFiles().writeFileFromString(mostProfitableWay
             .mostProfitableWay(stringFromFileCity), "outputCityPrice");
         System.out.println(
-            "cost of the ways : \n" + mostProfitableWay
+            "\ncost of the ways : \n" + mostProfitableWay
                 .mostProfitableWay(stringFromFileCity));
         System.out.println("press enter to continue!");
         br.readLine();
