@@ -2,13 +2,14 @@ package ry.rudenko.yevhenii;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MostProfitableWay {
 
   private final Dijkstra dijkstra = new Dijkstra();
   public String mostProfitableWay(String inputCity) {
     StringBuilder retOutput = new StringBuilder();
-    Map<String, Integer> cityes = new HashMap<>();
+    Map<String, Integer> cityes = new TreeMap<>();
     final String[] split = inputCity.split("\n");
     int valueCityes = Integer.parseInt(split[0]);
     int[][] inputMatrix = new int[valueCityes][valueCityes];
