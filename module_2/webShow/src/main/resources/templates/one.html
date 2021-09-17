@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>one</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:utext="${#strings.replace(nameone, newLineChar, '&lt;br /&gt;')}"></p>
+<p th:text=" ${firstUniqueName}"></p>
+<p>RESULT SAVE in file outputFiles/outputName.txt"  </p>
+<p>if you want test this, then change file inputFiles/names.txt"  </p>
+<div>
+  <a href="/">main</a>
+</div>
+</body>
+</html>
