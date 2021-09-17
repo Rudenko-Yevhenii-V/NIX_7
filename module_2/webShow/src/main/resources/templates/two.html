@@ -5,9 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<!--<p th:utext="${nametwo}"></p>-->
 <p th:utext="${#strings.replace(nametwo, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></p>
-<!--<p th:text=" ${firstUniqueName}"></p>-->
 <p th:utext="${#strings.replace(firstUniqueName, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></p>
 
 <p>RESULT SAVE in file outputFiles/outputDates.txt"  </p>

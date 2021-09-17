@@ -54,6 +54,5 @@ sleep 10
 else
    echo "not one two  - $n!!!"
 fi
-
 printf ''
 read _

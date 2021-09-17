@@ -32,12 +32,10 @@ public class GreetingController {
       Model model) {
     FindFirstUniqueName findFirstUniqueName = new FindFirstUniqueName();
     final String stringFromFile = new ReadInputFiles().getStringFromFile(INPUT_FILE_NAMES);
-//    System.out.println(stringFromFile);
     final String firstUniqueName = findFirstUniqueName
         .findFirstUniqueName(stringFromFile);
     String out = "first unique name : " + firstUniqueName;
     new WriteOutputFiles().writeFileFromString(firstUniqueName, "outputName");
-    System.out.println("press enter to continue!");
     name = stringFromFile;
     model.addAttribute("nameone", name);
     model.addAttribute("firstUniqueName", out);
@@ -57,16 +55,13 @@ public class GreetingController {
     name = stringFromFileDates;
     model.addAttribute("nametwo", name);
     model.addAttribute("firstUniqueName", out);
-
     return "two";
-
   }
 
   @GetMapping("/three")
   public String three(
       @RequestParam(name = "namethree", required = false, defaultValue = "three") String name,
       Model model) {
-
     MostProfitableWay mostProfitableWay = new MostProfitableWay();
     String stringFromFileCity = new ReadInputFiles().getStringFromFile(INPUT_FILE_CITY);
     new WriteOutputFiles().writeFileFromString(mostProfitableWay
@@ -78,7 +73,6 @@ public class GreetingController {
     name = stringFromFileCity;
     model.addAttribute("namethree", name);
     model.addAttribute("firstUniqueName", out);
-
     return "three";
   }
 
