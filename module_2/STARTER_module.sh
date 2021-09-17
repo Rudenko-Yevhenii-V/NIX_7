@@ -37,6 +37,7 @@ read n
 if [ $n -eq '1' ]
 then
 	echo "for exit CTRL + C!!!!"
+	echo  "web app on port 8088     http://localhost:8088/"
 	sleep 6
 cd ../
 cd webShow/

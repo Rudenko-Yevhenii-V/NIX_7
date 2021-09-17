@@ -36,6 +36,7 @@ public class GreetingController {
         .findFirstUniqueName(stringFromFile);
     String out = "first unique name : " + firstUniqueName;
     new WriteOutputFiles().writeFileFromString(firstUniqueName, "outputName");
+    System.out.println("press enter to continue!");
     name = stringFromFile;
     model.addAttribute("nameone", name);
     model.addAttribute("firstUniqueName", out);
@@ -48,11 +49,14 @@ public class GreetingController {
       @RequestParam(name = "nametwo", required = false, defaultValue = "two") String name,
       Model model) {
     ReturnListOfDates returnListOfDates = new ReturnListOfDates();
-    final String stringFromFileDates = new ReadInputFiles().getStringFromFile(INPUT_FILE_DATES);
+    String stringFromFileDates = new ReadInputFiles().getStringFromFile(INPUT_FILE_DATES);
     final String returnDates = returnListOfDates.returnListOfDates(stringFromFileDates);
     String out = "valid and formatted dates : " + returnDates;
     new WriteOutputFiles().writeFileFromString(returnDates, "outputDates");
+    stringFromFileDates= stringFromFileDates.replaceAll("\n", "<br>");
     name = stringFromFileDates;
+    out = out.replaceAll("\n", "<br>");
+
     model.addAttribute("nametwo", name);
     model.addAttribute("firstUniqueName", out);
     return "two";
@@ -62,6 +66,7 @@ public class GreetingController {
   public String three(
       @RequestParam(name = "namethree", required = false, defaultValue = "three") String name,
       Model model) {
+
     MostProfitableWay mostProfitableWay = new MostProfitableWay();
     String stringFromFileCity = new ReadInputFiles().getStringFromFile(INPUT_FILE_CITY);
     new WriteOutputFiles().writeFileFromString(mostProfitableWay

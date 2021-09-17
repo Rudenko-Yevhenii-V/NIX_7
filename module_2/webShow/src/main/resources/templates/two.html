@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>one</title>
+  <title>two</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<p th:utext="${#strings.replace(nametwo, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></p>
-<p th:utext="${#strings.replace(firstUniqueName, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></p>
-
+<p th:utext="${nametwo}"></p>
+<p th:utext=" ${firstUniqueName}"></p>
 <p>RESULT SAVE in file outputFiles/outputDates.txt"  </p>
 <p>if you want test this, then change file inputFiles/dates.txt"  </p>
 <div>
