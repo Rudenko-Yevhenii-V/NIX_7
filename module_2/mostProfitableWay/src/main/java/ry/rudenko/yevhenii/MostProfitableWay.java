@@ -2,15 +2,15 @@ package ry.rudenko.yevhenii;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class MostProfitableWay {
 
   private final Dijkstra dijkstra = new Dijkstra();
   public String mostProfitableWay(String inputCity) {
     StringBuilder retOutput = new StringBuilder();
-    Map<String, Integer> cityes = new TreeMap<>();
+    Map<String, Integer> cityes = new HashMap<>();
     final String[] split = inputCity.split("\n");
+    split[0] = split[0].replaceAll("\n","");
     int valueCityes = Integer.parseInt(split[0]);
     int[][] inputMatrix = new int[valueCityes][valueCityes];
     for (int i = 0; i < inputMatrix.length; i++) {
@@ -33,6 +33,9 @@ public class MostProfitableWay {
       }
       if (s.matches("[^0-9]*\\s[^0-9]*")) {
         final String[] split1 = s.split(" ");
+        for (int i = 0; i < split1.length; i++) {
+          split1[i] = split1[i].replaceAll("\n", "");
+        }
         int start = cityes.get(split1[0]);
         int stop = cityes.get(split1[1]);
         int step = inputMatrix.length - (stop - start + 1);
