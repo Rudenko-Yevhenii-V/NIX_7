@@ -25,6 +25,9 @@ public class MostProfitableWay {
     int inputMatrixCount = -1;
     int countCityes = 1;
     for (String s : split) {
+      if(String.valueOf((s.charAt(s.length()-1))).matches("\\s") || String.valueOf((s.charAt(s.length()-1))).matches("\n")){
+        s = s.substring(0, s.length()-1);
+      }
       if (s.matches("[^0-9]*") && !(s.matches("[^0-9]+\\s[^0-9]+"))) {
         s = s.replaceAll("\n", "");
         s = s.replaceAll("\\s", "");
@@ -37,6 +40,7 @@ public class MostProfitableWay {
         final String[] split1 = s.split(" ");
         for (int i = 0; i < split1.length; i++) {
           split1[i] = split1[i].replaceAll("\n", "");
+          split1[i] = split1[i].replaceAll("\\s", "");
         }
         int start = cityes.get(split1[0]);
         int stop = cityes.get(split1[1]);
@@ -60,7 +64,19 @@ public class MostProfitableWay {
             -1] = Integer.parseInt(s1[1].replaceAll("[^0-9]", ""));
       }
     }
-
     return retOutput.toString();
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
