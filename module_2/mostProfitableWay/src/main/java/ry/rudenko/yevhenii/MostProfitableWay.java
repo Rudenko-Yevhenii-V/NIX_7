@@ -11,7 +11,7 @@ public class MostProfitableWay {
     Map<String, Integer> cityes = new HashMap<>();
     final String[] split = inputCity.split("\n");
     split[0] = split[0].replaceAll("\n","");
-    int valueCityes = Integer.parseInt(split[0]);
+    int valueCityes = Integer.parseInt(split[0].replaceAll("[^0-9]", ""));
     int[][] inputMatrix = new int[valueCityes][valueCityes];
     for (int i = 0; i < inputMatrix.length; i++) {
       for (int i1 = 0; i1 < inputMatrix[i].length; i1++) {
@@ -25,13 +25,15 @@ public class MostProfitableWay {
     int inputMatrixCount = -1;
     int countCityes = 1;
     for (String s : split) {
-      if (s.matches("[^0-9]*") && !(s.matches("[^0-9]*\\s[^0-9]*"))) {
+      if (s.matches("[^0-9]*") && !(s.matches("[^0-9]+\\s[^0-9]+"))) {
+        s = s.replaceAll("\n", "");
+        s = s.replaceAll("\\s", "");
         cityes.put(s, countCityes);
         countCityes++;
         inputMatrixCount++;
         continue;
       }
-      if (s.matches("[^0-9]*\\s[^0-9]*")) {
+      if (s.matches("[^0-9]+\\s[^0-9]+")) {
         final String[] split1 = s.split(" ");
         for (int i = 0; i < split1.length; i++) {
           split1[i] = split1[i].replaceAll("\n", "");
@@ -49,12 +51,13 @@ public class MostProfitableWay {
         retOutput.append(result[result.length - 1]).append("\n");
         continue;
       }
-      if (s.matches("[0-9]*\\s[0-9]*")) {
+      if (s.matches("[0-9]+\\s[0-9]+")) {
         final String[] s1 = s.split(" ");
-        if(Integer.parseInt(s1[1]) > 200000){
+        if(Integer.parseInt(s1[1].replaceAll("[^0-9]", "")) > 200000){
           s1[1] = "200000";
         }
-        inputMatrix[inputMatrixCount][Integer.parseInt(s1[0])-1] = Integer.parseInt(s1[1]);
+        inputMatrix[inputMatrixCount][Integer.parseInt(s1[0].replaceAll("[^0-9]", ""))
+            -1] = Integer.parseInt(s1[1].replaceAll("[^0-9]", ""));
       }
     }
 
