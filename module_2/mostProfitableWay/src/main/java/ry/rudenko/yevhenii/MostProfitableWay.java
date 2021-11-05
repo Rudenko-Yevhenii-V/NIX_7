@@ -46,6 +46,15 @@ public class MostProfitableWay {
         }
         int start = cityes.get(split1[0]);
         int stop = cityes.get(split1[1]);
+        System.out.println();
+        System.out.println();
+        for (int[] matrix : inputMatrix) {
+          System.out.println();
+          for (int i : matrix) {
+            System.out.print(i);
+          }
+        }
+        System.out.println();System.out.println();
         int step = inputMatrix.length - (stop - start + 1);
         int[][] adjMatrix = new int[stop - start + 1][stop - start + 1];
         for (int i = 0; i <= stop - start; i++) {
